@@ -14,7 +14,7 @@
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#ffffff",
-        "navigationBarTitleText": "桂院校园导航",
+        "navigationBarTitleText": "科师校园导航",
         "navigationBarTextStyle": "black"
     },
     "tabBar": {
