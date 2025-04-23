@@ -1,0 +1,501 @@
+/* pages/home/home.wxss */
+.list-landscape-title {
+  padding-top: 5px;
+  font-size: 22px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.list-landscape-container {
+  margin-top: 10px;
+  position: relative;
+}
+
+.list-landscape-container .wx-swiper-dot.wx-swiper-dot-active {
+  width: 33rpx;
+  border-radius: 15rpx;
+}
+
+/* 指示点靠右 */
+.wx-swiper-dots {
+  position: absolute;
+  bottom: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.list-landscape-container-swiper {
+  height: 388rpx;
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.list-landscape-container-swiper:active {
+  transform: translateY(4rpx);
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.08);
+}
+
+.list-landscape-container-swiper-item {
+  margin-left: 22rpx;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.list-landscape-container-swiper-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120rpx;
+  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
+  pointer-events: none;
+}
+
+.list-landscape-container-swiper-item-img {
+  width: 100%;
+  height: auto;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+/* 轮播图指示点样式 */
+.list-landscape-container .wx-swiper-dot {
+  width: 20rpx;
+  height: 20rpx;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  margin: 0 8rpx;
+  transition: all 0.3s ease;
+}
+
+.list-landscape-container .wx-swiper-dot.wx-swiper-dot-active {
+  width: 40rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+}
+
+.wx-swiper-dots {
+  position: absolute;
+  bottom: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 30rpx;
+  z-index: 1;
+}
+
+.list-landscape-container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+  margin-top: 20rpx;
+  position: relative;
+}
+
+.list-landscape-container-icon {
+  display: flex;
+  align-items: center;
+  animation: fadeInUp 0.8s ease-out;
+  flex-shrink: 0;
+}
+
+.list-landscape-container-icon-img {
+  height: 120rpx;
+  width: 120rpx;
+}
+
+.list-landscape-container-icon-school {
+  height: 50rpx;
+  width: 150rpx;
+}
+
+.list-landscape-container-text {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  margin: 0 30rpx;
+  line-height: 1.4;
+  position: relative;
+}
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid #333;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end 4.6s forwards;
+}
+
+.list-info {
+  /* padding: 8px; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 16px;
+  padding-bottom: 8px;
+}
+
+.list-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-info-container-titletext {
+  color: white;
+  border-radius: 15px;
+  padding: 2px 10px;
+  /* margin-bottom: 10px; */
+  margin-top: 10px;
+  margin-bottom: 8px;
+  /* font-size: small; */
+}
+
+.red {
+  background: #ec3b2ecc;
+}
+
+.blue {
+  background: #5fa1ec;
+}
+
+.green {
+  background: #37b69aea;
+}
+
+.list-info-container-text {
+  margin-top: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+.list-row {
+  /* padding: 10px; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.list-row-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-row-container-img {
+  width: 50px;
+  height: 50px;
+}
+
+.list-row-container-text {
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.list-l {
+  margin-top: 10px;
+}
+
+.list-list {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px #e1e1e1;
+}
+
+.list-list-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.list-list-left-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.list-list-left-text {
+  font-size: 15px;
+}
+
+.normal {
+  font-weight: normal;
+}
+
+.list-list-left-text-key {
+  font-size: 15px;
+  color: cornflowerblue;
+}
+
+.list-list-right {
+  width: 15px;
+  height: 15px
+}
+
+.list-laba {
+  height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.list-laba-image {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.list-laba-text {
+  margin-left: 20px;
+}
+
+.small_text {
+  font-size: small;
+}
+
+.weather_text {
+  color: #73a5d6;
+  font-size: 20px;
+}
+
+.forward-button {
+  margin-top: 10px;
+}
+
+.card-container {
+  padding: 10px 0;
+}
+
+.card-container-card {
+  margin: 0 15px;
+  padding-top: 5px;
+  border-radius: 10px;
+  background-color: ghostwhite;
+  border: 1px solid rgb(238, 235, 235);
+  transition: all 0.3s ease;
+}
+
+.card-container-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-container-card-title {
+  font-size: larger;
+  font-weight: bold;
+  position: relative;
+  margin-left: 10px;
+  height: 28px;
+  margin-bottom: 10px;
+}
+
+.two {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+}
+
+.card-container-card-button {
+  width: 160px;
+  height: 68px;
+  transition: all 0.3s ease;
+}
+
+.card-container-card-button:active {
+  transform: scale(0.95);
+}
+
+.yellow {
+  background-color: #ffe08d;
+}
+
+.blue {
+  background-color: #4393ec;
+}
+
+/* 动画定义 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.school-info-card {
+  margin: 20rpx 30rpx;
+  padding: 30rpx;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 20rpx;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+  animation: cardAppear 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.school-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: lineGrow 1s ease-out 0.5s forwards;
+}
+
+.school-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+  position: relative;
+  gap: 20rpx;
+}
+
+.school-info-row:last-child {
+  margin-bottom: 0;
+}
+
+.school-info-item {
+  width: calc(50% - 10rpx);
+  padding: 25rpx;
+  background-color: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120rpx;
+}
+
+.school-info-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.school-info-item:active {
+  transform: scale(0.98) translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.school-info-item:active::after {
+  opacity: 1;
+}
+
+.school-info-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12rpx;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.school-info-value {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
+}
+
+/* 卡片出现动画 */
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 顶部线条动画 */
+@keyframes lineGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* 信息项悬停效果 */
+.school-info-item:hover {
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.1);
+}
+
+.school-info-item:hover .school-info-label {
+  color: #4facfe;
+}
+
+.school-info-item:hover .school-info-value {
+  color: #333;
+  transform: translateX(4rpx);
+}
+
+/* 打字机动画 */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #333 }
+}
+
+/* 滑入动画 */
+@keyframes slideInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
