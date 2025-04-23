@@ -55,7 +55,7 @@ Page({
         const waitingMessage = {
             id: Date.now(),
             role: 'ai',
-            content: '正在思考中...',
+            content: 'loading',
             time: this.formatTime(new Date())
         }
 
@@ -127,7 +127,7 @@ Page({
             }
 
             // 移除等待消息
-            const messages = this.data.messages.filter(msg => msg.content !== '正在思考中...')
+            const messages = this.data.messages.filter(msg => msg.content !== 'loading')
             
             const aiMessage = {
                 id: Date.now(),
@@ -145,7 +145,7 @@ Page({
             console.error('API调用失败:', error)
             
             // 移除等待消息
-            const messages = this.data.messages.filter(msg => msg.content !== '正在思考中...')
+            const messages = this.data.messages.filter(msg => msg.content !== 'loading')
             
             // 添加错误消息
             const errorMessage = {
@@ -181,6 +181,20 @@ Page({
             title: message,
             icon: 'none',
             duration: 2000
+        })
+    },
+
+    onLongPress: function(e) {
+        const content = e.currentTarget.dataset.content
+        wx.setClipboardData({
+            data: content,
+            success: function() {
+                wx.showToast({
+                    title: '已复制到剪贴板',
+                    icon: 'success',
+                    duration: 1500
+                })
+            }
         })
     }
 })

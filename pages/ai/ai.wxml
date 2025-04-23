@@ -8,7 +8,18 @@
           <image src="{{item.role === 'user' ? userAvatar : aiAvatar}}" mode="aspectFill"></image>
         </view>
         <view class="message-content">
-          <view class="message-text">{{item.content}}</view>
+          <view class="message-text" bindlongpress="onLongPress" data-content="{{item.content}}">
+            <block wx:if="{{item.content === 'loading'}}">
+              <view class="loading-container">
+                <view class="loading-dot"></view>
+                <view class="loading-dot"></view>
+                <view class="loading-dot"></view>
+              </view>
+            </block>
+            <block wx:else>
+              {{item.content}}
+            </block>
+          </view>
           <view class="message-time">{{item.time}}</view>
         </view>
       </view>
