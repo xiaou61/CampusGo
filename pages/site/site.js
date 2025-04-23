@@ -18,8 +18,6 @@ Page({
         card: null,
         dialogShow: false,
         buttons: [{
-            text: '设为起点'
-        }, {
             text: '设为终点'
         }],
     },

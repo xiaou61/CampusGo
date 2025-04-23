@@ -88,8 +88,6 @@ Page({
         dialogShow_category: false,
         dialogShow_road: false,
         buttons: [{
-            text: '设为起点'
-        }, {
             text: '设为终点'
         }],
         button: [{
