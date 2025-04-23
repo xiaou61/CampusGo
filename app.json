@@ -8,7 +8,8 @@
         "pages/site/site",
         "pages/school/school",
         "pages/school/guidance/guidance",
-        "pages/home/pano/pano"
+        "pages/home/pano/pano",
+        "pages/ai/ai"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -41,6 +42,12 @@
                 "iconPath": "/images/tabbar/icon_school.png",
                 "pagePath": "pages/school/school",
                 "text": "校园指南"
+            },
+            {
+                "selectedIconPath": "/images/tabbar/icon_school_HL.png",
+                "iconPath": "/images/tabbar/icon_school.png",
+                "pagePath": "pages/ai/ai",
+                "text": "ai对话"
             }
         ]
     },
