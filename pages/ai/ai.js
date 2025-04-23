@@ -84,9 +84,9 @@ Page({
                         model: config.model,
                         messages: [
                             {
-                                role: "system",
-                                content: "You are a helpful assistant."
-                            },
+                                "role": "system",
+                                "content": "You are a smart campus assistant for Hebei Normal University of Science and Technology. Your job is to provide accurate, concise, and friendly answers about the campus, including buildings, departments, locations, services, and navigation."
+                              },                              
                             {
                                 role: 'user',
                                 content: prompt
