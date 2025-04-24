@@ -2,6 +2,9 @@ const app = getApp()
 const config = require('../../utils/config')
 const { qaData, findSimilarQuestion } = require('../../pages/ai/qa_data.js');
 
+// 每日最大提问次数
+const MAX_DAILY_QUESTIONS = 10;
+
 Page({
     data: {
         messages: [],
@@ -10,12 +13,14 @@ Page({
         userAvatar: '/images/user-avatar.png',
         aiAvatar: '/images/ai-avatar.png',
         isTyping: false,
-        suggestedQuestions: []
+        suggestedQuestions: [],
+        remainingQuestions: MAX_DAILY_QUESTIONS
     },
 
     onLoad(options) {
         this.initChatHistory()
         this.updateSuggestedQuestions()
+        this.checkDailyLimit()
     },
 
     initChatHistory: function() {
@@ -65,6 +70,50 @@ Page({
         this.sendMessage();
     },
 
+    // 检查每日限制
+    checkDailyLimit: function() {
+        const today = new Date().toDateString()
+        const dailyData = wx.getStorageSync('ai_daily_data')
+        
+        if (dailyData && dailyData.date === today) {
+            this.setData({
+                remainingQuestions: MAX_DAILY_QUESTIONS - dailyData.count
+            })
+        } else {
+            // 新的一天，重置计数
+            wx.setStorageSync('ai_daily_data', {
+                date: today,
+                count: 0
+            })
+            this.setData({
+                remainingQuestions: MAX_DAILY_QUESTIONS
+            })
+        }
+    },
+
+    // 更新提问计数
+    updateQuestionCount: function() {
+        const dailyData = wx.getStorageSync('ai_daily_data')
+        const today = new Date().toDateString()
+        
+        if (dailyData && dailyData.date === today) {
+            dailyData.count += 1
+            wx.setStorageSync('ai_daily_data', dailyData)
+            this.setData({
+                remainingQuestions: MAX_DAILY_QUESTIONS - dailyData.count
+            })
+        } else {
+            // 新的一天，重置计数
+            wx.setStorageSync('ai_daily_data', {
+                date: today,
+                count: 1
+            })
+            this.setData({
+                remainingQuestions: MAX_DAILY_QUESTIONS - 1
+            })
+        }
+    },
+
     sendMessage: function() {
         const input = this.data.inputValue.trim();
         if (!input) return;
@@ -85,6 +134,7 @@ Page({
 
         const matchedQA = findSimilarQuestion(input);
         if (matchedQA) {
+            // 本地问答不消耗次数
             setTimeout(() => {
                 const aiMessage = {
                     id: Date.now(),
@@ -98,6 +148,20 @@ Page({
                 });
             }, 500);
         } else {
+            // 检查剩余次数
+            if (this.data.remainingQuestions <= 0) {
+                wx.showToast({
+                    title: '今日AI提问次数已用完，请明天再来',
+                    icon: 'none',
+                    duration: 2000
+                })
+                return;
+            }
+
+            // 更新提问计数
+            this.updateQuestionCount();
+
+            // 添加加载状态
             const loadingMessage = {
                 id: Date.now(),
                 role: 'ai',

@@ -19,7 +19,7 @@ const qaData = [
   {
     q: "快速排序的Python实现",
     a: "```python\ndef quick_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quick_sort(left) + middle + quick_sort(right)\n```"
-  }
+  },
 ];
 
 // 计算两个字符串的相似度

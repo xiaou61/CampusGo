@@ -199,3 +199,13 @@
     transform: scale(1);
   }
 }
+
+.daily-limit {
+  text-align: center;
+  padding: 10rpx;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  margin: 10rpx 20rpx;
+  font-size: 24rpx;
+  color: #666;
+}
