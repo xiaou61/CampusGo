@@ -3,7 +3,7 @@
   <!-- 对话历史区域 -->
   <scroll-view class="chat-history" scroll-y="true" scroll-into-view="{{scrollToView}}" scroll-with-animation="true">
     <view class="daily-limit">
-      <text>今日剩余提问次数：{{remainingQuestions}}/10</text>
+      <text>今日剩余提问次数：{{remainingQuestions}}/50</text>
     </view>
     <block wx:for="{{messages}}" wx:key="id">
       <view class="message-item {{item.role === 'user' ? 'user-message' : ''}}" id="msg-{{item.id}}">

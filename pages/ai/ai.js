@@ -1,9 +1,13 @@
+/**
+ * @author https://github.com/xiaou61
+ * 相关技术文：
+ */
 const app = getApp()
 const config = require('../../utils/config')
 const { qaData, findSimilarQuestion } = require('../../pages/ai/qa_data.js');
 
 // 每日最大提问次数
-const MAX_DAILY_QUESTIONS = 10;
+const MAX_DAILY_QUESTIONS = 50;
 
 Page({
     data: {
