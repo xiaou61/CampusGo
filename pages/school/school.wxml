@@ -1,15 +1,29 @@
 <!--pages/school/school.wxml-->
-<scroll-view scroll-y>
-  <view class="cu-list">
-    <view class="cu-item" wx:for="{{allWords}}" wx:key="index" bindtap="jump" data-id="{{index}}">
-      <view class="content">
-        <view>
-          <text class="cuIcon-link">📖</text>
-          <text class="text-grey">{{item.title}}</text>
-        </view>
-
-        <image style="height:40rpx;width:40rpx;" src="{{green_arrow}}"></image>
-      </view>
+<view class="school-container">
+  <view class="header">
+    <view class="title-wrapper">
+      <text class="title">校园指南</text>
+      <view class="title-decoration"></view>
+    </view>
+    <view class="subtitle-wrapper">
+      <text class="subtitle">探索校园的每一个角落</text>
     </view>
   </view>
-</scroll-view>
+  
+  <scroll-view scroll-y class="guide-list">
+    <view class="guide-item" wx:for="{{allWords}}" wx:key="index" bindtap="jump" data-id="{{index}}">
+      <view class="guide-content">
+        <view class="guide-icon">
+          <text class="icon">📖</text>
+        </view>
+        <view class="guide-info">
+          <text class="guide-title">{{item.title}}</text>
+          <text class="guide-desc">{{item.desc || '点击查看详情'}}</text>
+        </view>
+        <view class="guide-arrow">
+          <image src="{{green_arrow}}" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
