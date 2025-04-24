@@ -134,7 +134,7 @@
 }
 
 .send-btn {
-  width: 60rpx;
+  width: 80rpx;
   height: 60rpx;
   display: flex;
   justify-content: center;
@@ -142,15 +142,23 @@
   margin-left: 10rpx;
   opacity: 0.5;
   flex-shrink: 0;
+  background-color: #1890ff;
+  border-radius: 30rpx;
+  transition: all 0.3s ease;
+  color: #fff;
+  font-size: 26rpx;
 }
 
 .send-btn.active {
   opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 2rpx 8rpx rgba(24, 144, 255, 0.3);
 }
 
 .send-btn image {
   width: 32rpx;
   height: 32rpx;
+  filter: brightness(0) invert(1);
 }
 
 .typing-cursor {
