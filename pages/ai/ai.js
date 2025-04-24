@@ -1,5 +1,6 @@
 const app = getApp()
 const config = require('../../utils/config')
+const { qaData, findSimilarQuestion } = require('../../pages/ai/qa_data.js');
 
 Page({
     data: {
@@ -8,18 +9,20 @@ Page({
         scrollToView: '',
         userAvatar: '/images/user-avatar.png',
         aiAvatar: '/images/ai-avatar.png',
-        isTyping: false
+        isTyping: false,
+        suggestedQuestions: []
     },
 
     onLoad(options) {
         this.initChatHistory()
+        this.updateSuggestedQuestions()
     },
 
     initChatHistory: function() {
         const welcomeMessage = {
             id: Date.now(),
             role: 'ai',
-            content: '你好！我是校园AI助手，有什么可以帮助你的吗？',
+            content: '你好！我是河北科技师范学院专属校园AI助手，有什么可以帮助你的吗？',
             time: this.formatTime(new Date())
         }
         this.setData({
@@ -32,39 +35,82 @@ Page({
         this.setData({
             inputValue: e.detail.value
         })
+        this.updateSuggestedQuestions()
+    },
+
+    updateSuggestedQuestions: function() {
+        const input = this.data.inputValue.toLowerCase();
+        const suggestions = [];
+        
+        if (!input) {
+            suggestions.push(...qaData.map(item => item.q));
+        } else {
+            qaData.forEach(item => {
+                if (item.q.toLowerCase().includes(input)) {
+                    suggestions.push(item.q);
+                }
+            });
+        }
+        
+        this.setData({
+            suggestedQuestions: suggestions.slice(0, 5)
+        });
+    },
+
+    onSuggestedQuestionTap: function(e) {
+        const question = e.currentTarget.dataset.question;
+        this.setData({
+            inputValue: question
+        });
+        this.sendMessage();
     },
 
     sendMessage: function() {
-        if (!this.data.inputValue.trim() || this.data.isTyping) return
+        const input = this.data.inputValue.trim();
+        if (!input) return;
 
         const userMessage = {
             id: Date.now(),
             role: 'user',
-            content: this.data.inputValue,
+            content: input,
             time: this.formatTime(new Date())
-        }
+        };
 
         this.setData({
             messages: [...this.data.messages, userMessage],
             inputValue: '',
-            scrollToView: 'msg-' + userMessage.id,
-            isTyping: true
-        })
+            suggestedQuestions: [],
+            scrollToView: 'msg-' + userMessage.id
+        });
 
-        // 添加等待消息
-        const waitingMessage = {
-            id: Date.now(),
-            role: 'ai',
-            content: 'loading',
-            time: this.formatTime(new Date())
+        const matchedQA = findSimilarQuestion(input);
+        if (matchedQA) {
+            setTimeout(() => {
+                const aiMessage = {
+                    id: Date.now(),
+                    role: 'ai',
+                    content: matchedQA.a,
+                    time: this.formatTime(new Date())
+                };
+                this.setData({
+                    messages: [...this.data.messages, aiMessage],
+                    scrollToView: 'msg-' + aiMessage.id
+                });
+            }, 500);
+        } else {
+            const loadingMessage = {
+                id: Date.now(),
+                role: 'ai',
+                content: 'loading',
+                time: this.formatTime(new Date())
+            };
+            this.setData({
+                messages: [...this.data.messages, loadingMessage],
+                scrollToView: 'msg-' + loadingMessage.id,
+                isTyping: true
+            });
+            this.callDeepSeekAPI(input);
         }
-
-        this.setData({
-            messages: [...this.data.messages, waitingMessage],
-            scrollToView: 'msg-' + waitingMessage.id
-        })
-
-        this.callDeepSeekAPI(userMessage.content)
     },
 
     callDeepSeekAPI: async function(prompt) {
@@ -77,7 +123,7 @@ Page({
 
             const response = await new Promise((resolve, reject) => {
                 wx.request({
-                    url: config.baseURL + '/v1/chat/completions',
+                    url: config.baseURL + '/chat/completions',
                     method: 'POST',
                     header: config.headers,
                     data: {
@@ -85,8 +131,8 @@ Page({
                         messages: [
                             {
                                 "role": "system",
-                                "content": "You are a smart campus assistant for Hebei Normal University of Science and Technology. Your job is to provide accurate, concise, and friendly answers about the campus, including buildings, departments, locations, services, and navigation."
-                              },                              
+                                "content": "You are a smart campus assistant for Hebei Normal University of Science and Technology. When users ask for directions or how to get somewhere, tell them to check the in-app map for accurate routes and navigation. When users ask about school-related information, guide them to the campus guide section. Always respond clearly and helpfully in simplified Chinese unless requested otherwise."
+                              },                     
                             {
                                 role: 'user',
                                 content: prompt
@@ -108,7 +154,6 @@ Page({
 
             console.log('API 响应:', response)
 
-            // 检查响应状态和数据
             if (!response) {
                 throw new Error('API响应为空')
             }
@@ -121,12 +166,10 @@ Page({
                 throw new Error('API响应数据为空')
             }
 
-            // 检查响应数据结构
             if (!response.data.choices || !response.data.choices[0]?.message?.content) {
                 throw new Error('API响应格式错误: ' + JSON.stringify(response.data))
             }
 
-            // 移除等待消息
             const messages = this.data.messages.filter(msg => msg.content !== 'loading')
             
             const aiMessage = {
@@ -144,10 +187,8 @@ Page({
         } catch (error) {
             console.error('API调用失败:', error)
             
-            // 移除等待消息
             const messages = this.data.messages.filter(msg => msg.content !== 'loading')
             
-            // 添加错误消息
             const errorMessage = {
                 id: Date.now(),
                 role: 'ai',
@@ -161,7 +202,6 @@ Page({
                 isTyping: false
             })
 
-            // 显示错误提示
             wx.showToast({
                 title: '请求失败，请检查网络连接或API配置',
                 icon: 'none',
@@ -196,5 +236,9 @@ Page({
                 })
             }
         })
+    },
+
+    onTowxmlError: function(e) {
+        console.error('towxml 解析错误:', e.detail)
     }
 })
