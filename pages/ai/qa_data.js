@@ -1,4 +1,13 @@
-// QA数据集
+/**
+ * @author https://github.com/xiaou61
+ * 本地问答数据模块
+ * 主要功能：
+ * 1. 存储本地问答数据
+ * 2. 提供问题匹配和查找功能
+ * 3. 支持模糊匹配和相似度计算
+ */
+
+// 本地问答数据
 const qaData = [
   {
     q: "什么是快速排序？",
@@ -20,59 +29,38 @@ const qaData = [
     q: "这个来进行",
     a: "1.**每日学习安排**   - 早晨7:30-8:00：晨读/记忆类学习（如英语单词、专业课概念）  - 课后1小时：及时整理当天课堂笔记  - 晚上19:00-21:00：核心课程深度学习+作业 \n 2.**每日学习安排**"
   },
+  // 校园生活相关
+  {
+    q: "学校图书馆开放时间",
+    a: "图书馆开放时间：\n周一至周五：8:00-22:00\n周六至周日：9:00-21:00\n节假日开放时间请关注图书馆通知。"
+  },
+  {
+    q: "如何办理校园卡",
+    a: "校园卡办理流程：\n1. 准备材料：身份证、学生证\n2. 前往校园卡服务中心\n3. 填写申请表\n4. 缴纳工本费\n5. 等待制卡（约3个工作日）"
+  },
 ];
 
-// 计算两个字符串的相似度
-function calculateSimilarity(str1, str2) {
-  const len1 = str1.length;
-  const len2 = str2.length;
-  const matrix = [];
-
-  // 初始化矩阵
-  for (let i = 0; i <= len1; i++) {
-    matrix[i] = [i];
-  }
-  for (let j = 0; j <= len2; j++) {
-    matrix[0][j] = j;
-  }
-
-  // 填充矩阵
-  for (let i = 1; i <= len1; i++) {
-    for (let j = 1; j <= len2; j++) {
-      if (str1[i - 1] === str2[j - 1]) {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      } else {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1,
-          matrix[i][j - 1] + 1,
-          matrix[i - 1][j] + 1
-        );
-      }
-    }
-  }
-
-  // 计算相似度
-  const distance = matrix[len1][len2];
-  const maxLen = Math.max(len1, len2);
-  return 1 - distance / maxLen;
-}
-
-// 查找最相似的问题
+/**
+ * 查找相似问题
+ * @param {string} question - 用户输入的问题
+ * @returns {Object|null} - 匹配的问答数据，如果没有匹配则返回null
+ */
 function findSimilarQuestion(question) {
-  let maxSimilarity = 0;
-  let bestMatch = null;
-
+  // 将问题转换为小写以进行不区分大小写的匹配
+  const normalizedQuestion = question.toLowerCase();
+  
+  // 遍历问答数据，查找匹配项
   for (const item of qaData) {
-    const similarity = calculateSimilarity(question.toLowerCase(), item.q.toLowerCase());
-    if (similarity > maxSimilarity) {
-      maxSimilarity = similarity;
-      bestMatch = item;
+    // 检查问题是否包含关键词
+    if (item.q.toLowerCase().includes(normalizedQuestion)) {
+      return item;
     }
   }
-
-  return maxSimilarity >= 0.9 ? bestMatch : null;
+  
+  return null;
 }
 
+// 导出模块
 module.exports = {
   qaData,
   findSimilarQuestion

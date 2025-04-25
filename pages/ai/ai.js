@@ -1,32 +1,41 @@
 /**
  * @author https://github.com/xiaou61
- * 相关技术文：
+ * AI聊天页面
+ * 主要功能：
+ * 1. 实现与AI助手的对话功能
+ * 2. 处理消息的发送和接收
+ * 3. 格式化消息内容（包括有序列表、无序列表等）
+ * 4. 管理聊天历史记录
+ * 5. 处理每日提问限制
  */
+
 const app = getApp()
 const config = require('../../utils/config')
 const { qaData, findSimilarQuestion } = require('../../pages/ai/qa_data.js');
 
-// 每日最大提问次数
+// 每日最大提问次数限制
 const MAX_DAILY_QUESTIONS = 50;
 
 Page({
     data: {
-        messages: [],
-        inputValue: '',
-        scrollToView: '',
-        userAvatar: '/images/user-avatar.png',
-        aiAvatar: '/images/ai-avatar.png',
-        isTyping: false,
-        suggestedQuestions: [],
-        remainingQuestions: MAX_DAILY_QUESTIONS
+        messages: [], // 存储聊天消息
+        inputValue: '', // 输入框内容
+        scrollToView: '', // 自动滚动到指定消息
+        userAvatar: '/images/user-avatar.png', // 用户头像
+        aiAvatar: '/images/ai-avatar.png', // AI头像
+        isTyping: false, // AI是否正在输入
+        suggestedQuestions: [], // 建议问题列表
+        remainingQuestions: MAX_DAILY_QUESTIONS // 剩余提问次数
     },
 
+    // 页面加载时初始化
     onLoad(options) {
-        this.initChatHistory()
-        this.updateSuggestedQuestions()
-        this.checkDailyLimit()
+        this.initChatHistory() // 初始化聊天历史
+        this.updateSuggestedQuestions() // 更新建议问题
+        this.checkDailyLimit() // 检查每日限制
     },
 
+    // 初始化聊天历史
     initChatHistory: function() {
         const welcomeMessage = {
             id: Date.now(),
@@ -40,20 +49,24 @@ Page({
         })
     },
 
+    // 输入框内容变化时触发
     onInput: function(e) {
         this.setData({
             inputValue: e.detail.value
         })
-        this.updateSuggestedQuestions()
+        this.updateSuggestedQuestions() // 更新建议问题
     },
 
+    // 更新建议问题列表
     updateSuggestedQuestions: function() {
         const input = this.data.inputValue.toLowerCase();
         const suggestions = [];
         
         if (!input) {
+            // 如果输入框为空，显示所有建议问题
             suggestions.push(...qaData.map(item => item.q));
         } else {
+            // 根据输入内容过滤建议问题
             qaData.forEach(item => {
                 if (item.q.toLowerCase().includes(input)) {
                     suggestions.push(item.q);
@@ -62,24 +75,26 @@ Page({
         }
         
         this.setData({
-            suggestedQuestions: suggestions.slice(0, 5)
+            suggestedQuestions: suggestions.slice(0, 5) // 最多显示5个建议
         });
     },
 
+    // 点击建议问题时触发
     onSuggestedQuestionTap: function(e) {
         const question = e.currentTarget.dataset.question;
         this.setData({
             inputValue: question
         });
-        this.sendMessage();
+        this.sendMessage(); // 发送消息
     },
 
-    // 检查每日限制
+    // 检查每日提问限制
     checkDailyLimit: function() {
         const today = new Date().toDateString()
         const dailyData = wx.getStorageSync('ai_daily_data')
         
         if (dailyData && dailyData.date === today) {
+            // 如果是同一天，更新剩余次数
             this.setData({
                 remainingQuestions: MAX_DAILY_QUESTIONS - dailyData.count
             })
@@ -118,10 +133,12 @@ Page({
         }
     },
 
+    // 发送消息
     sendMessage: function() {
         const input = this.data.inputValue.trim();
         if (!input) return;
 
+        // 创建用户消息
         const userMessage = {
             id: Date.now(),
             role: 'user',
@@ -136,6 +153,7 @@ Page({
             scrollToView: 'msg-' + userMessage.id
         });
 
+        // 检查本地问答库
         const matchedQA = findSimilarQuestion(input);
         if (matchedQA) {
             // 本地问答不消耗次数
@@ -181,6 +199,7 @@ Page({
         }
     },
 
+    // 调用DeepSeek API
     callDeepSeekAPI: async function(prompt) {
         try {
             console.log('开始调用 API，请求数据:', {
@@ -240,25 +259,28 @@ Page({
 
             const messages = this.data.messages.filter(msg => msg.content !== 'loading')
             
-            const aiMessage = {
-                id: Date.now(),
-                role: 'ai',
-                content: response.data.choices[0].message.content
-                  // 修复“1.”后有两个空格 + 换行的问题
-                  .replace(/(\d\.)\s{2,}\n/g, '$1 ')
-                  
-                  // 修复编号前多余换行或空格（如 “\n   2.” → “\n2.”）
-                  .replace(/\n\s*(\d+\.)\s+/g, '\n$1 ')
-              
-                  // 修复无序列表格式（让 - 后统一缩进）
-                  .replace(/\n\s*-\s+/g, '\n  - ')
-              
-                  // 修复任务列表显示（可选）
-                  .replace(/\[ \]/g, '☐')
-                  .replace(/\[x\]/gi, '✅'),
-              
-                time: this.formatTime(new Date())
-              }
+           // 创建AI回复消息，并进行格式处理
+           const aiMessage = {
+            id: Date.now(),
+            role: 'ai',
+            content: response.data.choices[0].message.content
+              // 修复“1.”后两个空格+换行的错误情况（仅处理错误，不破坏正常格式）
+              .replace(/(\d\.)\s{2,}\n/g, '$1 ')
+          
+              // 保留编号结构但去掉多余的空格（不影响“1. **目标**”这种格式）
+              .replace(/\n {2,}(\d+\.)/g, '\n$1')
+          
+              // 保留正确缩进的无序列表（但去掉开头多余空格）
+              .replace(/\n\s*-\s+/g, '\n  - ')
+          
+              // 转换任务列表样式（可选美化）
+              .replace(/\[ \]/g, '☐')
+              .replace(/\[x\]/gi, '✅'),
+          
+            time: this.formatTime(new Date())
+          }
+          
+            
               
 
             this.setData({
@@ -291,12 +313,15 @@ Page({
             })
         }
     },
+
+    // 格式化时间
     formatTime: function(date) {
         const hours = date.getHours().toString().padStart(2, '0')
         const minutes = date.getMinutes().toString().padStart(2, '0')
         return `${hours}:${minutes}`
     },
 
+    // 显示错误信息
     showError: function(message) {
         wx.showToast({
             title: message,
@@ -305,6 +330,7 @@ Page({
         })
     },
 
+    // 长按消息复制内容
     onLongPress: function(e) {
         const content = e.currentTarget.dataset.content
         wx.setClipboardData({
@@ -319,6 +345,7 @@ Page({
         })
     },
 
+    // 处理towxml解析错误
     onTowxmlError: function(e) {
         console.error('towxml 解析错误:', e.detail)
     }

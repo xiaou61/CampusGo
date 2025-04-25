@@ -42,6 +42,7 @@ module.exports = {
   },
 
   // 学校边界
+  //todo 这个待修改
   school_boundary: {
     // 东（学校最东端点的 经度）
     east: 110.280699,
@@ -67,6 +68,7 @@ module.exports = {
   },
 
   // 地点数据（使用嵌套列表存储）
+  //todo 这个是核心定位数据
   site_data: [{
       id: 1,
       name: "图书馆",

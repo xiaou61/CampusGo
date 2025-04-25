@@ -1,7 +1,17 @@
+/**
+ * 校园地图页面
+ * 主要功能：
+ * 1. 显示校园地图
+ * 2. 支持地点搜索和导航
+ * 3. 显示地点详情和路线规划
+ * 4. 处理地图交互事件
+ */
+
 // pages/map/map.js
 var map = require('../../data/map')
 var media = require('../../data/media')
 const app = getApp()
+const config = require('../../utils/config')
 
 // 引入SDK核心类
 var QQMapWX = require('../../libs/qqmap-wx-jssdk.min')
@@ -86,7 +96,23 @@ Page({
             currentTarget: {
                 id: 0,
             }
-        }
+        },
+
+        // 搜索相关数据
+        searchValue: '', // 搜索框内容
+        searchResult: [], // 搜索结果
+        showSearchResult: false, // 是否显示搜索结果
+        
+        // 导航相关数据
+        startPoint: null, // 起点
+        endPoint: null, // 终点
+        showRoute: false, // 是否显示路线
+        routeDistance: 0, // 路线距离
+        routeTime: 0, // 预计时间
+        
+        // 地点详情
+        selectedMarker: null, // 选中的标记点
+        showDetail: false, // 是否显示详情
     },
 
     onLoad(options) {
@@ -498,6 +524,156 @@ Page({
                     markers: markers
                 })
             }
+        })
+    },
+
+    // 搜索地点
+    searchLocation: function(e) {
+        const keyword = e.detail.value
+        if (!keyword) {
+            this.setData({
+                searchResult: [],
+                showSearchResult: false
+            })
+            return
+        }
+
+        // 调用搜索API
+        wx.request({
+            url: config.baseURL + '/search',
+            method: 'GET',
+            data: {
+                keyword: keyword,
+                location: `${this.data.latitude},${this.data.longitude}`
+            },
+            success: (res) => {
+                this.setData({
+                    searchResult: res.data.results,
+                    showSearchResult: true
+                })
+            },
+            fail: (err) => {
+                console.error('搜索失败:', err)
+                wx.showToast({
+                    title: '搜索失败',
+                    icon: 'none'
+                })
+            }
+        })
+    },
+
+    // 选择搜索结果
+    selectSearchResult: function(e) {
+        const item = e.currentTarget.dataset.item
+        this.setData({
+            selectedMarker: item,
+            showDetail: true,
+            showSearchResult: false,
+            searchValue: item.name
+        })
+        
+        // 移动地图到选中位置
+        this.mapCtx.moveToLocation({
+            latitude: item.location.lat,
+            longitude: item.location.lng
+        })
+    },
+
+    // 开始导航
+    startNavigation: function() {
+        if (!this.data.startPoint || !this.data.endPoint) {
+            wx.showToast({
+                title: '请选择起点和终点',
+                icon: 'none'
+            })
+            return
+        }
+
+        // 调用导航API
+        wx.request({
+            url: config.baseURL + '/route',
+            method: 'POST',
+            data: {
+                origin: `${this.data.startPoint.latitude},${this.data.startPoint.longitude}`,
+                destination: `${this.data.endPoint.latitude},${this.data.endPoint.longitude}`
+            },
+            success: (res) => {
+                this.setData({
+                    polyline: res.data.polyline,
+                    routeDistance: res.data.distance,
+                    routeTime: res.data.duration,
+                    showRoute: true
+                })
+            },
+            fail: (err) => {
+                console.error('获取路线失败:', err)
+                wx.showToast({
+                    title: '获取路线失败',
+                    icon: 'none'
+                })
+            }
+        })
+    },
+
+    // 标记点点击事件
+    markerTap: function(e) {
+        const markerId = e.markerId
+        const marker = this.data.markers.find(m => m.id === markerId)
+        if (marker) {
+            this.setData({
+                selectedMarker: marker,
+                showDetail: true
+            })
+        }
+    },
+
+    // 地图移动事件
+    regionchange: function(e) {
+        if (e.type === 'end') {
+            // 地图移动结束后更新视野范围内的标记点
+            this.updateMarkers()
+        }
+    },
+
+    // 更新标记点
+    updateMarkers: function() {
+        // 获取当前视野范围内的地点
+        wx.request({
+            url: config.baseURL + '/nearby',
+            method: 'GET',
+            data: {
+                location: `${this.data.latitude},${this.data.longitude}`,
+                radius: 1000 // 1公里范围内
+            },
+            success: (res) => {
+                this.setData({
+                    markers: res.data.results.map(item => ({
+                        id: item.id,
+                        latitude: item.location.lat,
+                        longitude: item.location.lng,
+                        title: item.name,
+                        iconPath: item.icon || '/images/marker.png',
+                        width: 30,
+                        height: 30
+                    }))
+                })
+            }
+        })
+    },
+
+    // 关闭详情
+    closeDetail: function() {
+        this.setData({
+            showDetail: false,
+            selectedMarker: null
+        })
+    },
+
+    // 关闭搜索结果
+    closeSearchResult: function() {
+        this.setData({
+            showSearchResult: false,
+            searchResult: []
         })
     }
 })
