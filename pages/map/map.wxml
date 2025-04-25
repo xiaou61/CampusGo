@@ -1,7 +1,7 @@
 <!--pages/map/map.wxml-->
 <view class="card">
   <view class="card-top">
-    <view class="card-top-left" style="width: calc(100vw - 130px);">
+    <view class="card-top-left" style="width: calc(100vw - 150px);">
       <view class="card-top-left-view">
         <view class="card-top-circle end"></view>
         <input class="card-top-input" value="{{end.name}}" placeholder="请选择终点" disabled="true" data-search_id="{{w}}" bindtap="tosearch" />
@@ -26,8 +26,8 @@
   </scroll-view>
 </view>
 
-<map style="width: 100%; height: calc(100% - 180px);" id="map" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" min-scale="{{minscale}}" show-location="{{false}}" enable-poi="{{enablepoi}}" markers="{{markers}}" include-points="" polyline="{{polyline}}" polygons="{{polygons}}" bindmarkertap="markertap">
-  <view class="map_right_card" style="margin-top: calc(100vh - 245px);width: 100%;">
+<map style="width: 100%; height: calc(100vh - 130px);" id="map" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" min-scale="{{minscale}}" show-location="{{false}}" enable-poi="{{enablepoi}}" markers="{{markers}}" include-points="" polyline="{{polyline}}" polygons="{{polygons}}" bindmarkertap="markertap">
+  <view class="map_right_card" style="margin-top: calc(100vh - 215px);width: 100%;">
     <view class="duration_and_distance" style="width: 100%;">
       <view class="duration_and_distance_style">
         <view wx:if="{{polyline.length != 0}}" class="duration_and_distance_text">耗时：{{duration}}分钟 距离：{{distance}}米</view>
@@ -40,13 +40,8 @@
 </map>
 
 <view class="card-bottom">
-  <view class="card-bottom-button" bindtap="clickButton">
-    <view wx:if="{{polyline.length == 0}}">
-      🏫 {{site_data[category].name}} 有 {{site_data[category].list.length}} 个地点
-    </view>
-    <view wx:if="{{polyline.length != 0}}">
-      🧭 路线详情
-    </view>
+  <view class="card-bottom-button" bindtap="clickButton" wx:if="{{polyline.length == 0}}">
+    🏫 {{site_data[category].name}} 有 {{site_data[category].list.length}} 个地点
   </view>
 </view>
 
@@ -77,7 +72,11 @@
 
 <mp-dialog title="{{site_data[category].name}}" show="{{dialogShow_category}}" bindbuttontap="mapmarker_close" buttons="{{button}}" custom-style="border-radius: 12px;">
   <view class="dialog-list">
-    <view class="dialog-list-item" wx:for="{{site_data[category].list}}" wx:key="id">
+    <view class="dialog-list-item" 
+          wx:for="{{site_data[category].list}}" 
+          wx:key="id"
+          data-index="{{index}}"
+          bindtap="listItemTap">
       {{index+1}}.{{item.name}}
     </view>
   </view>

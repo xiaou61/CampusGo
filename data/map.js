@@ -95,5 +95,33 @@ module.exports = {
           },
       ]
     },
+    {
+        id: 2,
+        name: "图书馆2",
+        list: [{
+            id: 1,
+            name: "图书馆",
+            aliases: "学校图书馆",
+            img: "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+            desc: "全校最大的图书馆",
+            latitude: 39.910054,
+            longitude: 119.548771
+          },
+          {
+              id: 2,
+              name: "易学超市",
+              aliases: "易学超市",
+              img: "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+              images: [
+                "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+                "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+                "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+              ],
+              desc: "全校最大的超市",
+              latitude: 39.910833,
+              longitude: 119.548387
+            },
+        ]
+      },
   ]
 }

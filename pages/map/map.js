@@ -290,6 +290,26 @@ Page({
 
     },
 
+    // 列表项点击事件
+    listItemTap(e) {
+        const index = e.currentTarget.dataset.index;
+        const site = this.data.site_data[this.data.category].list[index];
+        
+        // 关闭分类列表弹窗
+        this.setData({
+            dialogShow_category: false,
+            dialogShow_site: true,
+            card: site
+        });
+
+        // 移动地图到选中位置
+        this.mapCtx.moveToLocation({
+            latitude: site.latitude,
+            longitude: site.longitude,
+            scale: 18
+        });
+    },
+
     // 点击地图标记点时触发事件
     markertap(e) {
         if(this.data.polyline.length == 0) {

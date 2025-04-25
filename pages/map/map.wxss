@@ -1,59 +1,92 @@
 /* pages/map/map.wxss */
 .card {
-  height: 90px;
+  height: 90rpx;
   width: 100%;
   display: flex;
   justify-content: center;
-  /* align-items: flex-end; */
   align-items: center;
-  background-color: #f2f1ed;
+  background-color: #f5f7fa;
+  padding: 0;
 }
 
 .card-top {
-  height: 80px;
-  width: 100%; /* 或者 100% */
-  background-color: #ffffff;
-  border-radius: 10px;
   display: flex;
-  justify-content: space-between;
-  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2)
+  flex-direction: row;
+  align-items: center;
+  height: 120rpx;
+  background-color: #fff;
+  padding: 0;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  width: 100%;
 }
 
 .card-top-left {
+  flex: 1;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  border-radius: 10px 0 0 10px;
+  align-items: center;
+  padding: 0 20rpx;
 }
 
 .card-top-left-view {
-  height: 100%;
-  margin-left: 10px;
   display: flex;
   align-items: center;
-}
-
-.up {
-  border-bottom: 1px solid #d8d8d8;
+  width: 100%;
+  height: 80rpx;
+  background-color: #f5f7fa;
+  border-radius: 40rpx;
+  padding: 0 30rpx;
 }
 
 .card-top-circle {
-  width: 15px;
-  height: 15px;
+  width: 20rpx;
+  height: 20rpx;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 20rpx;
 }
 
 .start {
-  background-color: #8e1d21;
+  background-color: #1890ff;
+  box-shadow: 0 2rpx 8rpx rgba(24, 144, 255, 0.3);
 }
 
 .end {
-  background-color: #404481;
+  background-color: #52c41a;
+  box-shadow: 0 2rpx 8rpx rgba(82, 196, 26, 0.3);
 }
 
 .card-top-input {
-  letter-spacing: 1px;
-  /* width: 100%; */
+  flex: 1;
+  height: 80rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.card-top-right {
+  width: 120rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 20rpx;
+}
+
+.card-top-right-button {
+  width: 100rpx;
+  height: 80rpx;
+  background-color: #1890ff;
+  color: #fff;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40rpx;
+  transition: all 0.3s ease;
+}
+
+.card-top-right-button:active {
+  background-color: #096dd9;
+  transform: scale(0.98);
 }
 
 .card-top-middle {
@@ -72,83 +105,89 @@
   justify-content: center;
 }
 
-.card-top-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0 10px 10px 0;
-  /* margin-left: 10px; */
-  margin-right: 10px;
-}
-
-.card-top-right-button {
-  background-color: #73a5d6;
-  color: white;
-  width: 70px;
-  height: 40px;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .relative {
   position: relative;
-  height: 40px;
+  height: 60rpx;
   display: flex;
   justify-content: center;
+  margin: 20rpx 0;
 }
 
 .card-bottom-category {
   height: 100%;
-  /* background-color: #f0f0f099; */
-  text-align: center;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
+  padding: 0 20rpx;
 }
 
 .card-bottom-category-label {
-  width: 71px;
-  height: 30px;
-  /* height: 40px; */
-  margin-left: 2px;
-  margin-right: 2px;
+  width: 140rpx;
+  height: 60rpx;
+  margin: 0 10rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border-bottom: 5px solid #f0f0f099; */
-  /* border-bottom: 5px solid transparent; */
-  font-weight: bold;
+  font-size: 28rpx;
+  color: #666;
+  border-radius: 30rpx;
+  transition: all 0.3s ease;
+  transform-origin: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-bottom-category-label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3rpx;
+  background-color: #39a096;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.card-bottom-category-label:active {
+  transform: scale(0.95);
 }
 
 .choose {
-  /* border-bottom: 5px solid #404481; */
-  /* background-color: white; */
-  /* background-color: #ffffff99; */
-  /* background-color: #20b6a8; */
   background-color: #39a096;
   color: white;
-  border-radius: 20px;
-  font-weight: bold;
+  font-weight: 500;
+  transform: scale(1.05);
+  box-shadow: 0 4rpx 12rpx rgba(57, 160, 150, 0.3);
+}
+
+.choose::after {
+  width: 100%;
 }
 
 .map_right_card {
   height: 190px;
   position: absolute;
   right: 0px;
+  margin-top: -20px;
+}
+
+.duration_and_distance {
+  display: flex;
+  justify-content: space-between;
 }
 
 .location {
   width: 60px;
-  /* width: 100%; */
   height: 65px;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* justify-content: flex-end; */
-  /* align-items: center; */
-  /* margin-bottom: 10px; */
+}
+
+.img {
+  width: 55px;
+  height: 55px;
+  margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 .instruction {
@@ -164,18 +203,6 @@
   margin-right: 5px;
 }
 
-.img {
-  width: 55px;
-  height: 55px;
-  margin-right: 5px;
-  margin-bottom: 10px;
-}
-
-.duration_and_distance {
-  display: flex;
-  justify-content: space-between;
-}
-
 .duration_and_distance_style {
   display: flex;
   align-items: flex-end;
@@ -189,33 +216,35 @@
 }
 
 .card-bottom {
-  /* height: 230px; */
-  position: relative;
-  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
   height: 50px;
-  background-color: #ffffff;
+  background-color: #f5f7fa;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100;
+  margin: 0;
+  padding: 0 20rpx;
+  box-sizing: border-box;
 }
 
 .card-bottom-button {
-  /* height: 35px; */
-  /* margin-top: 5px; */
-  /* padding: 5px 30px 5px 30px; */
-  padding: 5px;
-  width: 94%;
-  font-size: larger;
-  /* color: white; */
-  /* background-color: #1AAD19; */
-  /* background-color: #f0f0f0; */
-  color: #0152d6;
+  width: 100%;
+  height: 100%;
   background-color: #f3f3ff;
   border: 1px solid #0152d6;
-  border-radius: 10px;
+  border-radius: 25rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: larger;
+  color: #0152d6;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .road {
@@ -260,14 +289,16 @@
 
 /* 地点详情弹窗 */
 .dialog-content {
+  padding: 30rpx;
   animation: dialogFadeIn 0.3s ease-out;
 }
 
 .dialog-image {
   width: 100%;
-  border-radius: 12rpx;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 400rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   animation: imageFadeIn 0.5s ease-out;
 }
@@ -277,39 +308,35 @@
 }
 
 .dialog-aliases {
-  font-size: 14px;
+  font-size: 28rpx;
   color: #666;
-  margin-bottom: 10px;
-  padding: 8px 12px;
-  background: #f8f9fa;
-  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+  padding: 0;
   display: inline-block;
 }
 
 .dialog-desc {
-  font-size: 15px;
+  font-size: 28rpx;
   color: #333;
   line-height: 1.6;
-  padding: 12px;
-  background: #fff;
-  border-radius: 12rpx;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 0;
+  margin-top: 20rpx;
 }
 
 /* 轮播图样式 */
 .dialog-swiper {
   width: 100%;
-  height: 300rpx;
-  margin-bottom: 20rpx;
-  border-radius: 12rpx;
+  height: 400rpx;
+  margin-bottom: 30rpx;
+  border-radius: 20rpx;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }
 
 .dialog-swiper .dialog-image {
   width: 100%;
   height: 100%;
-  border-radius: 12rpx;
+  border-radius: 20rpx;
 }
 
 .dialog-swiper .wx-swiper-dot {
@@ -345,21 +372,32 @@
 
 /* 弹窗标题样式 */
 .mp-dialog__title {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 32rpx;
+  font-weight: 600;
   color: #333;
-  padding: 20px 0;
+  padding: 30rpx 0;
+  text-align: center;
+  border-bottom: 1rpx solid #f0f0f0;
 }
 
 /* 弹窗按钮样式 */
 .mp-dialog__btn {
-  font-size: 16px;
-  color: #404481;
+  font-size: 28rpx;
+  color: #1890ff;
   font-weight: 500;
-  padding: 12px 0;
-  transition: background-color 0.3s ease;
+  padding: 24rpx 0;
+  transition: all 0.3s ease;
+  border-top: 1rpx solid #f0f0f0;
 }
 
 .mp-dialog__btn:active {
-  background-color: #f5f5f5;
+  background-color: #f5f7fa;
+  color: #096dd9;
+}
+
+page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: #f5f7fa;
 }
