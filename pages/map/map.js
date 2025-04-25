@@ -11,17 +11,9 @@ var qqmapsdk = new QQMapWX({
     key: map.mapKey // 必填
 });
 
-
-
-
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
         scrollLeft: 0,
-
         category: 1,
         site: 0,
 
@@ -29,10 +21,8 @@ Page({
         location: media.location,
         use: media.use,
         restore: media.restore,
-
         exchange: media.exchange,
         map_bottom: media.map_bottom,
-
 
         // 自定义图层、地图、学校 边界
         groundoverlay: map.groundoverlay,
@@ -62,8 +52,6 @@ Page({
           strokeWidth: 2,
           zIndex: 1
         }],
-
-        mylocationmarker: "",
 
         duration: 0,
         distance: 0,
@@ -101,12 +89,124 @@ Page({
         }
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad(options) {
         this.map()
         this.location()
+    },
+
+    // 初始化地图
+    map() {
+        var that = this
+        this.mapCtx = wx.createMapContext('map')
+        this.mapCtx.addGroundOverlay({
+            id: 0,
+            src: that.data.map_bottom,
+            bounds: {
+                southwest: {
+                    latitude: that.data.groundoverlay.southwest_latitude,
+                    longitude: that.data.groundoverlay.southwest_longitude
+                },
+                northeast: {
+                    latitude: that.data.groundoverlay.northeast_latitude,
+                    longitude: that.data.groundoverlay.northeast_longitude
+                }
+            },
+            opacity: that.data.groundoverlay.opacity,
+            success(res) {
+                console.log("添加自定义图层成功", res)
+            },
+            fail(err) {
+                console.log("添加自定义图层失败", err)
+            },
+            complete(res) {
+                console.log("添加自定义图层完成", res)
+            }
+        })
+        this.mapCtx.setBoundary({
+            southwest: {
+                latitude: this.data.boundary.southwest_latitude,
+                longitude: this.data.boundary.southwest_longitude,
+            },
+            northeast: {
+                latitude: this.data.boundary.northeast_latitude,
+                longitude: this.data.boundary.northeast_longitude,
+            }
+        })
+        this.mapCtx.initMarkerCluster({
+            enableDefaultStyle: true,
+            zoomOnClick: false,
+            gridSize: 30,
+            complete(res) {
+                console.log('initMarkerCluster', res)
+            }
+        })
+    },
+
+    // 定位
+    location() {
+        var that = this
+        var school_boundary = this.data.school_boundary
+        var default_point = that.data.default_point
+        wx.getLocation({
+            type: 'gcj02',
+            success: function (res) {
+                var nowlatitude = res.latitude
+                var nowlongitude = res.longitude
+                console.log("当前位置坐标", nowlatitude, nowlongitude)
+                if (nowlatitude > school_boundary.south && nowlatitude < school_boundary.north && nowlongitude > school_boundary.west && nowlongitude < school_boundary.east) {
+                    that.setData({
+                        mylocationmarker: {
+                            id: 0,
+                            latitude: nowlatitude,
+                            longitude: nowlongitude,
+                            width: 25,
+                            height: 37,
+                            callout: {
+                                content: " 当前位置 ",
+                                display: 'ALWAYS',
+                                padding: 5,
+                                borderRadius: 10
+                            },
+                            joinCluster: true,
+                        },
+                        start: {
+                            name: "当前位置",
+                            latitude: nowlatitude,
+                            longitude: nowlongitude,
+                        }
+                    })
+                } else {
+                    that.setData({
+                        mylocationmarker: {
+                            id: 0,
+                            latitude: default_point.latitude,
+                            longitude: default_point.longitude,
+                            width: 25,
+                            height: 37,
+                            callout: {
+                                content: " " + default_point.name + " ",
+                                display: 'ALWAYS',
+                                padding: 5,
+                                borderRadius: 10
+                            },
+                            joinCluster: true,
+                        },
+                        start: {
+                            name: default_point.name,
+                            latitude: default_point.latitude,
+                            longitude: default_point.longitude,
+                        }
+                    })
+
+                    wx.showToast({
+                        title: '当前位置不在校区内\n默认位置设为' + that.data.default_point.name,
+                        icon: 'none',
+                        duration: 2000
+                    })
+                }
+                that.changeCategory(that.data.static)
+            }
+        })
     },
 
     /**
@@ -190,135 +290,19 @@ Page({
 
     },
 
-    // 初始化地图
-    map() {
-        var that = this
-        this.mapCtx = wx.createMapContext('map')
-        this.mapCtx.addGroundOverlay({
-            id: 0,
-            src: that.data.map_bottom,
-            bounds: {
-                southwest: { //西南角
-                    latitude: this.data.groundoverlay.southwest_latitude,
-                    longitude: this.data.groundoverlay.southwest_longitude,
-                },
-                northeast: { //东北角
-                    latitude: this.data.groundoverlay.northeast_latitude,
-                    longitude: this.data.groundoverlay.northeast_longitude,
-                }
-            },
-            opacity: this.data.groundoverlay.opacity, //图层透明度
-            success(res) {
-                // console.log('wp', res)
-            },
-            fail(err) {
-                // console.log('err', err)
-            }
-        })
-        this.mapCtx.setBoundary({
-            southwest: { //西南角
-                latitude: this.data.boundary.southwest_latitude,
-                longitude: this.data.boundary.southwest_longitude,
-            },
-            northeast: { //东北角
-                latitude: this.data.boundary.northeast_latitude,
-                longitude: this.data.boundary.northeast_longitude,
-            }
-        })
-        this.mapCtx.initMarkerCluster({
-            enableDefaultStyle: true, //启用默认的聚合样式
-            zoomOnClick: false, //点击已经聚合的标记点时是否实现聚合分离，点击后，标记点出现在屏幕边缘
-            gridSize: 30, //聚合算法的可聚合距离
-            complete(res) {
-                // console.log('initMarkerCluster', res)
-            }
-        })
-    },
-
-    // 定位
-    location() {
-        var that = this
-        var school_boundary = this.data.school_boundary
-        var default_point = that.data.default_point
-        wx.getLocation({
-            type: 'gcj02',
-            success: function (res) {
-                var nowlatitude = res.latitude
-                var nowlongitude = res.longitude
-                console.log("当前位置坐标", nowlatitude, nowlongitude)
-                if (nowlatitude > school_boundary.south && nowlatitude < school_boundary.north && nowlongitude > school_boundary.west && nowlongitude < school_boundary.east) {
-                    that.setData({
-                        mylocationmarker: {
-                            id: 0,
-                            // iconPath: "",
-                            latitude: nowlatitude,
-                            longitude: nowlongitude,
-                            width: 25,
-                            height: 37,
-                            callout: {
-                                content: " 当前位置 ",
-                                display: 'ALWAYS',
-                                padding: 5,
-                                borderRadius: 10
-                            },
-                            joinCluster: true,
-                        },
-                        start: {
-                            name: "当前位置",
-                            latitude: nowlatitude,
-                            longitude: nowlongitude,
-                        }
-                    })
-                } else {
-                    that.setData({
-                        mylocationmarker: {
-                            id: 0,
-                            // iconPath: "",
-                            latitude: default_point.latitude,
-                            longitude: default_point.longitude,
-                            width: 25,
-                            height: 37,
-                            callout: {
-                                content: " " + default_point.name + " ",
-                                display: 'ALWAYS',
-                                padding: 5,
-                                borderRadius: 10
-                            },
-                            joinCluster: true,
-                        },
-                        start: {
-                            name: default_point.name,
-                            latitude: default_point.latitude,
-                            longitude: default_point.longitude,
-                        }
-                    })
-
-                    wx.showToast({
-                        title: '当前位置不在校区内\n默认位置设为' + that.data.default_point.name,
-                        icon: 'none',
-                        duration: 2000
-                    })
-                }
-                that.changeCategory(that.data.static)
-            }
-        })
-    },
-
-
     // 点击地图标记点时触发事件
     markertap(e) {
-		if(this.data.polyline.length == 0) {
-			// console.log(e.markerId)
-			if (e.markerId == 0) {
-				var site = this.data.default_point
-			} else {
-				var site = this.data.site_data[this.data.category].list[e.markerId - 1]
-			}
-			this.setData({
-				dialogShow_site: true,
-				card: site,
-			})
-		}
+        if(this.data.polyline.length == 0) {
+            if (e.markerId == 0) {
+                var site = this.data.default_point
+            } else {
+                var site = this.data.site_data[this.data.category].list[e.markerId - 1]
+            }
+            this.setData({
+                dialogShow_site: true,
+                card: site,
+            })
+        }
     },
 
     // 底部按钮（路线详情和类别地点）
@@ -334,7 +318,7 @@ Page({
         }
     },
 
-    // mpdialog “关闭” 按钮点击事件
+    // mpdialog "关闭" 按钮点击事件
     mapmarker_close() {
         this.setData({
             dialogShow_category: false,
@@ -352,7 +336,7 @@ Page({
         })
     },
 
-    // mpdialog “设为起点”和“设为终点” 按钮点击事件
+    // mpdialog "设为起点"和"设为终点" 按钮点击事件
     mapmarker_choose(e) {
         this.setData({
             dialogShow_site: false,
@@ -433,7 +417,7 @@ Page({
         })
     },
 
-    // “还原” 按钮
+    // "还原" 按钮
     restore() {
         let e = {
             currentTarget: {
@@ -456,9 +440,6 @@ Page({
             url: '../../pages/map/instruction/instruction',
         })
     },
-
-
-    
 
     //todo 目前已修改完成 路线的逻辑
     formSubmit() {

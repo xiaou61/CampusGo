@@ -26,7 +26,7 @@
   </scroll-view>
 </view>
 
-<map style="width: 100%; height: calc(100% - 180px);" id="map" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" min-scale="{{minscale}}" show-location="{{showLocation}}" enable-poi="{{enablepoi}}" markers="{{markers}}" include-points="" polyline="{{polyline}}" polygons="{{polygons}}" bindmarkertap="markertap">
+<map style="width: 100%; height: calc(100% - 180px);" id="map" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" min-scale="{{minscale}}" show-location="{{false}}" enable-poi="{{enablepoi}}" markers="{{markers}}" include-points="" polyline="{{polyline}}" polygons="{{polygons}}" bindmarkertap="markertap">
   <view class="map_right_card" style="margin-top: calc(100vh - 245px);width: 100%;">
     <view class="duration_and_distance" style="width: 100%;">
       <view class="duration_and_distance_style">
