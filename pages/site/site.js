@@ -1,3 +1,12 @@
+/**
+ * @author https://github.com/xiaou61
+ * 地点页面
+ * 主要功能：
+ * 1. 展示地点列表
+ * 2. 处理地点点击事件
+ * 3. 提供地点搜索功能
+ * 4. 支持地点分类切换
+ */
 // pages/site/site.js
 var map = require('../../data/map')
 var media = require('../../data/media')
