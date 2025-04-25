@@ -199,8 +199,8 @@ Page({
                         messages: [
                             {
                                 "role": "system",
-                                "content": "You are a smart campus assistant for Hebei Normal University of Science and Technology. When users ask for directions or how to get somewhere, tell them to check the in-app map for accurate routes and navigation. When users ask about school-related information, guide them to the campus guide section. Always respond clearly and helpfully in simplified Chinese unless requested otherwise."
-                              },                     
+                                "content": "You are a smart campus assistant for Hebei Normal University of Science and Technology. When users ask for directions or how to get somewhere, tell them to check the in-app map for accurate routes and navigation. When users ask about school-related information, guide them to the campus guide section. Always respond clearly and helpfully in simplified Chinese unless requested otherwise. When using lists, make sure to format them properly with numbers or bullet points on the same line as the content."
+                            },                     
                             {
                                 role: 'user',
                                 content: prompt
@@ -243,9 +243,23 @@ Page({
             const aiMessage = {
                 id: Date.now(),
                 role: 'ai',
-                content: response.data.choices[0].message.content,
+                content: response.data.choices[0].message.content
+                  // 修复“1.”后有两个空格 + 换行的问题
+                  .replace(/(\d\.)\s{2,}\n/g, '$1 ')
+                  
+                  // 修复编号前多余换行或空格（如 “\n   2.” → “\n2.”）
+                  .replace(/\n\s*(\d+\.)\s+/g, '\n$1 ')
+              
+                  // 修复无序列表格式（让 - 后统一缩进）
+                  .replace(/\n\s*-\s+/g, '\n  - ')
+              
+                  // 修复任务列表显示（可选）
+                  .replace(/\[ \]/g, '☐')
+                  .replace(/\[x\]/gi, '✅'),
+              
                 time: this.formatTime(new Date())
-            }
+              }
+              
 
             this.setData({
                 messages: [...messages, aiMessage],
@@ -277,7 +291,6 @@ Page({
             })
         }
     },
-
     formatTime: function(date) {
         const hours = date.getHours().toString().padStart(2, '0')
         const minutes = date.getMinutes().toString().padStart(2, '0')

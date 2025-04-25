@@ -80,10 +80,11 @@
   padding: 20rpx;
   border-radius: 16rpx;
   max-width: 85%;
-  word-break: break-all;
+  word-break: break-word;
   font-size: 28rpx;
-  line-height: 1.5;
+  line-height: 1.6;
   position: relative;
+  white-space: pre-wrap;
 }
 
 .user-bubble {
@@ -238,4 +239,135 @@
   40% {
     transform: scale(1);
   }
+}
+
+/* 消息内容样式 */
+.markdown-body {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.markdown-body text {
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 列表样式 */
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 40rpx;
+  margin: 16rpx 0;
+}
+
+.markdown-body ol li,
+.markdown-body ul li {
+  margin: 8rpx 0;
+  line-height: 1.6;
+}
+
+.markdown-body ol {
+  list-style-type: decimal;
+}
+
+.markdown-body ul {
+  list-style-type: disc;
+}
+
+/* towxml 样式 */
+.towxml {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.towxml p {
+  margin: 8rpx 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.towxml ol,
+.towxml ul {
+  padding-left: 40rpx;
+  margin: 16rpx 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.towxml ol li,
+.towxml ul li {
+  margin: 8rpx 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: block;
+}
+
+.towxml ol {
+  list-style-type: decimal;
+}
+
+.towxml ul {
+  list-style-type: disc;
+}
+
+.towxml h1,
+.towxml h2,
+.towxml h3,
+.towxml h4,
+.towxml h5,
+.towxml h6 {
+  margin: 24rpx 0 16rpx;
+  font-weight: bold;
+}
+
+.towxml h1 { font-size: 36rpx; }
+.towxml h2 { font-size: 34rpx; }
+.towxml h3 { font-size: 32rpx; }
+.towxml h4 { font-size: 30rpx; }
+.towxml h5 { font-size: 28rpx; }
+.towxml h6 { font-size: 26rpx; }
+
+.towxml code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2rpx 6rpx;
+  border-radius: 4rpx;
+  font-family: monospace;
+}
+
+.towxml pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 16rpx;
+  border-radius: 8rpx;
+  overflow-x: auto;
+  margin: 16rpx 0;
+}
+
+.towxml blockquote {
+  border-left: 4rpx solid rgba(0, 0, 0, 0.1);
+  padding-left: 16rpx;
+  margin: 16rpx 0;
+  color: #666;
+}
+
+.towxml table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16rpx 0;
+}
+
+.towxml th,
+.towxml td {
+  border: 1rpx solid rgba(0, 0, 0, 0.1);
+  padding: 8rpx 12rpx;
+  text-align: left;
+}
+
+.towxml th {
+  background-color: rgba(0, 0, 0, 0.05);
 }

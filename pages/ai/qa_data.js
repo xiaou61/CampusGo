@@ -17,8 +17,8 @@ const qaData = [
     a: "不是，快速排序是不稳定的排序算法。"
   },
   {
-    q: "快速排序的Python实现",
-    a: "```python\ndef quick_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quick_sort(left) + middle + quick_sort(right)\n```"
+    q: "这个来进行",
+    a: "1.**每日学习安排**   - 早晨7:30-8:00：晨读/记忆类学习（如英语单词、专业课概念）  - 课后1小时：及时整理当天课堂笔记  - 晚上19:00-21:00：核心课程深度学习+作业 \n 2.**每日学习安排**"
   },
 ];
 
