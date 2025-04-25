@@ -27,7 +27,8 @@ module.exports = {
   },
 
   // 校园指南
-  shool_guide: [{
+  shool_guide: [
+    {
       title: '待编辑',
       content: '待编辑21321312',
       imageList: [''],
