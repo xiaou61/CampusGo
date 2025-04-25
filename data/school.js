@@ -38,6 +38,6 @@ module.exports = {
         content: '待编辑212312',
         imageList: [''],
         keywords: ['图书']
-      },
+      }
   ]
 }

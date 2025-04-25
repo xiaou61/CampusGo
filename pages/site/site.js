@@ -65,25 +65,35 @@ Page({
     },
 
     click: function (e) {
-        console.log(e)
+        console.log("点击事件数据：", e.currentTarget.dataset)
         var card = e.currentTarget.dataset
         let id = e.currentTarget.id
+
+        // 处理图片数据
+        if (card.images && Array.isArray(card.images)) {
+            console.log("使用已有的图片数组：", card.images)
+        } else {
+            console.log("使用单张图片：", card.img)
+            card.images = [card.img]
+        }
+
+        console.log("最终图片数据：", card.images)
 
         this.setData({
             dialogShow: true,
             card: card,
             id: id,
         })
-
     },
 
     //点击图片可查看
     lookPhoto(e) {
         console.log("点击了图片", e.target.dataset.src)
-        var url = e.target.dataset.src
+        var current = e.target.dataset.src
+        var urls = this.data.card.images
         wx.previewImage({
-            current: url, // 当前显示图片的http链接
-            urls: [url] // 需要预览的图片http链接列表
+            current: current, // 当前显示图片的http链接
+            urls: urls // 需要预览的图片http链接列表
         })
     },
 

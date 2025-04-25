@@ -1,88 +1,121 @@
 /* pages/site/site.wxss */
 .card {
-    background-color: grey;
+    background-color: #f5f5f5;
     display: flex;
     flex-direction: row;
+    min-height: 100vh;
 }
 
 .card-left {
-    width: 75px;
-    background-color: #f0f0f0;
+    width: 80px;
+    background-color: #ffffff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
 }
 
 .card-left-scorll-view {
     height: 100%;
-    background-color: #f0f0f0;
-    width: 75px;
+    background-color: #ffffff;
+    width: 80px;
     text-align: center;
-
 }
 
 .card-left-scorll-view-label {
-    width: 75px;
-    height: 45px;
+    width: 80px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
+    color: #666;
+    transition: all 0.3s;
 }
 
 .choose {
-    border-left: 6px solid #404481;
-    background-color: white;
+    border-left: 4px solid #404481;
+    background-color: #f8f9fa;
+    color: #404481;
+    font-weight: 500;
 }
 
 .card-right {
-    background-color: white;
+    background-color: #f5f5f5;
+    flex: 1;
+    padding: 10px;
 }
 
 .card-right-title {
-    margin: 10px;
-    font-size: 20px;
+    margin: 15px 10px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     height: 30px;
+    color: #333;
+    font-weight: 500;
 }
 
 .card-right-title-icon {
-    height: 30px;
-    width: 30px;
-    margin-left: 5px;
-    margin-right: 10px;
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
 }
 
 .card-right-content {
     display: flex;
     flex-flow: row wrap;
+    padding: 0 5px;
 }
 
 .card-right-content-card {
-    margin-top: 5px;
-    /* margin-left: 4px; */
+    margin: 8px;
     font-size: 14px;
-    /* height: 150px; */
-    /* width: 95px; */
-    width: 33.3%;
+    width: calc(33.33% - 16px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.card-right-content-card:active {
+    transform: scale(0.98);
 }
 
 .card-right-content-card-img {
-    height: 90px;
-    width: 90px;
-    border-radius: 10px;
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+    object-fit: cover;
 }
 
 .card-right-content-card-context {
     display: flex;
     width: 100%;
+    margin-top: 8px;
+    align-items: center;
+    padding: 0 4px;
 }
 
 .card-right-content-card-context-icon {
-    height: 20px;
-    width: 20px;
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
 }
 
+.card-right-content-card-context text {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.card-right-content-card-context text text {
+    font-size: 12px;
+    color: #999;
+    display: block;
+    margin-top: 2px;
+}
 
 .card-container {
     height: 100%;
@@ -118,4 +151,115 @@
     width: auto;
     padding: 10px;
     font-size: 18px;
+}
+
+/* 弹窗动画 */
+@keyframes dialogFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dialog-content {
+    padding: 0 20px 20px;
+    animation: dialogFadeIn 0.3s ease-out;
+}
+
+.dialog-image {
+    width: 100%;
+    border-radius: 12rpx;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    animation: imageFadeIn 0.5s ease-out;
+}
+
+.dialog-image:active {
+    transform: scale(0.98);
+}
+
+.dialog-aliases {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 8rpx;
+    display: inline-block;
+}
+
+.dialog-desc {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+    padding: 12px;
+    background: #fff;
+    border-radius: 12rpx;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 轮播图样式优化 */
+.dialog-swiper {
+    width: 100%;
+    height: 300rpx;
+    margin-bottom: 20rpx;
+    border-radius: 12rpx;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-swiper .dialog-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 12rpx;
+}
+
+.dialog-swiper .wx-swiper-dot {
+    width: 8rpx;
+    height: 8rpx;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.dialog-swiper .wx-swiper-dot-active {
+    width: 16rpx;
+    background: #ffffff;
+    border-radius: 4rpx;
+}
+
+/* 弹窗标题样式 */
+.mp-dialog__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    padding: 20px 0;
+}
+
+/* 弹窗按钮样式 */
+.mp-dialog__btn {
+    font-size: 16px;
+    color: #404481;
+    font-weight: 500;
+    padding: 12px 0;
+    transition: background-color 0.3s ease;
+}
+
+.mp-dialog__btn:active {
+    background-color: #f5f5f5;
 }
