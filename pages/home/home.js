@@ -16,6 +16,7 @@ Page({
 
         laba: media.laba,
         school_logo: media.school_logo,
+        school_background: media.school_background,
 
         function_buttons: media.function_buttons,
 
@@ -55,6 +56,8 @@ Page({
             text: '关闭'
         }],
 
+        showTyping: true,
+
     },
 
     /**
@@ -62,6 +65,7 @@ Page({
      */
     onLoad(options) {
         this.getWeather()
+        this.startTypingLoop()
     },
 
     /**
@@ -207,5 +211,24 @@ Page({
         wx.navigateTo({
             url: "../../pages/home/introduction/introduction",
         })
+    },
+
+    startTypingLoop() {
+        const that = this
+        if (this.typingTimer) clearInterval(this.typingTimer)
+        this.setData({ showTyping: false })
+        setTimeout(() => {
+            that.setData({ showTyping: true })
+        }, 100) // 先隐藏再显示，触发动画
+        this.typingTimer = setInterval(() => {
+            that.setData({ showTyping: false })
+            setTimeout(() => {
+                that.setData({ showTyping: true })
+            }, 100)
+        }, 20000)
+    },
+
+    onUnload() {
+        if (this.typingTimer) clearInterval(this.typingTimer)
     },
 })
