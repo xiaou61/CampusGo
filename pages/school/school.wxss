@@ -1,6 +1,6 @@
 /* pages/school/school.wxss */
 page {
-  background-color: #56CCF2;
+  background-color: #f8f9fa;
 }
 
 .cu-list {
@@ -60,4 +60,189 @@ page {
 .text-grey {
   /* color: #8799a3; */
   color: grey;
+}
+
+.school-container {
+  min-height: 100vh;
+  padding: 30rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  margin-bottom: 40rpx;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.title-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 56rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(45deg, #2196F3, #00BCD4);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: titleGlow 2s infinite alternate;
+}
+
+.title-decoration {
+  position: absolute;
+  bottom: -10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100rpx;
+  height: 4rpx;
+  background: linear-gradient(90deg, transparent, #2196F3, transparent);
+  animation: decorationMove 2s infinite;
+}
+
+.subtitle-wrapper {
+  margin-top: 20rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+  opacity: 0;
+  animation: fadeIn 1s forwards 0.5s;
+  display: block;
+  text-align: center;
+}
+
+.guide-list {
+  margin-top: 20rpx;
+  height: calc(100vh - 200rpx);
+}
+
+.guide-item {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20rpx);
+  animation: slideIn 0.5s forwards;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+.guide-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+}
+
+.guide-content {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.guide-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background: #e8f5e9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  transition: all 0.3s ease;
+}
+
+.guide-item:active .guide-icon {
+  transform: rotate(360deg);
+}
+
+.icon {
+  font-size: 40rpx;
+}
+
+.guide-info {
+  flex: 1;
+}
+
+.guide-title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.guide-desc {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+}
+
+.guide-arrow {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.guide-item:active .guide-arrow {
+  transform: translateX(10rpx);
+}
+
+.guide-arrow image {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow: 0 0 10rpx rgba(33, 150, 243, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 20rpx rgba(33, 150, 243, 0.8);
+  }
+}
+
+@keyframes decorationMove {
+  0% {
+    width: 100rpx;
+  }
+  50% {
+    width: 200rpx;
+  }
+  100% {
+    width: 100rpx;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

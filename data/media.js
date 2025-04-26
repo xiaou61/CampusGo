@@ -81,13 +81,4 @@ module.exports = {
   // 小程序码
   miniprogramming_ma: "https://s1.imagehub.cc/images/2024/03/20/b2b3bfb91a1ee49b269b93f6ffed651e.jpeg",
 
-
-  // 软件声明页
-
-  message: "../../images/message.png",
-  zhixie: "../../images/zhixie.png",
-  zhixie_kaifazhe: "https://cdnjson.com/images/2023/10/24/zhixie_kaifazhe.jpg",
-  zhixie_up: "https://cdnjson.com/images/2023/02/26/zhixie_up.jpg",
-  zhixie_honghui: "https://cdnjson.com/images/2023/02/26/zhixie_honghui.jpg",
-  notes: "../../images/notes.png"
 }

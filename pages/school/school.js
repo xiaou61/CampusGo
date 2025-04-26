@@ -1,3 +1,12 @@
+/**
+ * @author https://github.com/xiaou61
+ * 学校页面
+ * 主要功能：
+ * 1. 展示学校指南
+ * 2. 处理指南点击事件
+ * 3. 提供指南搜索功能
+ * 4. 支持指南分类切换
+ */
 // pages/school/school.js
 var school = require('../../data/school')
 var media = require('../../data/media')

@@ -13,12 +13,12 @@
 
     <view class="list-landscape-container-header">
       <view class="list-landscape-container-icon">
-        <image class="list-landscape-container-icon-img" src="{{school_logo}}" />
-      </view>
+      <image class="list-landscape-container-icon-img" src="{{school_logo}}" />
+    </view>
 
       <view class="list-landscape-container-text">
         <text class="typing-text">{{school_information.school_name_full}}</text>
-      </view>
+    </view>
 
       <view class="list-landscape-container-icon">
         <image class="list-landscape-container-icon-school" src="{{label}}" bindtap="tointroduction" />

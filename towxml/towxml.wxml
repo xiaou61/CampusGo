@@ -1,0 +1,57 @@
+<view class="towxml-container">
+  <block wx:for="{{nodes}}" wx:key="index">
+    <block wx:if="{{item.type === 'text'}}">
+      <text>{{item.text}}</text>
+    </block>
+    <block wx:elif="{{item.type === 'h1'}}">
+      <view class="h1">
+        <rich-text nodes="{{item.text}}"></rich-text>
+      </view>
+    </block>
+    <block wx:elif="{{item.type === 'h2'}}">
+      <view class="h2">
+        <rich-text nodes="{{item.text}}"></rich-text>
+      </view>
+    </block>
+    <block wx:elif="{{item.type === 'h3'}}">
+      <view class="h3">
+        <rich-text nodes="{{item.text}}"></rich-text>
+      </view>
+    </block>
+    <block wx:elif="{{item.type === 'p'}}">
+      <view class="p">
+        <rich-text nodes="{{item.text}}"></rich-text>
+      </view>
+    </block>
+    <block wx:elif="{{item.type === 'code'}}">
+      <view class="code-block">
+        <view class="code-header" wx:if="{{item.language}}">
+          <text class="code-language">{{item.language}}</text>
+        </view>
+        <view class="code-content">
+          <text class="code">{{item.text}}</text>
+        </view>
+      </view>
+    </block>
+    <block wx:elif="{{item.type === 'ul'}}">
+      <view class="ul">
+        <block wx:for="{{item.nodes}}" wx:key="index">
+          <view class="li">
+            <text>• </text>
+            <rich-text nodes="{{item.text}}"></rich-text>
+          </view>
+        </block>
+      </view>
+    </block>
+    <block wx:elif="{{item.type === 'ol'}}">
+      <view class="ol">
+        <block wx:for="{{item.nodes}}" wx:key="index">
+          <view class="li">
+            <text>{{index + 1}}. </text>
+            <rich-text nodes="{{item.text}}"></rich-text>
+          </view>
+        </block>
+      </view>
+    </block>
+  </block>
+</view> 
