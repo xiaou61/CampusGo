@@ -192,7 +192,7 @@ module.exports = {
             name: "第三食堂",
             aliases: "教职工食堂",
             img: "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
-            desc: "全校最大的图书馆",
+            desc: "老师吃饭的地方",
             latitude: 39.9102522,
             longitude: 119.5507388
           },
@@ -507,7 +507,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "篮球场地",
             latitude: 39.9123688,
             longitude: 119.545697
           },
@@ -521,7 +521,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "音乐广场",
             latitude: 39.9092716,
             longitude: 119.5471748
           },
@@ -661,7 +661,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "停车场教职工专用",
             latitude: 39.9092856,
             longitude: 119.5486192
           },
@@ -675,7 +675,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "教职工停车场",
             latitude: 39.9131292,
             longitude: 119.5481404
           }
@@ -696,7 +696,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "科师的一条小商街",
             latitude: 39.9127236,
             longitude: 119.5486628
           },
@@ -710,7 +710,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "学校的一个超市",
             latitude: 39.9105426,
             longitude: 119.5500758
           },
@@ -724,7 +724,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "学校的一个超市",
             latitude: 39.9109354,
             longitude: 119.5488568
           },
@@ -738,7 +738,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "学校的咖啡",
             latitude: 39.9117982,
             longitude: 119.5480546
           },
@@ -752,7 +752,7 @@ module.exports = {
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
               "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             ],
-            desc: "全校最大的图书馆",
+            desc: "学校警卫室",
             latitude: 39.9089,
             longitude: 119.5483542
           },
