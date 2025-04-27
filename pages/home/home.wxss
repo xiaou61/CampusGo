@@ -562,7 +562,7 @@
   height: 160rpx;
   border-radius: 50%;
   border: 4rpx solid rgba(255,255,255,0.8);
-  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.2);
+  box-shadow: 0 4rpx 20rpx rgba(36, 67, 243, 0.2);
 }
 
 .school-title {
@@ -572,8 +572,8 @@
 .school-title text {
   color: #000000;
   font-size: 36rpx;
-  font-weight: 500;
-  text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.3);
+  font-weight: 800;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3);
 }
 
 .intro-button {
