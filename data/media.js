@@ -8,7 +8,7 @@ module.exports = {
   statement: "../../images/statement.png",
   // 风景轮播图
   swiper_background: ['https://cdnjson.com/images/2023/02/26/swiper_1.jpg', 'https://cdnjson.com/images/2023/02/26/swiper_2.jpg', 'https://cdnjson.com/images/2023/02/26/swiper_3.jpg'],
-
+  school_background: "../../images/top_bg.png",
 
   // 地图页
 

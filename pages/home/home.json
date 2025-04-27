@@ -2,5 +2,6 @@
     "usingComponents": {
         "mp-dialog": "weui-miniprogram/dialog/dialog"
     },
+    "navigationStyle": "custom",
     "navigationBarTitleText": "首页"
 }

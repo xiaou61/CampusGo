@@ -12,6 +12,7 @@
         "pages/ai/ai"
     ],
     "window": {
+        
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#ffffff",
         "navigationBarTitleText": "科师校园导航",
