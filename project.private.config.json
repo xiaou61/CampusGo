@@ -3,9 +3,10 @@
     "projectname": "CampusGo111",
     "setting": {
         "compileHotReLoad": true,
-        "urlCheck": false
+        "urlCheck": false,
+        "bigPackageSizeSupport": true
     },
-    "libVersion": "2.23.4",
+    "libVersion": "3.7.12",
     "condition": {
         "miniprogram": {
             "list": [

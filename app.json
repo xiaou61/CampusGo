@@ -12,7 +12,6 @@
         "pages/ai/ai"
     ],
     "window": {
-        
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#ffffff",
         "navigationBarTitleText": "科师校园导航",
@@ -48,7 +47,7 @@
                 "selectedIconPath": "/images/tabbar/icon_school_HL.png",
                 "iconPath": "/images/tabbar/icon_school.png",
                 "pagePath": "pages/ai/ai",
-                "text": "ai对话"
+                "text": "AI助手"
             }
         ]
     },

@@ -70,6 +70,7 @@
 .card-right-content-card {
     margin: 0;
     font-size: 14px;
+    width: calc(33.33% - 1px);
     width: calc(50% - 5px);
     display: flex;
     flex-direction: column;
@@ -87,8 +88,8 @@
 }
 
 .card-right-content-card-img {
-    height: 120px;
-    width: 100%;
+    height: 90px;
+    width: 90px;
     border-radius: 8px;
     object-fit: cover;
 }

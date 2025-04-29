@@ -17,6 +17,7 @@ Page({
         laba: media.laba,
         school_logo: media.school_logo,
         school_background: media.school_background,
+        top_image: media.background,
 
         function_buttons: media.function_buttons,
 
@@ -176,19 +177,19 @@ Page({
     },
 
     // 跳转到校园页
-    school() {
+    ai() {
         wx.switchTab({
-            url: '../school/school',
+            url: '../ai/ai',
         })
     },
 
     // 跳转到地点汇总页
-    site() {
+    guide() {
         // wx.switchTab({
         //   url: '../site/site',
         // })
-        wx.navigateTo({
-          url: '../home/pano/pano',
+        wx.switchTab({
+          url: '../school/school',
         })
     },
 
@@ -209,8 +210,8 @@ Page({
     // 学校简介
     tointroduction() {
         wx.navigateTo({
-            url: "../../pages/home/introduction/introduction",
-        })
+            url: "/pages/home/introduction/introduction",
+        });
     },
 
     startTypingLoop() {

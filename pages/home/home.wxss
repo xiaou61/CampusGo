@@ -521,13 +521,13 @@
 
 .page-container {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
 }
 
 /* 顶部区域样式 */
 .header-section {
   position: relative;
-  height: 700rpx;
+  height: 800rpx;
   overflow: hidden;
 }
 
@@ -536,8 +536,8 @@
   left: 0;
   position: absolute;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 87%;
+  object-fit: fill;
 }
 
 .header-content {
@@ -557,46 +557,122 @@
   margin-bottom: 20rpx;
 }
 
-.school-logo {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-  border: 4rpx solid rgba(255,255,255,0.8);
-  box-shadow: 0 4rpx 20rpx rgba(36, 67, 243, 0.2);
-}
-
-.school-title {
-  margin-bottom: 30rpx;
-}
-
-.school-title text {
-  color: #000000;
-  font-size: 36rpx;
-  font-weight: 800;
-  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3);
-}
-
 .intro-button {
+  margin-top: 30rpx;
+  padding: 20rpx 40rpx;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
   display: flex;
+  flex-direction: row;
   align-items: center;
-  padding: 16rpx 32rpx;
-  background: rgba(255,255,255,0.9);
-  border-radius: 40rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 2rpx solid #4facfe;
+  position: relative;
+  white-space: nowrap;
 }
 
-.intro-button image {
-  width: 200rpx;
-  height: 60rpx;
-  margin-right: 0rpx;
+.intro-button::before {
+  content: '';
+  position: absolute;
+  top: -4rpx;
+  left: -4rpx;
+  right: -4rpx;
+  bottom: -4rpx;
+  border: 2rpx solid rgba(79, 172, 254, 0.3);
+  border-radius: 52rpx;
+  animation: borderPulse 2s infinite;
 }
 
+@keyframes borderPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.intro-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.motto-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rpx;
+  white-space: nowrap;
+}
+
+.motto-item {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 10rpx 20rpx;
+  position: relative;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.motto-separator {
+  font-size: 32rpx;
+  color: #4facfe;
+  padding: 0 10rpx;
+}
+
+.motto-intro {
+  font-size: 32rpx;
+  color: #4facfe;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  line-height: 1;
+  display: inline;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  min-width: auto;
+  height: auto;
+  min-height: auto;
+}
+
+.motto-intro::after {
+  display: none;
+}
+
+.motto-intro:active {
+  opacity: 0.8;
+  transform: scale(0.95);
+}
+
+.motto-decoration {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 20rpx;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.intro-button:active .motto-decoration {
+  transform: scale(0.95);
+  opacity: 1;
+}
 
 /* 快捷功能区样式 */
 .quick-access {
 
   margin: -0rpx 30rpx 0;
-  padding: 10rpx;
+  padding: 8rpx;
   background: #ffffff;
   border-radius: 24rpx;
   box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.08);
@@ -614,8 +690,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10rpx;
-  background: #f8f9fa;
+  padding: 8rpx;
+  background: #ffffff;
   border-radius: 16rpx;
   transition: all 0.3s ease;
 }
@@ -628,12 +704,7 @@
 .grid-item image {
   width: 100%;
   height: 150rpx;
-  margin-bottom: 16rpx;
-}
-
-.grid-item text {
-  font-size: 28rpx;
-  color: #333;
+  margin-bottom: 10rpx;
 }
 
 /* 信息卡片样式 */
@@ -659,7 +730,7 @@
 }
 
 .info-item {
-  width: 48%;
+  width: 40%;
   padding: 24rpx;
   background: #f8f9fa;
   border-radius: 16rpx;
@@ -789,4 +860,20 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* 顶部图片容器样式 */
+.top-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10rpx;
+}
+
+.top-image {
+  margin-top: 150rpx;
+  width: 1000rpx;
+  height: 270rpx;
+  border-radius: 0;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }
