@@ -6,10 +6,10 @@ module.exports = {
 
   // 软件声明
   statement: "../../images/statement.png",
-  // 风景轮播图
-  swiper_background: ['https://cdnjson.com/images/2023/02/26/swiper_1.jpg', 'https://cdnjson.com/images/2023/02/26/swiper_2.jpg', 'https://cdnjson.com/images/2023/02/26/swiper_3.jpg'],
-  school_background: "../../images/top_bg.png",
-  background: "../../images/background.jpg",
+  //图片替换top_bg
+  school_background: "https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png",
+  //图片替换 background.jpg
+  background: "https://free4.yunpng.top/2025/04/29/6810c47a8a044.jpg",
   // 地图页
 
   // 自定义地图
@@ -39,7 +39,8 @@ module.exports = {
   // 首页
 
   // 校徽
-  school_logo: "../../images/logo.png",
+  //logo.png
+  school_logo: "https://free4.yunpng.top/2025/04/29/6810c86b96bc7.png",
   label: "../../images/label.png",
   laba: "../../images/laba.png",
   school_icon: "../../images/school_icon.png",
@@ -49,7 +50,7 @@ module.exports = {
   weather: "../../images/weather.png",
   wave: "https://cdnjson.com/images/2024/02/19/wave1c95582ec21c3965.gif",
   // 常用功能 按钮
-  function_buttons: ["../../images/school_map.png","../../images/school_ai.png","../../images/guide.png","../../images/friend_link.png"],
+  function_buttons: ["https://free4.yunpng.top/2025/04/29/6810c86c47861.png","https://free4.yunpng.top/2025/04/29/6810c86ad0e1d.png","https://free4.yunpng.top/2025/04/29/6810c8695566f.png","https://free4.yunpng.top/2025/04/29/6810c8693e637.png"],
   // 学校公众号
   guanwei: ["https://cdnjson.com/images/2023/04/30/guanwei.png", "https://s1.imagehub.cc/images/2024/02/07/a9e42b78adace1b3f93484530613c84c.png", "https://s1.imagehub.cc/images/2024/02/07/8e8dae8b402c4c4ed236d7fbe4a9d913.png"],
 

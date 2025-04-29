@@ -42,7 +42,6 @@ Page({
         APIKEY: data.weatherKey,
         school_location: parseFloat(map.longitude).toFixed(2) + "," + parseFloat(map.latitude).toFixed(2),
 
-        background: media.swiper_background,
 
         indicatorDots: true, //是否显示面板指示点
         indicatorColor: "white", //指示点颜色

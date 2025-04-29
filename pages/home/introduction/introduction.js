@@ -10,7 +10,6 @@ Page({
     data: {
         school_information: school.school_information,
 
-        background: media.swiper_background,
         navigation: media.navigation,
         videourl: media.videourl,
 
