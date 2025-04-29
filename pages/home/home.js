@@ -176,7 +176,7 @@ Page({
         })
     },
 
-    // 跳转到校园页
+    // 跳转到Ai助手页
     ai() {
         wx.switchTab({
             url: '../ai/ai',
