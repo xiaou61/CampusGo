@@ -17,6 +17,7 @@ Page({
         laba: media.laba,
         school_logo: media.school_logo,
         school_background: media.school_background,
+        top_image: media.background,
 
         function_buttons: media.function_buttons,
 

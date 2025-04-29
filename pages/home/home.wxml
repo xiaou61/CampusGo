@@ -4,12 +4,10 @@
   <view class="header-section">
     <image class="header-bg" src="{{school_background}}" mode="aspectFill" />
     <view class="header-content" style="position: relative; left: 0rpx; top: -2rpx">
-      <view class="school-logo-container">
-        <image class="school-logo animate-fade-in" src="{{school_logo}}" />
+      <view class="top-image-container">
+        <image class="top-image animate-fade-in" src="{{top_image}}" mode="aspectFit" />
       </view>
-      <view class="school-title animate-slide-in">
-        <text class="typing-text" wx:if="{{showTyping}}">{{school_information.school_name_full}}</text>
-      </view>
+
       <view class="intro-button animate-fade-in">
         <view class="motto-container">
           <text class="motto-item">敏学</text>

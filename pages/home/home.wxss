@@ -536,8 +536,8 @@
   left: 0;
   position: absolute;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 87%;
+  object-fit: fill;
 }
 
 .header-content {
@@ -555,25 +555,6 @@
 .school-logo-container {
   margin-top: 100rpx;
   margin-bottom: 20rpx;
-}
-
-.school-logo {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-  border: 4rpx solid rgba(255,255,255,0.8);
-  box-shadow: 0 4rpx 20rpx rgba(36, 67, 243, 0.2);
-}
-
-.school-title {
-  margin-bottom: 30rpx;
-}
-
-.school-title text {
-  color: #000000;
-  font-size: 36rpx;
-  font-weight: 800;
-  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3);
 }
 
 .intro-button {
@@ -879,4 +860,20 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* 顶部图片容器样式 */
+.top-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10rpx;
+}
+
+.top-image {
+  margin-top: 150rpx;
+  width: 1000rpx;
+  height: 270rpx;
+  border-radius: 0;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }

@@ -47,7 +47,7 @@
                 "selectedIconPath": "/images/tabbar/icon_school_HL.png",
                 "iconPath": "/images/tabbar/icon_school.png",
                 "pagePath": "pages/ai/ai",
-                "text": "ai对话"
+                "text": "AI助手"
             }
         ]
     },
