@@ -3,34 +3,31 @@
   <!-- 顶部背景区域 -->
   <view class="header-section">
     <image class="header-bg" src="{{school_background}}" mode="aspectFill" />
-    <view class="header-content">
+    <view class="header-content" style="position: relative; left: 0rpx; top: -2rpx">
       <view class="school-logo-container">
         <image class="school-logo animate-fade-in" src="{{school_logo}}" />
       </view>
       <view class="school-title animate-slide-in">
         <text class="typing-text" wx:if="{{showTyping}}">{{school_information.school_name_full}}</text>
       </view>
-      <view class="intro-button animate-fade-in" bindtap="tointroduction">
-        <image src="{{label}}" />
+      <view class="intro-button animate-fade-in">
+        <view class="motto-container">
+          <text class="motto-item">敏学</text>
+          <text class="motto-item">修身</text>
+          <text class="motto-item">乐业</text>
+          <text class="motto-item">创新</text>
+          <text class="motto-separator">|</text>
+        </view>
+          <button class="motto-intro" bindtap="tointroduction" style="width: 160rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">学校简介></button>
       </view>
     </view>
   </view>
 
-  <!-- 快捷功能区 -->
-  <view class="quick-access animate-slide-up">
-    <view class="quick-access-grid">
-      <view class="grid-item" bindtap="map">
-        <image src="{{function_buttons[0]}}" mode="aspectFit" />
-      </view>
-      <view class="grid-item" bindtap="school">
-        <image src="{{function_buttons[1]}}" mode="aspectFit" />
-      </view>
-      <view class="grid-item" bindtap="site">
-        <image src="{{function_buttons[5]}}" mode="aspectFit" />
-      </view>
-      <view class="grid-item" bindtap="link">
-        <image src="{{function_buttons[3]}}" mode="aspectFit" />
-      </view>
+<!-- 公告栏 -->
+  <view class="notice-bar animate-slide-up">
+    <image class="notice-icon" src="{{laba}}" />
+    <view class="notice-text">
+      <text>欢迎使用{{miniprogram_name}}小程序</text>
     </view>
   </view>
 
@@ -60,11 +57,21 @@
     </view>
   </view>
 
-  <!-- 公告栏 -->
-  <view class="notice-bar animate-slide-up">
-    <image class="notice-icon" src="{{laba}}" />
-    <view class="notice-text">
-      <text>欢迎使用{{miniprogram_name}}小程序</text>
+  <!-- 快捷功能区 -->
+  <view class="quick-access animate-slide-up">
+    <view class="quick-access-grid">
+      <view class="grid-item" bindtap="map">
+        <image src="{{function_buttons[0]}}" mode="aspectFit" />
+      </view>
+      <view class="grid-item" bindtap="ai">
+        <image src="{{function_buttons[1]}}" mode="aspectFit" />
+      </view>
+      <view class="grid-item" bindtap="guide">
+        <image src="{{function_buttons[2]}}" mode="aspectFit" />
+      </view>
+      <view class="grid-item" bindtap="link">
+        <image src="{{function_buttons[3]}}" mode="aspectFit" />
+      </view>
     </view>
   </view>
 

@@ -23,8 +23,7 @@
             {
                 "selectedIconPath": "/images/tabbar/icon_map_HL.png",
                 "iconPath": "/images/tabbar/icon_map.png",
-                "pagePath": "pages/map/map",
-                "text": "地图"
+                "pagePath": "pages/map/map"
             },
             {
                 "selectedIconPath": "/images/tabbar/icon_collection_HL.png",
