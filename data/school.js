@@ -2,7 +2,7 @@
 // 学校相关
 module.exports = {
   // 学校官方小程序AppID
-  AppID: "wx0a954435bd49aca4",
+  AppID: "wx08ab195c5d0a6598",
 
   // 学校信息
   school_information: {
