@@ -9,13 +9,13 @@
       </view>
 
       <view class="intro-button animate-fade-in">
-        <view class="motto-container">
+        <view class="motto-container motto-typing">
           <text class="motto-item">敏学</text>
           <text class="motto-item">修身</text>
           <text class="motto-item">乐业</text>
           <text class="motto-item">创新</text>
-          <text class="motto-separator">|</text>
         </view>
+          <text class="motto-separator">|</text>
           <button class="motto-intro" bindtap="tointroduction" style="width: 160rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">学校简介></button>
       </view>
     </view>
@@ -25,7 +25,7 @@
   <view class="notice-bar animate-slide-up">
     <image class="notice-icon" src="{{laba}}" />
     <view class="notice-text">
-      <text>欢迎使用{{miniprogram_name}}小程序</text>
+      <text class="typing-text">欢迎使用{{miniprogram_name}}小程序</text>
     </view>
   </view>
 
@@ -90,13 +90,24 @@
       <image src="{{book}}" />
       <text>图书馆</text>
     </view>
-    <view class="quick-link-item" bindtap="tofinance">
-      <image src="{{money}}" />
-      <text>财务处</text>
-    </view>
+
+    <!-- 因要添加页面，先暂停启用 -->
+    <!-- <view class="quick-link-item" bindtap="tofinance">
+      <image src="{{jwxt}}" />
+      <text>教务系统</text>
+    </view> -->
+    
     <view class="quick-link-item" bindtap="toMiniProgram">
       <image src="{{magazine}}" />
       <text>招生信息</text>
+    </view>
+    <view class="quick-link-item" bindtap="toMiXue">
+      <image src="{{mixue}}" />
+      <text>蜜雪冰城</text>
+    </view>
+    <view class="quick-link-item" bindtap="toLuckin">
+      <image src="{{luckin}}" />
+      <text>瑞幸咖啡</text>
     </view>
   </view>
 </mp-dialog>

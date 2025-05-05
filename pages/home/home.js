@@ -10,37 +10,40 @@ Page({
      * 页面的初始数据
      */
     data: {
-        miniprogram_name: data.miniprogram_name,
-        school_information: school.school_information,
-        AppID: school.AppID,
+        miniprogram_name: data.miniprogram_name, // 校园导航小程序名称
+        school_information: school.school_information, // 学校信息
+        AppID: school.AppID,  // 学校招生小程序AppID
 
-        laba: media.laba,
-        school_logo: media.school_logo,
-        school_background: media.school_background,
-        top_image: media.background,
+        laba: media.laba,  // 喇叭样式
+        school_logo: media.school_logo,  // 学校logo
+        school_background: media.school_background,  //首页顶部背景图
+        top_image: media.background,  // 首页顶部图片框
 
-        function_buttons: media.function_buttons,
+        function_buttons: media.function_buttons,  // 常用功能
 
-        school_icon: media.school_icon,
-        book: media.book,
-        money: media.money,
+        school_icon: media.school_icon,  // 学校图标
+        book: media.book,  // 图书图标
+        jwxt: media.jwxt,  // jwxt
+        // wave: media.wave,  // 波浪动画
 
-        wave: media.wave,
 
+        // label: media.label,  //学校简介图标
 
-        label: media.label,
+        luckin:media.luckin,
+        LuckinAppID:"wx21c7506e98a2fe75",
+        mixue:media.MiXue,
+        MiXueAppID:"wx7696c66d2245d107",
+        magazine: media.magazine,  // 友情链接-招生信息-icon
+        // school: media.school,   // 未找到相关用处
+        information: media.information,  // 小程序相关信息
+        notes: media.notes, 
+        admin: media.admin,  
+        contact: media.contact, 
+        hevttc: media.hevttc,  // 学校公众号
+        //weather: media.weather,  // 天气图标
 
-        magazine: media.magazine,
-        school: media.school,
-        information: media.information,
-        notes: media.notes,
-        admin: media.admin,
-        contact: media.contact,
-        guanwei: media.guanwei,
-        weather: media.weather,
-
-        APIKEY: data.weatherKey,
-        school_location: parseFloat(map.longitude).toFixed(2) + "," + parseFloat(map.latitude).toFixed(2),
+        //APIKEY: data.weatherKey,  // 和风天气API
+        school_location: parseFloat(map.longitude).toFixed(2) + "," + parseFloat(map.latitude).toFixed(2),  // 学校位置
 
 
         indicatorDots: true, //是否显示面板指示点
@@ -64,7 +67,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        this.getWeather()
+        //this.getWeather()
         this.startTypingLoop()
     },
 
@@ -110,24 +113,24 @@ Page({
     // 学校官微
     toschool() {
         wx.previewImage({
-            current: this.data.guanwei[0],
-            urls: this.data.guanwei
+            current: this.data.hevttc[0],
+            urls: this.data.hevttc
         })
     },
 
     // 图书馆官微
     tolibrary() {
         wx.previewImage({
-            current: this.data.guanwei[1],
-            urls: this.data.guanwei
+            current: this.data.hevttc[1],
+            urls: this.data.hevttc
         })
     },
 
-    // 财务处官微
+    // 教务系统网站
     tofinance() {
         wx.previewImage({
-            current: this.data.guanwei[2],
-            urls: this.data.guanwei
+            current: this.data.hevttc[2],
+            urls: this.data.hevttc
         })
     },
 
@@ -136,27 +139,39 @@ Page({
     toMiniProgram() {
         wx.navigateToMiniProgram({
             appId: this.data.AppID,
-            success(res) {
-                // console.log("打开成功")
-            },
-            fail(res) {
-                // console.log("打开失败")
-            }
         })
     },
+
+    // 蜜雪冰城
+    toMiXue() {
+        wx.navigateToMiniProgram({
+            appId: this.data.MiXueAppID,
+        })
+    },
+    
+    //瑞幸咖啡
+    toLuckin() {
+        wx.navigateToMiniProgram({
+            appId: this.data.LuckinAppID,
+        })
+    },
+
+
+
+
     // 获取天气
-    getWeather() {
-        var that = this
-        wx.request({
-            url: 'https://devapi.qweather.com/v7/weather/now?key=' + that.data.APIKEY + "&location=" + that.data.school_location,
-            success(result) {
-                var res = result.data
-                that.setData({
-                    now: res.now
-                })
-            }
-        })
-    },
+    // getWeather() {
+    //     var that = this
+    //     wx.request({
+    //         url: 'https://devapi.qweather.com/v7/weather/now?key=' + that.data.APIKEY + "&location=" + that.data.school_location,
+    //         success(result) {
+    //             var res = result.data
+    //             that.setData({
+    //                 now: res.now
+    //             })
+    //         }
+    //     })
+    // },
 
     //点击图片可查看
     lookPhoto(e) {

@@ -8,7 +8,9 @@ Page({
      * 组件的初始数据
      */
     data: {
+        logo :media.school_logo,
         school_information: school.school_information,
+        school_background: media.background,
 
         navigation: media.navigation,
         videourl: media.videourl,
@@ -26,7 +28,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        // 初始化页面时添加可见类
+        this.observeElements()
     },
 
     /**
@@ -40,7 +43,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
+        // 页面显示时重新观察元素
+        this.observeElements()
     },
 
     /**
@@ -57,9 +61,55 @@ Page({
 
     },
 
+    // 观察元素是否进入视口
+    observeElements() {
+        const query = wx.createSelectorQuery()
+        const elements = [
+            '.section',
+            '.section-title',
+            '.intro-text',
+            '.intro-image',
+            '.feature-item',
+            '.contact-item'
+        ]
+
+        elements.forEach(selector => {
+            query.selectAll(selector).boundingClientRect()
+        })
+
+        query.exec((res) => {
+            if (!res || !Array.isArray(res)) return;
+            
+            res.forEach((rects, index) => {
+                if (!rects || !Array.isArray(rects)) return;
+                
+                rects.forEach((rect, i) => {
+                    if (rect && rect.top < wx.getWindowInfo().windowHeight) {
+                        const className = elements[index]
+                        const elementQuery = wx.createSelectorQuery()
+                        elementQuery.selectAll(className).boundingClientRect()
+                        elementQuery.exec((elements) => {
+                            if (elements && elements[0] && elements[0][i]) {
+                                const element = elements[0][i]
+                                if (element) {
+                                    // 元素已经在视口中，不需要额外处理
+                                }
+                            }
+                        })
+                    }
+                })
+            })
+        })
+    },
+
+    // 监听页面滚动
+    onPageScroll(e) {
+        this.observeElements()
+    },
+
     //图片比例
     imgHeight: function (e) {
-        var winWid = wx.getSystemInfoSync().windowWidth; //获取当前屏幕的宽度
+        var winWid = wx.getWindowInfo().windowWidth; //获取当前屏幕的宽度
         var imgh = e.detail.height; //图片高度
         var imgw = e.detail.width; //图片宽度
         var swiperH = winWid * imgh / imgw + "px" //等比设置swiper的高度。 即 屏幕宽度 / swiper高度 = 图片宽度 / 图片高度  ==》swiper高度 = 屏幕宽度 * 图片高度 / 图片宽度
