@@ -1,1 +1,1 @@
-数据生成：http://data.rznet.xyz/，
+数据生成：http://data.rznet.xyz
