@@ -6,18 +6,5 @@
         "urlCheck": false,
         "bigPackageSizeSupport": true
     },
-    "libVersion": "3.7.12",
-    "condition": {
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "pages/home/pano/pano",
-                    "pathName": "pages/home/pano/pano",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                }
-            ]
-        }
-    }
+    "libVersion": "3.7.12"
 }
