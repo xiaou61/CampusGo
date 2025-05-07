@@ -13,7 +13,7 @@ module.exports = {
   // 地图页
 
   // 自定义地图
-  map_bottom: "https://i.postimg.cc/qMBMZnBj/download-Image-1.jpg",
+  map_bottom: "https://youtiao3-1305448902.cos.ap-nanjing.myqcloud.com/3a572e159ce140f5841ec2b8c81f408.png",
   exchange: "https://lbs.gtimg.com/visual/miniprogram-plugin/route-planning/assets/exchange.png",
   // 定位图标
   location: "../../images/location.png",
@@ -65,7 +65,7 @@ module.exports = {
 
 
   // 宣传视频
-  videourl: "https://holcc-cdn.haier.net/lemc/aliyun1/20250501/4a256a9210b64a898e8118e47e7d6d1f.mp4",
+  videourl: "",
 
   // 全景地图页
 

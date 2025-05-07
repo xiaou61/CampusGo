@@ -22,13 +22,13 @@ module.exports = {
     // 自定义图层
     groundoverlay: {
       // 图层透明度 0-1，对应 0%-100%
-      opacity: 0,
+      opacity: 0.8,
       //西南角
-      southwest_latitude: 39.906968,
-      southwest_longitude: 119.543406,
+      southwest_latitude: 39.911979,
+      southwest_longitude: 119.547972,
       //东北角
-      northeast_latitude: 39.917704,
-      northeast_longitude: 119.553928,
+      northeast_latitude: 39.911537,
+      northeast_longitude: 119.548894,
     },
   
     // 地图边界
