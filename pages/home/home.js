@@ -228,6 +228,13 @@ Page({
         });
     },
 
+    //致谢页面
+    Thanks() {
+      wx.navigateTo({
+        url: "/pages/home/thanks/thanks",
+      })
+    },
+
     startTypingLoop() {
         const that = this
         if (this.typingTimer) clearInterval(this.typingTimer)

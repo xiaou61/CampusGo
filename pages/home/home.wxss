@@ -552,7 +552,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40rpx;
+  padding: 30rpx;
   background: linear-gradient(to bottom, rgba(1, 162, 236, 0), rgba(0,0,0,0));
 }
 
@@ -773,6 +773,8 @@
 }
 
 .notice-text {
+  height: 40rpx;
+  position: relative;
   font-size: 28rpx;
   color: #666;
 }

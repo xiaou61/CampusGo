@@ -14,8 +14,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f7fa;
+  background-color: var(--card-background);
   padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 2rpx 20rpx var(--shadow-color);
 }
 
 .card-top {
@@ -25,7 +30,6 @@
   height: 120rpx;
   background-color: #fff;
   padding: 0;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
   width: 100%;
 }
 
@@ -42,9 +46,16 @@
   align-items: center;
   width: 100%;
   height: 80rpx;
-  background-color: #f5f7fa;
+  background-color: var(--background-color);
   border-radius: 40rpx;
   padding: 0 30rpx;
+  box-shadow: 0 2rpx 12rpx var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+.card-top-left-view:active {
+  transform: scale(0.98);
+  background-color: var(--border-color);
 }
 
 .card-top-circle {
@@ -54,21 +65,21 @@
   margin-right: 20rpx;
 }
 
-.start {
-  background-color: #1890ff;
-  box-shadow: 0 2rpx 8rpx rgba(24, 144, 255, 0.3);
+.card-top-circle.start {
+  background-color: var(--primary-color);
+  box-shadow: 0 2rpx 8rpx rgba(59, 130, 246, 0.3);
 }
 
-.end {
-  background-color: #52c41a;
-  box-shadow: 0 2rpx 8rpx rgba(82, 196, 26, 0.3);
+.card-top-circle.end {
+  background-color: var(--success-color);
+  box-shadow: 0 2rpx 8rpx rgba(16, 185, 129, 0.3);
 }
 
 .card-top-input {
   flex: 1;
   height: 80rpx;
   font-size: 32rpx;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .card-top-right {
@@ -83,19 +94,20 @@
 .card-top-right-button {
   width: 100rpx;
   height: 80rpx;
-  background-color: #1890ff;
-  color: #fff;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: var(--card-background);
   font-size: 32rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 40rpx;
   transition: all 0.3s ease;
+  box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.2);
 }
 
 .card-top-right-button:active {
-  background-color: #096dd9;
-  transform: scale(0.98);
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 8rpx rgba(59, 130, 246, 0.1);
 }
 
 .card-top-middle {
@@ -115,11 +127,17 @@
 }
 
 .relative {
-  position: relative;
-  height: 60rpx;
+  position: fixed;
+  top: 90rpx;
+  left: 0;
+  width: 100%;
+  height: 80rpx;
   display: flex;
   justify-content: center;
-  margin: 20rpx 0;
+  background-color: var(--card-background);
+  padding: 10rpx 0;
+  box-shadow: 0 2rpx 10rpx var(--shadow-color);
+  z-index: 99;
 }
 
 .card-bottom-category {
@@ -129,34 +147,23 @@
   align-items: center;
   justify-content: flex-start;
   padding: 0 20rpx;
+  white-space: nowrap;
 }
 
 .card-bottom-category-label {
-  width: 140rpx;
+  min-width: 140rpx;
   height: 60rpx;
   margin: 0 10rpx;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 28rpx;
-  color: #666;
+  color: var(--text-secondary);
   border-radius: 30rpx;
   transition: all 0.3s ease;
-  transform-origin: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-bottom-category-label::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 3rpx;
-  background-color: #39a096;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
+  background-color: var(--background-color);
+  box-shadow: 0 2rpx 8rpx var(--shadow-color);
+  flex-shrink: 0;
 }
 
 .card-bottom-category-label:active {
@@ -164,11 +171,11 @@
 }
 
 .choose {
-  background-color: #39a096;
-  color: white;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: var(--card-background);
   font-weight: 500;
   transform: scale(1.05);
-  box-shadow: 0 4rpx 12rpx rgba(57, 160, 150, 0.3);
+  box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.3);
 }
 
 .choose::after {
@@ -185,6 +192,7 @@
 .duration_and_distance {
   display: flex;
   justify-content: space-between;
+  padding: 20rpx;
 }
 
 .location {
@@ -220,8 +228,12 @@
 }
 
 .duration_and_distance_text {
-  background-color: white;
-  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 16rpx var(--shadow-color);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
 }
 
 .card-bottom {
@@ -229,31 +241,37 @@
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 50px;
-  background-color: #f5f7fa;
+  height: 120rpx;
+  background-color: var(--card-background);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
   margin: 0;
-  padding: 0 20rpx;
+  padding: 0 30rpx;
   box-sizing: border-box;
+  box-shadow: 0 -2rpx 20rpx var(--shadow-color);
 }
 
 .card-bottom-button {
   width: 100%;
-  height: 100%;
-  background-color: #f3f3ff;
-  border: 1px solid #0152d6;
-  border-radius: 25rpx;
+  height: 80rpx;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+  border: none;
+  border-radius: 40rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: larger;
-  color: #0152d6;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-size: 32rpx;
+  color: var(--card-background);
+  font-weight: 500;
+  box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card-bottom-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(59, 130, 246, 0.1);
 }
 
 .road {
@@ -300,6 +318,7 @@
 .dialog-content {
   padding: 30rpx;
   animation: dialogFadeIn 0.3s ease-out;
+  background-color: var(--card-background);
 }
 
 .dialog-image {
@@ -307,7 +326,7 @@
   height: 400rpx;
   border-radius: 20rpx;
   margin-bottom: 30rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4rpx 12rpx var(--shadow-color);
   transition: transform 0.3s ease;
   animation: imageFadeIn 0.5s ease-out;
 }
@@ -317,19 +336,16 @@
 }
 
 .dialog-aliases {
-  font-size: 28rpx;
-  color: #666;
-  margin-bottom: 20rpx;
-  padding: 0;
-  display: inline-block;
+  font-size: 32rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin: 20rpx 0;
 }
 
 .dialog-desc {
   font-size: 28rpx;
-  color: #333;
+  color: var(--text-secondary);
   line-height: 1.6;
-  padding: 0;
-  margin-top: 20rpx;
 }
 
 /* 轮播图样式 */
@@ -339,7 +355,7 @@
   margin-bottom: 30rpx;
   border-radius: 20rpx;
   overflow: hidden;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4rpx 12rpx var(--shadow-color);
 }
 
 .dialog-swiper .dialog-image {
@@ -368,47 +384,62 @@
 }
 
 .dialog-list-item {
-  padding: 12px 15px;
-  border-bottom: 1px solid #f5f5f5;
-  transition: background-color 0.3s ease;
-  font-size: 15px;
-  color: #333;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  background-color: var(--background-color);
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
 .dialog-list-item:active {
-  background-color: #f8f9fa;
+  background-color: var(--border-color);
+  transform: scale(0.98);
 }
 
 /* 弹窗标题样式 */
 .mp-dialog__title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
   padding: 30rpx 0;
   text-align: center;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid var(--border-color);
 }
 
 /* 弹窗按钮样式 */
 .mp-dialog__btn {
   font-size: 28rpx;
-  color: #1890ff;
+  color: var(--primary-color);
   font-weight: 500;
   padding: 24rpx 0;
   transition: all 0.3s ease;
-  border-top: 1rpx solid #f0f0f0;
+  border-top: 1rpx solid var(--border-color);
 }
 
 .mp-dialog__btn:active {
-  background-color: #f5f7fa;
-  color: #096dd9;
+  background-color: var(--background-color);
+  color: var(--primary-dark);
 }
 
 page {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-color: #f5f7fa;
+  background-color: var(--background-color);
+  --primary-color: #3B82F6;  /* 主色调：蓝色 */
+  --primary-light: #60A5FA;  /* 主色调浅色 */
+  --primary-dark: #2563EB;   /* 主色调深色 */
+  --success-color: #60A5FA;  /* 成功色：绿色 */
+  --success-light: #60A5FA;  /* 成功色浅色 */
+  --success-dark: #60A5FA;   /* 成功色深色 */
+  --background-color: #F3F4F6;  /* 背景色 */
+  --card-background: #FFFFFF;   /* 卡片背景色 */
+  --text-primary: #1F2937;    /* 主要文字颜色 */
+  --text-secondary: #6B7280;  /* 次要文字颜色 */
+  --border-color: #E5E7EB;    /* 边框颜色 */
+  --shadow-color: rgba(0, 0, 0, 0.08);  /* 阴影颜色 */
 }
 
 /* 页面容器 */
@@ -491,11 +522,11 @@ page {
     bottom: 30rpx;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #007AFF;
+    background-color: var(--primary-color);
     color: #fff;
     padding: 20rpx 40rpx;
     border-radius: 40rpx;
-    box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4rpx 10rpx rgba(59, 130, 246, 0.2);
     z-index: 102;
 }
 
@@ -542,7 +573,7 @@ page {
 .loading-dot {
     width: 20rpx;
     height: 20rpx;
-    background-color: #007AFF;
+    background-color: var(--primary-color);
     border-radius: 50%;
     margin: 0 10rpx;
     animation: loading 1.4s infinite ease-in-out;
@@ -556,4 +587,10 @@ page {
     40% {
         transform: scale(1);
     }
+}
+
+map {
+  margin-top: 180rpx;
+  width: 100%;
+  height: calc(100vh - 180rpx);
 }

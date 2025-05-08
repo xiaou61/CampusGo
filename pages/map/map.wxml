@@ -32,9 +32,6 @@
       <view class="duration_and_distance_style">
         <view wx:if="{{polyline.length != 0}}" class="duration_and_distance_text">耗时：{{duration}}分钟 距离：{{distance}}米</view>
       </view>
-      <view class="location">
-        <image class="img" src="{{use}}" bindtap="toinstruction" />
-      </view>
     </view>
   </view>
 </map>

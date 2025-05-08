@@ -74,7 +74,7 @@
   </view>
 
   <!-- 底部版权信息 -->
-  <view class="footer animate-fade-in">
+  <view class="footer animate-fade-in" bindtap="Thanks">
     <text>{{miniprogram_name}}小程序 | 版权归开发者所有</text>
   </view>
 </view>
