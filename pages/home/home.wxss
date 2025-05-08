@@ -773,11 +773,8 @@
 }
 
 .notice-text {
-<<<<<<< HEAD
   height: 40rpx;
   position: relative;
-=======
->>>>>>> parent of 9fd3353 (整体UI完善)
   font-size: 28rpx;
   color: #666;
 }
