@@ -32,15 +32,4 @@
       </view>
     </view>
   </view>
-
-  <!-- 特别鸣谢 -->
-  <view class="section thanks-section animate delay-3">
-    <view class="section-title">特别鸣谢</view>
-    <view class="thanks-info">
-      <view class="thanks-item" wx:for="{{teamData.specialThanks}}" wx:key="id">
-        <text class="iconfont icon-{{item.icon}}"></text>
-        <text>{{item.text}}</text>
-      </view>
-    </view>
-  </view>
 </view> 

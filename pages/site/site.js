@@ -1,4 +1,3 @@
-
 // pages/site/site.js
 var map = require('../../data/map')
 var media = require('../../data/media')
@@ -59,9 +58,9 @@ Page({
     },
 
     changeCategory: function (e) {
-        console.log("类别", e.currentTarget.id)
+        console.log("类别", e.currentTarget.dataset.id)
         this.setData({
-            category: e.currentTarget.id,
+            category: e.currentTarget.dataset.id,
         })
     },
 

@@ -1,28 +1,30 @@
 <!--pages/site/site.wxml-->
-<view class="card">
-  <view class="card-left">
-    <scroll-view scroll-y="true" style="height: 100vh;">
-      <view class="card-left-scorll-view">
-        <view class="card-left-scorll-view-label {{index == category ? 'choose' : ''}}" 
-              wx:for="{{site_data}}" 
-              wx:key="id" 
-              id="{{index}}" 
-              bindtap="changeCategory">
-          {{item.name}}
-        </view>
+<view class="page">
+  <!-- 左侧分类 -->
+  <view class="sidebar">
+    <scroll-view scroll-y="true" class="sidebar-scroll">
+      <view class="sidebar-item {{index == category ? 'active' : ''}}" 
+            wx:for="{{site_data}}" 
+            wx:key="id" 
+            bindtap="changeCategory"
+            data-id="{{index}}">
+        {{item.name}}
       </view>
     </scroll-view>
   </view>
 
-  <view class="card-right">
-    <view class="card-right-title">
-      <image class="card-right-title-icon" src="{{tag}}" mode="aspectFit" />
-      <text>{{site_data[category].name}}</text>
+  <!-- 右侧内容 -->
+  <view class="main">
+    <!-- 标题 -->
+    <view class="header">
+      <image class="header-icon" src="{{tag}}" mode="aspectFit" />
+      <text class="header-title">{{site_data[category].name}}</text>
     </view>
 
-    <scroll-view scroll-y="true" style="height: calc(100vh - 60px);">
-      <view class="card-right-content">
-        <view class="card-right-content-card" 
+    <!-- 地点列表 -->
+    <scroll-view scroll-y="true" class="content-scroll">
+      <view class="location-list">
+        <view class="location-item" 
               wx:for="{{site_data[category].list}}" 
               wx:key="id" 
               bindtap="click" 
@@ -30,15 +32,14 @@
               data-desc="{{item.desc}}" 
               data-aliases="{{item.aliases}}" 
               data-img="{{item.img}}" 
-              data-images="{{item.images}}"
-              id="{{index}}">
-          <image class="card-right-content-card-img" src="{{item.img}}" mode="aspectFill" />
-          <view class="card-right-content-card-context">
-            <image class="card-right-content-card-context-icon" src="{{little_location}}" mode="aspectFit" />
-            <text>
-              {{item.name}}
-              <text>{{item.aliases}}</text>
-            </text>
+              data-images="{{item.images}}">
+          <image class="location-img" src="{{item.img}}" mode="aspectFill" />
+          <view class="location-info">
+            <view class="location-name">
+              <image class="location-icon" src="{{little_location}}" mode="aspectFit" />
+              <text>{{item.name}}</text>
+            </view>
+            <text class="location-aliases">{{item.aliases}}</text>
           </view>
         </view>
       </view>
@@ -46,27 +47,44 @@
   </view>
 </view>
 
-<mp-dialog title="{{card.name}}" show="{{dialogShow}}" bindbuttontap="mapmarker" buttons="{{buttons}}" custom-style="border-radius: 12px;">
+<!-- 详情弹窗 -->
+<mp-dialog title="{{card.name}}" 
+           show="{{dialogShow}}" 
+           bindbuttontap="mapmarker" 
+           buttons="{{buttons}}" 
+           custom-style="border-radius: 12px;">
   <view class="dialog-content">
-    <block wx:if="{{card.images.length > 1}}">
-      <swiper class="dialog-swiper" 
-              indicator-dots="{{true}}" 
-              autoplay="{{true}}" 
-              interval="3000" 
-              duration="500" 
-              circular="{{true}}"
-              current="{{0}}">
-        <block wx:for="{{card.images}}" wx:key="*this">
-          <swiper-item>
-            <image class="dialog-image" bindtap="lookPhoto" mode="aspectFill" src="{{item}}" data-src="{{item}}"></image>
+    <!-- 图片展示 -->
+    <view class="dialog-img-wrap">
+      <block wx:if="{{card.images.length > 1}}">
+        <swiper class="dialog-swiper" 
+                indicator-dots="{{true}}" 
+                autoplay="{{true}}" 
+                interval="3000" 
+                duration="500" 
+                circular="{{true}}">
+          <swiper-item wx:for="{{card.images}}" wx:key="*this">
+            <image class="dialog-img" 
+                   bindtap="lookPhoto" 
+                   mode="aspectFill" 
+                   src="{{item}}" 
+                   data-src="{{item}}" />
           </swiper-item>
-        </block>
-      </swiper>
-    </block>
-    <block wx:else>
-      <image class="dialog-image" bindtap="lookPhoto" mode="aspectFill" src="{{card.images[0]}}" data-src="{{card.images[0]}}"></image>
-    </block>
-    <view class="dialog-aliases">{{card.aliases}}</view>
-    <view class="dialog-desc">{{card.desc}}</view>
+        </swiper>
+      </block>
+      <block wx:else>
+        <image class="dialog-img" 
+               bindtap="lookPhoto" 
+               mode="aspectFill" 
+               src="{{card.images[0]}}" 
+               data-src="{{card.images[0]}}" />
+      </block>
+    </view>
+
+    <!-- 信息展示 -->
+    <view class="dialog-info">
+      <text class="dialog-aliases">{{card.aliases}}</text>
+      <text class="dialog-desc">{{card.desc}}</text>
+    </view>
   </view>
 </mp-dialog>
