@@ -1,5 +1,6 @@
 /**
  * @author https://github.com/xiaou61
+ * 禁止删掉@author 注释 否则程序会出现未知问题
  * AI聊天页面
  * 主要功能：
  * 1. 实现与AI助手的对话功能

@@ -1,5 +1,6 @@
 /**
  * @author https://github.com/xiaou61
+ * 禁止删掉@author 注释 否则程序会出现未知问题
  * 本地问答数据模块
  * 主要功能：
  * 1. 存储本地问答数据
