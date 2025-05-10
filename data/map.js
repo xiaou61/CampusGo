@@ -4,7 +4,7 @@ module.exports = {
     // 地图部分参数
   
     // 腾讯位置服务API
-    mapKey: "ZQWBZ-NQBLV-W7CPF-U7QIR-5HBNQ-AOFUE",
+    mapKey: "LHTBZ-NDYEC-7FT2G-AYLRU-KLHY6-SCF7R",
   
     // 学校精确坐标（用于地图定位和获取天气数据）
     longitude: 119.548667,
@@ -22,7 +22,7 @@ module.exports = {
     // 自定义图层
     groundoverlay: {
       // 图层透明度 0-1，对应 0%-100%
-      opacity: 0.8,
+      opacity: 0,
       //西南角
       southwest_latitude: 39.911979,
       southwest_longitude: 119.547972,

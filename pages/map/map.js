@@ -123,8 +123,9 @@ Page({
     // 初始化地图
     map() {
         var that = this
-        this.mapCtx = wx.createMapContext('map')
+        this.mapCtx = wx.createMapContext('map') 
         this.mapCtx.addGroundOverlay({
+
             id: 0,
             src: that.data.map_bottom,
             bounds: {
