@@ -13,7 +13,7 @@ module.exports = {
   // 地图页
 
   // 自定义地图
-  map_bottom: "https://img.picui.cn/free/2025/05/12/6821e18c87f6d.png",
+  map_bottom: "https://img.picui.cn/free/2025/05/14/682426650e1ba.png",
   exchange: "https://lbs.gtimg.com/visual/miniprogram-plugin/route-planning/assets/exchange.png",
   // 定位图标
   location: "../../images/location.png",

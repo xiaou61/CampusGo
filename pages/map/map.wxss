@@ -590,7 +590,7 @@ page {
 }
 
 map {
-  margin-top: 200rpx;
+  top: 200rpx;
   width: 100%;
   height: calc(100vh - 320rpx);
 }

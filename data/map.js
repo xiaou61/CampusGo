@@ -19,16 +19,16 @@ module.exports = {
     // 最小缩放级别，比缩放级别小0.3-0.4为宜
     minscale: 15.51,
   
-    // 自定义图层
+    // 自定义图层  
     groundoverlay: {
       // 图层透明度 0-1，对应 0%-100%
       opacity: 1,
-      //西南角
-      southwest_latitude: 39.90816,    //越大越往北走
-      southwest_longitude: 119.544105,    //越大越往东走
-      //东北角
-      northeast_latitude: 39.915013,    //越大越往北走
-      northeast_longitude: 119.551414,   //越大越往东走
+      //西南角（手绘地图图片的左下角基准）
+      southwest_latitude: 39.908041,    
+      southwest_longitude: 119.544301,    
+      //东北角（手绘地图图片的右上角基准）
+      northeast_latitude: 39.915039,    
+      northeast_longitude: 119.551533,   
     },
   
     // 地图边界
@@ -192,6 +192,11 @@ module.exports = {
             name: "第三食堂",
             aliases: "教职工食堂",
             img: "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+            images:[
+              "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+              "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+              "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
+            ],
             desc: "老师吃饭的地方",
             latitude: 39.9102522,
             longitude: 119.5507388
@@ -562,7 +567,7 @@ module.exports = {
         list: [
           {
             id: 1,
-            name: " “ 一站式 ” 服务中心",
+            name: "一站式服务中心",
             aliases: "学校图书馆",
             img: "https://cdnjson.com/images/2023/02/26/building_zhishan.jpg",
             images: [
