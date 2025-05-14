@@ -1,12 +1,4 @@
-<view class="container">
-  <!-- 顶部banner -->
-  <view class="banner animate">
-    <view class="banner-content">
-      <text class="banner-title">河北科技师范学院</text>
-      <text class="banner-subtitle">知行合一 · 追求卓越</text>
-    </view>
-  </view>
-
+<view class="intro-body">
   <!-- 学校简介 -->
   <view class="section intro-section animate delay-1">
     <view class="section-title">学校简介</view>
