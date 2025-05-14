@@ -14,50 +14,26 @@ const teamData = {
   // 核心团队信息
   coreTeam: [
     {
-      id: 'leader',
-      title: "项目负责人",
-      members: ["张三", "李四"]
-    },
-    {
-      id: 'developers',
-      title: "核心开发人员",
-      members: ["王五", "赵六"]
-    },
-    {
       id: 'painters',
       title: "绘画组",
-      members: ["周八", "张三", "李四"]
+      members: ["刘中宏", "杜柔霏", "王升泽","刘欣雨", "张思涵", "张欣怡", "呼梓轩", "程雪春","张瑶", "王佳祎", "薛佳凝", "韩晓娟", "刘晴","许丽", "吕艾家", "侯雨晴", "李文雨", "荆然"]
     },
     {
       id: 'devTeam',
       title: "开发组",
-      members: ["刘一", "刘二", "刘三"]
-    }
+      members: ["孟凡宇", "刘金库", "任众", "李子凡", "戴江硕", "孙佳一","李冉冉", "孙瑞杰", "朱鸿佳", "王庆洁", "张嘉月","王莹莹", "张嘉艺", "吴梦雅"]
+    },
+    {
+      id: 'caiji',
+      title: "数据采集组",
+      members: ["杜柔霏", "刘晴", "刘禹萱","李凯文", "张欣怡", "韩冰雨","孔雅婷"]
+    },
+     {
+      id: 'teacher ',
+      title: "指导教师",
+      members: ["张继尧"]
+    }, 
   ],
-
-  // 特别鸣谢
-  specialThanks: [
-    {
-      id: 'school',
-      icon: "school",
-      text: "河北科技师范学院信息工程学院"
-    },
-    {
-      id: 'teachers',
-      icon: "teacher",
-      text: "指导老师：张教授 李教授"
-    },
-    {
-      id: 'support',
-      icon: "support",
-      text: "技术支持：腾讯云 微信小程序团队"
-    },
-    {
-      id: 'users',
-      icon: "users",
-      text: "参与测试的师生用户"
-    }
-  ]
 };
 
 module.exports = {
