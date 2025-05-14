@@ -11,8 +11,8 @@
 var school = require('../../../data/school')
 Page({
   data: {
-    allWords: school.shool_guide,
-    curWords: school.shool_guide,
+    allWords: school.school_guide,
+    curWords: school.school_guide,
 
     height: 0,
     detail: 'id0'
@@ -22,7 +22,7 @@ Page({
     console.log(options.id);
     // this.getRect()
     this.setData({
-      height: wx.getSystemInfoSync().windowHeight - 50, // 获取屏幕高度
+      height: wx.getWindowInfo().windowHeight - 50, // 获取屏幕高度
       detail: 'id' + options.id // 获取跳转过来的锚点id
     })
   },

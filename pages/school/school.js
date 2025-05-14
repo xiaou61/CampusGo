@@ -16,7 +16,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        allWords: school.shool_guide,
+        allWords: school.school_guide,
 
         green_arrow: media.green_arrow
     },
