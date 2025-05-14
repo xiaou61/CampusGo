@@ -1,24 +1,27 @@
-  <!-- 开发团队介绍 -->
-<view class="section team-section animate delay-1">
-  <view class="section-title">项目介绍</view>
-  <view class="team-content">
-    <view class="team-text">
-      <text>{{teamData.teamIntro}}</text>
-    </view>
-  </view>
-</view>
+<view class="Thanks-body">
 
-  <!-- 核心开发团队 -->
-<view class="section core-team-section animate delay-2">
-  <view class="section-title">开发团队</view>
-  <view class="team-grid">
-    <view class="team-item" wx:for="{{teamData.coreTeam}}" wx:key="id">
-      <view class="team-title">{{item.title}}</view>
-      <view class="team-members">
-        <block wx:for="{{item.members}}" wx:for-item="member" wx:for-index="index" wx:key="*this">
-          <text>{{member}}<text wx:if="{{index !== item.members.length-1}}">、</text></text>
-        </block>
+  <!-- 开发团队介绍 -->
+  <view class="section team-section animate delay-1">
+    <view class="section-title">项目介绍</view>
+    <view class="team-content">
+      <view class="team-text">
+        <text>{{teamData.teamIntro}}</text>
       </view>
     </view>
   </view>
-</view>
+
+  <!-- 核心开发团队 -->
+  <view class="section core-team-section animate delay-2">
+    <view class="section-title">开发团队</view>
+    <view class="team-grid">
+      <view class="team-item" wx:for="{{teamData.coreTeam}}" wx:key="id">
+        <view class="team-title">{{item.title}}</view>
+        <view class="team-members">
+          <block wx:for="{{item.members}}" wx:for-item="member" wx:for-index="index" wx:key="*this">
+            <text>{{member}}<text wx:if="{{index !== item.members.length-1}}">、</text></text>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 
