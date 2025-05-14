@@ -35,7 +35,7 @@
   </view>
 </view>
 
-<mp-dialog title="{{card.name}}" show="{{dialogShow_site}}" bindbuttontap="mapmarker_choose" buttons="{{buttons}}" custom-style="border-radius: 12px;">
+<mp-dialog title="{{card.name || '地点详情'}}" show="{{dialogShow_site}}" bindbuttontap="mapmarker_choose" buttons="{{buttons}}" custom-style="border-radius: 12px;">
   <view class="dialog-content">
     <block wx:if="{{card.images && card.images.length > 1}}">
       <swiper class="dialog-swiper" 
@@ -60,7 +60,7 @@
   </view>
 </mp-dialog>
 
-<mp-dialog title="{{site_data[category].name}}" show="{{dialogShow_category}}" bindbuttontap="mapmarker_close" buttons="{{button}}" custom-style="border-radius: 12px;">
+<mp-dialog title="{{site_data[category].name || '地点列表'}}" show="{{dialogShow_category}}" bindbuttontap="mapmarker_close" buttons="{{button}}" custom-style="border-radius: 12px;">
   <view class="dialog-list">
     <view class="dialog-list-item" 
           wx:for="{{site_data[category].list}}" 

@@ -1,4 +1,7 @@
 /* data/school.js */
+//加载指南数据
+import { school_guide } from './schoolGuide'
+
 // 学校相关
 module.exports = {
   // 学校官方小程序AppID
@@ -27,18 +30,5 @@ module.exports = {
   },
 
   // 校园指南
-  shool_guide: [
-    {
-      title: '待编辑',
-      content: '待编辑21321312',
-      imageList: [''],
-      keywords: ['介绍']
-    },
-    {
-        title: '待编辑2',
-        content: '待编辑212312',
-        imageList: [''],
-        keywords: ['图书']
-      }
-  ]
+  school_guide
 }
