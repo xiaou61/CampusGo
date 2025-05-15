@@ -36,7 +36,7 @@
       <image class="icon-right" src="{{}}"></image>
     </view>
 
-    <view wx:if="{{result&&result.length>0}}" class="result-list" wx:for="{{result}}" wx:key="*this" data-name="{{item.name}}" data-latitude="{{item.latitude}}" data-longitude="{{item.longitude}}" bindtap="tapback">
+    <view wx:if="{{result&&result.length>0}}" class="result-list" wx:for="{{result}}" wx:key="id" data-name="{{item.name}}" data-latitude="{{item.latitude}}" data-longitude="{{item.longitude}}" data-category_id="{{item.category_id}}" bindtap="tapback">
       <view class="item">
         <view>{{item.name}}</view>
         <view style="color: grey;font-size: small;">{{item.aliases}}</view>

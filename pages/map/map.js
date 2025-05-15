@@ -86,7 +86,7 @@ Page({
         dialogShow_category: false,
         dialogShow_road: false,
         buttons: [{
-            text: '设为终点'
+            text: '路线'
         }],
         button: [{
             text: '关闭'
@@ -118,6 +118,20 @@ Page({
     onLoad(options) {
         this.map()
         this.location()
+        // 添加错误处理
+        wx.onError(function(error) {
+            console.log('捕获到错误：', error);
+        });
+    },
+
+    // 添加错误处理函数
+    onError: function(error) {
+        console.log('页面错误：', error);
+    },
+
+    // 添加未处理的Promise错误处理
+    onUnhandledRejection: function(res) {
+        console.log('未处理的Promise错误：', res.reason);
     },
 
     // 初始化地图
@@ -248,30 +262,32 @@ Page({
      */
     onShow() {
         const get_start = wx.getStorageSync('start')
-        const get_end = wx.getStorageSync('end')
-        console.log("get_start", get_start)
-        console.log("get_end", get_end)
         if (get_start) {
-            var start = {
-                name: get_start.name,
-                latitude: get_start.latitude,
-                longitude: get_start.longitude,
-            }
             this.setData({
-                start: start
+                end: get_start
             })
-            wx.clearStorageSync()
+            wx.removeStorageSync('start')
         }
-        if (get_end) {
-            var end = {
-                name: get_end.name,
-                latitude: get_end.latitude,
-                longitude: get_end.longitude,
+
+        // 获取搜索页返回的分类信息
+        const searchCategory = wx.getStorageSync('searchCategory')
+        if (searchCategory) {
+            // 找到对应的分类索引
+            const categoryIndex = this.data.site_data.findIndex(item => item.id === searchCategory)
+            if (categoryIndex !== -1) {
+                // 更新分类
+                this.setData({
+                    category: categoryIndex,
+                    scrollLeft: categoryIndex * 75 // 75是每个分类标签的宽度
+                })
+                // 更新标记点
+                this.changeCategory({
+                    currentTarget: {
+                        id: categoryIndex
+                    }
+                })
             }
-            this.setData({
-                end: end
-            })
-            wx.clearStorageSync()
+            wx.removeStorageSync('searchCategory')
         }
     },
 
@@ -388,22 +404,19 @@ Page({
         this.setData({
             dialogShow_site: false,
         })
-        var choose = e.detail.item.text
         var card = {
             name: this.data.card.name,
             latitude: this.data.card.latitude,
             longitude: this.data.card.longitude,
         }
         console.log("选择地点", card)
-        if (choose == "设为起点") {
-            this.setData({
-                start: card
-            })
-        } else {
-            this.setData({
-                end: card,
-            })
-        }
+        // 直接设置为终点并规划路线
+        this.setData({
+            end: card,
+        }, () => {
+            // 调用路线规划方法
+            this.formSubmit()
+        })
     },
 
     // 切换类别
