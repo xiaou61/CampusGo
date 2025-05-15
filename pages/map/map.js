@@ -481,7 +481,7 @@ Page({
                 id: i + 1,
                 latitude: la,
                 longitude: lo,
-                iconPath: "https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker3_Activated@3x.png",
+                iconPath: "https://gampusgo-1321866016.cos.ap-beijing.myqcloud.com/school/iconPath.png",
                 width: 30,
                 height: 30,
                 callout: {
