@@ -14,11 +14,11 @@ module.exports = {
 
   // 自定义地图
   map_bottom: "https://img.picui.cn/free/2025/05/14/682426650e1ba.png",
-  exchange: "https://lbs.gtimg.com/visual/miniprogram-plugin/route-planning/assets/exchange.png",
+  // exchange: "https://lbs.gtimg.com/visual/miniprogram-plugin/route-planning/assets/exchange.png",
   // 定位图标
-  location: "../../images/location.png",
-  use: "../../images/use.png",
-  restore: "../../images/restore.png",
+  // location: "../../images/location.png",
+  // use: "../../images/use.png",
+  // restore: "../../images/restore.png",
 
   // 搜索页
   delete: "../../../images/delete.png",
@@ -48,7 +48,7 @@ module.exports = {
   jwxt: "https://img.picui.cn/free/2025/05/04/68174f13d7b85.jpeg",
   money: "../../images/money.png",
   magazine: "../../images/magazine.png",
-  weather: "../../images/weather.png",
+  // weather: "../../images/weather.png",
   // wave: "https://cdnjson.com/images/2024/02/19/wave1c95582ec21c3965.gif",  // 暂时不用
   // 常用功能 按钮
   function_buttons: ["https://free4.yunpng.top/2025/04/29/6810c86c47861.png","https://free4.yunpng.top/2025/04/29/6810c86ad0e1d.png","https://free4.yunpng.top/2025/04/29/6810c8695566f.png","https://free4.yunpng.top/2025/04/29/6810c8693e637.png"],
@@ -61,27 +61,27 @@ module.exports = {
 
   // 学校简介页
 
-  school_images: ["https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png", "https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png", "https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png", "https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png"],//简介轮播图
+  // school_images: ["https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png", "https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png", "https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png", "https://free4.yunpng.top/2025/04/29/6810c86e3cbe8.png"],//简介轮播图
 
 
   // 宣传视频
-  videourl: "",
+  // videourl: "",
 
   // 全景地图页
 
-  more: "../../../images/more.png",
-  judge: "../../../images/judge.png",
-  text: "../../../images/text.png",
+  // more: "../../../images/more.png",
+  // judge: "../../../images/judge.png",
+  // text: "../../../images/text.png",
 
 
   // 个人中心页
 
-  avatarUrl: "../../images/hat.png",
-  green_arrow: "../../images/green_arrow.png",
-  note: "../../images/note.png",
-  users: "../../images/users.png",
-  chat: "../../images/chat.png",
-  feedback: "../../images/feedback.png",
-  share: "../../images/share.png",
+  // avatarUrl: "../../images/hat.png",
+  // green_arrow: "../../images/green_arrow.png",
+  // note: "../../images/note.png",
+  // users: "../../images/users.png",
+  // chat: "../../images/chat.png",
+  // feedback: "../../images/feedback.png",
+  // share: "../../images/share.png",
 
 }

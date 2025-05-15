@@ -50,16 +50,15 @@ module.exports = {
     },
   
     // 学校边界
-    //todo 这个待修改
     school_boundary: {
       // 东（学校最东端点的 经度）
-      east: 110.280699,
+      east: 119.553928,
       // 西（学校最西端点的 经度）
-      west: 110.2733,
+      west: 119.543406,
       // 南（学校最南端点的 纬度）
-      south: 25.089701,
+      south: 39.906968,
       // 北（学校最北端点的 纬度）
-      north: 25.09839,
+      north: 39.917704,
     },
   
     // 闭合多边形
@@ -69,7 +68,7 @@ module.exports = {
     default_point: {
       name: "东南一门",
       aliases: "学校正大门",
-      img: "https://cdnjson.com/images/2023/02/26/schoolgate_dongmen.jpg",
+      img: "https://gampusgo-1321866016.cos.ap-beijing.myqcloud.com/school/background.jpg",
       desc: "学校正大门\n可以通行行人和车辆",
       latitude: 39.908927,
       longitude: 119.54864

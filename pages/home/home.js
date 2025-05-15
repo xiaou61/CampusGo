@@ -157,8 +157,6 @@ Page({
     },
 
 
-
-
     // 获取天气
     // getWeather() {
     //     var that = this
