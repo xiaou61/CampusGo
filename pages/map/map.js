@@ -706,7 +706,7 @@ Page({
                         latitude: item.location.lat,
                         longitude: item.location.lng,
                         title: item.name,
-                        iconPath: item.icon || '/images/marker.png',
+                        iconPath: item.icon,
                         width: 30,
                         height: 30
                     }))
