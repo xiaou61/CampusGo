@@ -306,7 +306,7 @@ export const site_data = [
         name: "南5",
         aliases: "24级南五男生公寓",
         img: "https://gampusgo-1321866016.cos.ap-beijing.myqcloud.com/gampusgo/Dormitory_Apartment/Panoramic_view1Nanwu.JPG",
-        
+        images: ["https://gampusgo-1321866016.cos.ap-beijing.myqcloud.com/gampusgo/Dormitory_Apartment/Panoramic_view1Nanwu.JPG"],
         desc: "8人寝",
         latitude: 39.9109026,
         longitude: 119.5478722
