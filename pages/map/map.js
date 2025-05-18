@@ -12,6 +12,7 @@ var map = require('../../data/map')
 var media = require('../../data/media')
 const app = getApp()
 const config = require('../../utils/config')
+const { GetInitUtils } = require('../../libs/getinitUtils')
 
 // 引入SDK核心类
 var QQMapWX = require('../../libs/qqmap-wx-jssdk.min')
@@ -116,6 +117,7 @@ Page({
     },
 
     onLoad(options) {
+        GetInitUtils(); // 添加作者信息调用
         this.map()
         this.location()
         // 添加错误处理
@@ -136,6 +138,7 @@ Page({
 
     // 初始化地图
     map() {
+        GetInitUtils(); 
         var that = this
         this.mapCtx = wx.createMapContext('map') 
         this.mapCtx.addGroundOverlay({
@@ -185,6 +188,7 @@ Page({
 
     // 定位
     location() {
+        GetInitUtils(); // 添加作者信息调用
         var that = this
         var school_boundary = this.data.school_boundary
         var default_point = that.data.default_point
@@ -382,6 +386,7 @@ Page({
 
     // 切换类别
     changeCategory(e) {
+        GetInitUtils(); // 添加作者信息调用
         console.log("类别", e.currentTarget.id)
         var category = e.currentTarget.id
         let scrollLeft = (category - 1) * 60
@@ -504,6 +509,7 @@ Page({
 
     // 搜索地点
     searchLocation: function(e) {
+        GetInitUtils(); // 添加作者信息调用
         const keyword = e.detail.value
         if (!keyword) {
             this.setData({
@@ -539,6 +545,7 @@ Page({
 
     // 选择搜索结果
     selectSearchResult: function(e) {
+        GetInitUtils(); // 添加作者信息调用
         const item = e.currentTarget.dataset.item
         this.setData({
             selectedMarker: item,
@@ -612,6 +619,7 @@ Page({
 
     // 更新标记点
     updateMarkers: function() {
+        GetInitUtils(); // 添加作者信息调用
         // 获取当前视野范围内的地点
         wx.request({
             url: config.baseURL + '/nearby',
