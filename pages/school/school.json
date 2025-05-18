@@ -1,4 +1,5 @@
 {
     "usingComponents": {},
-    "navigationBarTitleText": "校园指南"
+    "navigationBarBackgroundColor": "#f8f9fa",
+    "navigationBarTitleText": ""
 }

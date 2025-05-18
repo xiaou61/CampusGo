@@ -1,6 +1,14 @@
 /* pages/school/school.wxss */
 page {
   background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
 
 .cu-list {
@@ -121,6 +129,7 @@ page {
 }
 
 .guide-list {
+  overflow: hidden;
   margin-top: 20rpx;
   height: calc(100vh - 200rpx);
 }
