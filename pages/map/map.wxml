@@ -10,7 +10,7 @@
 
     <view class="card-top-right">
       <view class="card-top-right-button" bindtap="formSubmit">
-        路线
+        出发
       </view>
     </view>
   </view>

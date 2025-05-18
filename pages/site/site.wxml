@@ -32,7 +32,8 @@
               data-desc="{{item.desc}}" 
               data-aliases="{{item.aliases}}" 
               data-img="{{item.img}}" 
-              data-images="{{item.images}}">
+              data-images="{{item.images}}"
+              id="{{index}}">
           <image class="location-img" src="{{item.img}}" mode="aspectFill" />
           <view class="location-info">
             <view class="location-name">

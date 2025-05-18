@@ -18,7 +18,7 @@ Page({
         card: null,
         dialogShow: false,
         buttons: [{
-            text: '设为终点'
+            text: '到这里'
         }],
     },
 
@@ -79,17 +79,36 @@ Page({
     click: function (e) {
         console.log("点击事件数据：", e.currentTarget.dataset)
         var card = e.currentTarget.dataset
-        let id = e.currentTarget.id
+        let id = parseInt(e.currentTarget.id)  // 将id转换为数字
 
-        // 处理图片数据
-        if (card.images && Array.isArray(card.images)) {
-            console.log("使用已有的图片数组：", card.images)
-        } else {
-            console.log("使用单张图片：", card.img)
-            card.images = [card.img]
+        // 从site_data中获取完整的地点信息
+        const currentCategory = this.data.site_data[this.data.category];
+        const locationInfo = currentCategory.list[id];
+        
+        console.log("当前分类：", currentCategory)
+        console.log("地点ID：", id)
+        console.log("地点信息：", locationInfo)
+
+        if (!locationInfo) {
+            wx.showToast({
+                title: '获取地点信息失败',
+                icon: 'none'
+            });
+            return;
+        }
+        
+        // 合并数据
+        card = {
+            ...card,
+            latitude: locationInfo.latitude,
+            longitude: locationInfo.longitude,
+            name: locationInfo.name,
+            aliases: locationInfo.aliases,
+            desc: locationInfo.desc,
+            images: locationInfo.images || [locationInfo.img]
         }
 
-        console.log("最终图片数据：", card.images)
+        console.log("完整的地点信息：", card)
 
         this.setData({
             dialogShow: true,
@@ -115,63 +134,24 @@ Page({
      */
     mapmarker(e) {
         try {
-            // 获取点击的数据
-            const data = e.currentTarget.dataset;
-            if (!data) {
-                throw new Error('无效的数据对象');
+            // 获取当前卡片数据
+            const card = this.data.card;
+            if (!card || !card.latitude || !card.longitude) {
+                wx.showToast({
+                    title: '无效的地点信息',
+                    icon: 'none'
+                });
+                return;
             }
-
-            // 显示加载状态
-            wx.showLoading({
-                title: '加载中...',
-                mask: true
+            wx.openLocation({
+                latitude: card.latitude,
+                longitude: card.longitude,
+                name: card.name,
+                address: card.aliases || card.name,
+                scale: 18
             });
-
-            // 保存分类信息到本地存储
-            const currentCategory = this.data.site_data[this.data.category];
-            wx.setStorageSync('searchCategory', currentCategory.id);
-
-            // 保存地点数据到本地存储
-            const locationData = {
-                name: data.name,
-                latitude: data.latitude,
-                longitude: data.longitude,
-                category_id: currentCategory.id
-            };
-
-            // 保存起点或终点数据到本地存储
-            const isStartPoint = this.data.search_id === 1;
-            wx.setStorageSync(isStartPoint ? 'startPoint' : 'endPoint', locationData);
-
-            // 关闭弹窗
-            this.setData({
-                dialogShow: false
-            }, () => {
-                // 在弹窗关闭后延迟一小段时间再跳转，确保动画完成
-                setTimeout(() => {
-                    // 隐藏加载状态
-                    wx.hideLoading();
-                    
-                    // 返回地图页面
-                    wx.switchTab({
-                        url: '/pages/map/map',
-                        success: () => {
-                            console.log('成功切换到地图页面');
-                        },
-                        fail: (error) => {
-                            console.error('切换页面失败:', error);
-                            wx.showToast({
-                                title: '切换页面失败',
-                                icon: 'none'
-                            });
-                        }
-                    });
-                }, 300); // 300ms的延迟，可以根据实际动画时长调整
-            });
-
+            this.setData({ dialogShow: false });
         } catch (error) {
-            console.error('mapmarker方法执行出错:', error);
-            wx.hideLoading(); // 确保在出错时也隐藏加载状态
             wx.showToast({
                 title: error.message || '操作失败',
                 icon: 'none',

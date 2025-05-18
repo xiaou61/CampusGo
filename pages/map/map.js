@@ -195,11 +195,6 @@ Page({
                 var nowlongitude = res.longitude
                 console.log("当前位置坐标", nowlatitude, nowlongitude)
                 
-                // 检查是否在学校边界内
-                if (nowlatitude >= school_boundary.south && 
-                    nowlatitude <= school_boundary.north && 
-                    nowlongitude >= school_boundary.west && 
-                    nowlongitude <= school_boundary.east) {
                     // 在学校边界内，使用当前位置
                     that.setData({
                         mylocationmarker: {
@@ -208,83 +203,9 @@ Page({
                             longitude: nowlongitude,
                             width: 25,
                             height: 37,
-                            callout: {
-                                content: " 当前位置 ",
-                                display: 'ALWAYS',
-                                padding: 5,
-                                borderRadius: 10
-                            },
                             joinCluster: true,
-                        },
-                        start: {
-                            name: "当前位置",
-                            latitude: nowlatitude,
-                            longitude: nowlongitude,
                         }
                     })
-                } else {
-                    // 不在学校边界内，使用默认位置
-                    that.setData({
-                        mylocationmarker: {
-                            id: 0,
-                            latitude: default_point.latitude,
-                            longitude: default_point.longitude,
-                            width: 25,
-                            height: 37,
-                            callout: {
-                                content: " " + default_point.name + " ",
-                                display: 'ALWAYS',
-                                padding: 5,
-                                borderRadius: 10
-                            },
-                            joinCluster: true,
-                        },
-                        start: {
-                            name: default_point.name,
-                            latitude: default_point.latitude,
-                            longitude: default_point.longitude,
-                        }
-                    })
-
-                    wx.showToast({
-                        title: '当前位置不在校区内\n默认位置设为' + default_point.name,
-                        icon: 'none',
-                        duration: 2000
-                    })
-                }
-                that.changeCategory(that.data.static)
-            },
-            fail: function(err) {
-                console.error('获取位置失败：', err)
-                // 获取位置失败时使用默认位置
-                that.setData({
-                    mylocationmarker: {
-                        id: 0,
-                        latitude: default_point.latitude,
-                        longitude: default_point.longitude,
-                        width: 25,
-                        height: 37,
-                        callout: {
-                            content: " " + default_point.name + " ",
-                            display: 'ALWAYS',
-                            padding: 5,
-                            borderRadius: 10
-                        },
-                        joinCluster: true,
-                    },
-                    start: {
-                        name: default_point.name,
-                        latitude: default_point.latitude,
-                        longitude: default_point.longitude,
-                    }
-                })
-                
-                wx.showToast({
-                    title: '获取位置失败\n默认位置设为' + default_point.name,
-                    icon: 'none',
-                    duration: 2000
-                })
-                
                 that.changeCategory(that.data.static)
             }
         })
