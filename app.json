@@ -44,8 +44,8 @@
                 "text": "校园指南"
             },
             {
-                "selectedIconPath": "/images/tabbar/icon_school_HL.png",
-                "iconPath": "/images/tabbar/icon_school.png",
+                "selectedIconPath": "/images/tabbar/icon_ai_HL.png",
+                "iconPath": "/images/tabbar/icon_ai.png",
                 "pagePath": "pages/ai/ai",
                 "text": "AI助手"
             }
