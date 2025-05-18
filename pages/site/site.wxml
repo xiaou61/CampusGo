@@ -56,7 +56,7 @@
   <view class="dialog-content">
     <!-- 图片展示 -->
     <view class="dialog-img-wrap">
-      <block wx:if="{{card.images.length > 1}}">
+      <block wx:if="{{card.images.length >= 1}}">
         <swiper class="dialog-swiper" 
                 indicator-dots="{{true}}" 
                 autoplay="{{true}}" 

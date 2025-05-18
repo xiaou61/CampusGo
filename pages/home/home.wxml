@@ -31,23 +31,23 @@
 
   <!-- 学校信息卡片 -->
   <view class="info-section animate-fade-in">
-    <view class="info-card">
+    <view class="info-card"  bindtap="onInfoCardTap">
       <view class="info-row">
-        <view class="info-item">
+        <view class="info-item" hover-class="info-card-hover">
           <text class="info-label">建校时间</text>
           <text class="info-value">{{school_information.build_time}}年</text>
         </view>
-        <view class="info-item">
+        <view class="info-item" hover-class="info-card-hover">
           <text class="info-label">院校类型</text>
           <text class="info-value">{{school_information.institution_type}}</text>
         </view>
       </view>
       <view class="info-row">
-        <view class="info-item">
+        <view class="info-item" hover-class="info-card-hover">
           <text class="info-label">办学类型</text>
           <text class="info-value">{{school_information.school_type}}院校</text>
         </view>
-        <view class="info-item">
+        <view class="info-item" hover-class="info-card-hover">
           <text class="info-label">所在地</text>
           <text class="info-value">{{school_information.location}}</text>
         </view>
@@ -58,16 +58,16 @@
   <!-- 快捷功能区 -->
   <view class="quick-access animate-slide-up">
     <view class="quick-access-grid">
-      <view class="grid-item" bindtap="map">
+      <view class="grid-item" bindtap="map" hover-class="grid-card-hover">
         <image src="{{function_buttons[0]}}" mode="aspectFit" />
       </view>
-      <view class="grid-item" bindtap="ai">
+      <view class="grid-item" bindtap="ai" hover-class="grid-card-hover">
         <image src="{{function_buttons[1]}}" mode="aspectFit" />
       </view>
-      <view class="grid-item" bindtap="guide">
+      <view class="grid-item" bindtap="guide" hover-class="grid-card-hover">
         <image src="{{function_buttons[2]}}" mode="aspectFit" />
       </view>
-      <view class="grid-item" bindtap="link">
+      <view class="grid-item" bindtap="link" hover-class="grid-card-hover">
         <image src="{{function_buttons[3]}}" mode="aspectFit" />
       </view>
     </view>

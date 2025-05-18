@@ -1,11 +1,4 @@
-<view class="container">
-  <!-- 顶部banner -->
-  <view class="banner animate">
-    <view class="banner-content">
-      <text class="banner-title">开发团队致谢</text>
-      <text class="banner-subtitle">感谢每一位贡献者的付出</text>
-    </view>
-  </view>
+<view class="Thanks-body">
 
   <!-- 开发团队介绍 -->
   <view class="section team-section animate delay-1">
@@ -25,8 +18,7 @@
         <view class="team-title">{{item.title}}</view>
         <view class="team-members">
           <block wx:for="{{item.members}}" wx:for-item="member" wx:for-index="index" wx:key="*this">
-            <text>{{member}}</text>
-            <text wx:if="{{index !== item.members.length-1}}">、</text>
+            <text>{{member}}<text wx:if="{{index !== item.members.length-1}}">、</text></text>
           </block>
         </view>
       </view>

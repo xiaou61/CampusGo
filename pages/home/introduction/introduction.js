@@ -13,7 +13,6 @@ Page({
         school_background: media.background,
 
         navigation: media.navigation,
-        videourl: media.videourl,
 
         indicatorDots: true,
         indicatorColor: "white", //指示点颜色

@@ -697,7 +697,6 @@
   padding: 8rpx;
   background: #ffffff;
   border-radius: 16rpx;
-  transition: all 0.3s ease;
 }
 
 .grid-item:active {
@@ -711,6 +710,16 @@
   margin-bottom: 10rpx;
 }
 
+.grid-card-hover {
+  transform: scale(0.96);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
+  background: #f0f1f2;
+}
+
+.grid-card-hover::after {
+  opacity: 1;
+}
+
 /* 信息卡片样式 */
 .info-section {
   margin: 30rpx;
@@ -718,15 +727,17 @@
 
 .info-card {
   background: #ffffff;
-  border-radius: 24rpx;
+  border-radius: 16rpx;
   padding: 30rpx;
-  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.08);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .info-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 24rpx;
+  width: 100%;
 }
 
 .info-row:last-child {
@@ -734,25 +745,60 @@
 }
 
 .info-item {
-  width: 40%;
+  width: 41%;
   padding: 24rpx;
   background: #f8f9fa;
   border-radius: 16rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.info-card-hover {
+  transform: scale(0.97) translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
+  background: #f0f1f2;
+}
+
+.info-card-hover::after {
+  opacity: 1;
 }
 
 .info-label {
   font-size: 24rpx;
   color: #666;
   margin-bottom: 8rpx;
+  transition: all 0.3s ease;
 }
 
 .info-value {
   font-size: 28rpx;
   color: #333;
   font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.info-card-hover .info-label {
+  color: #4facfe;
+}
+
+.info-card-hover .info-value {
+  transform: translateX(4rpx);
 }
 
 /* 公告栏样式 */
@@ -879,7 +925,7 @@
 .top-image {
   margin-top: 150rpx;
   width: 1000rpx;
-  height: 270rpx;
-  border-radius: 0;
+  height: 280rpx;
+  border-radius: 15rpx;
   box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }

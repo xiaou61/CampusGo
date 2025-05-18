@@ -125,20 +125,22 @@ Page({
     wx.getStorage({
       key: 'historyStorage',
       success: function (res) {
-        //console.log(res.data)
         that.setData({
           historyStorageShow: true,
           historyStorage: res.data
         })
       }
     })
-    // console.log(this.data.historyStorage)
 
     if (content) {
+      let resultId = 1; // 用于生成唯一id
       for (let i = 0; i < site_data.length; i++) {
         for (let j = 0; j < site_data[i].list.length; j++) {
           var data = site_data[i].list[j]
           if (data.name.match(content) || data.aliases.match(content)) {
+            // 添加分类ID和唯一id到搜索结果中
+            data.category_id = site_data[i].id
+            data.id = resultId++ // 添加唯一id
             result.push(data)
           }
         }
@@ -178,6 +180,10 @@ Page({
     let search_id = this.data.search_id
     var pages = getCurrentPages();
     var prevPage = pages[pages.length - 2]; // 上一个页面
+    
+    // 保存分类信息
+    wx.setStorageSync('searchCategory', data.category_id)
+    
     if (search_id == 1) {
       // 直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
       prevPage.setData({

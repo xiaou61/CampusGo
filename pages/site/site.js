@@ -40,7 +40,19 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
+        // 读取起点数据
+        const startPoint = wx.getStorageSync('startPoint');
+        if (startPoint) {
+            this.setData({ start: startPoint });
+            wx.removeStorageSync('startPoint'); // 使用后清除
+        }
 
+        // 读取终点数据
+        const endPoint = wx.getStorageSync('endPoint');
+        if (endPoint) {
+            this.setData({ end: endPoint });
+            wx.removeStorageSync('endPoint'); // 使用后清除
+        }
     },
 
     /**
@@ -97,29 +109,74 @@ Page({
         })
     },
 
+    /**
+     * 处理地图标记点击事件
+     * @param {Object} e - 事件对象
+     */
     mapmarker(e) {
-        this.setData({
-            dialogShow: false,
-        })
-        console.log(e.detail)
-        let choose = e.detail.item.text
-        var id = this.data.id
-        var category = this.data.category
+        try {
+            // 获取点击的数据
+            const data = e.currentTarget.dataset;
+            if (!data) {
+                throw new Error('无效的数据对象');
+            }
 
-        if (choose == "设为终点") {
-            var end = this.data.site_data[category].list[id]
-            console.log(end)
-            wx.setStorageSync('end', end)
-            wx.switchTab({
-                url: '../../pages/map/map',
-            })
-        } else {
-            var start = this.data.site_data[category].list[id]
-            console.log(start)
-            wx.setStorageSync('start', start)
-            wx.switchTab({
-                url: '../../pages/map/map',
-            })
+            // 显示加载状态
+            wx.showLoading({
+                title: '加载中...',
+                mask: true
+            });
+
+            // 保存分类信息到本地存储
+            const currentCategory = this.data.site_data[this.data.category];
+            wx.setStorageSync('searchCategory', currentCategory.id);
+
+            // 保存地点数据到本地存储
+            const locationData = {
+                name: data.name,
+                latitude: data.latitude,
+                longitude: data.longitude,
+                category_id: currentCategory.id
+            };
+
+            // 保存起点或终点数据到本地存储
+            const isStartPoint = this.data.search_id === 1;
+            wx.setStorageSync(isStartPoint ? 'startPoint' : 'endPoint', locationData);
+
+            // 关闭弹窗
+            this.setData({
+                dialogShow: false
+            }, () => {
+                // 在弹窗关闭后延迟一小段时间再跳转，确保动画完成
+                setTimeout(() => {
+                    // 隐藏加载状态
+                    wx.hideLoading();
+                    
+                    // 返回地图页面
+                    wx.switchTab({
+                        url: '/pages/map/map',
+                        success: () => {
+                            console.log('成功切换到地图页面');
+                        },
+                        fail: (error) => {
+                            console.error('切换页面失败:', error);
+                            wx.showToast({
+                                title: '切换页面失败',
+                                icon: 'none'
+                            });
+                        }
+                    });
+                }, 300); // 300ms的延迟，可以根据实际动画时长调整
+            });
+
+        } catch (error) {
+            console.error('mapmarker方法执行出错:', error);
+            wx.hideLoading(); // 确保在出错时也隐藏加载状态
+            wx.showToast({
+                title: error.message || '操作失败',
+                icon: 'none',
+                duration: 2000
+            });
         }
     }
 
