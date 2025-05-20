@@ -24,4 +24,7 @@
       </view>
     </view>
   </view>
+  <view class="Acknowledgement">
+    <text>特别鸣谢：@奇妙方程式-bilibili</text>
+  </view>
 </view> 
