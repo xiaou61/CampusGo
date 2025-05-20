@@ -57,14 +57,6 @@
     "useExtendedLib": {
         "weui": true
     },
-    "requiredPrivateInfos": [
-        "getLocation"
-    ],
-    "permission": {
-        "scope.userLocation": {
-            "desc": "需要获取你当前位置信息"
-        }
-    },
     "usingComponents": {
         "towxml": "/towxml/towxml"
     }
