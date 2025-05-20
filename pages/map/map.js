@@ -420,7 +420,6 @@ Page({
             }
             markers.push(m)
         }
-        markers.push(this.data.mylocationmarker)
         console.log("当前marker点", markers)
         this.setData({
             markers: markers
