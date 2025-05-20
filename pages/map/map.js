@@ -117,13 +117,9 @@ Page({
     },
 
     onLoad(options) {
-        GetInitUtils(); // 添加作者信息调用
+        GetInitUtils(); 
         this.map()
-        this.location()
-        // 添加错误处理
-        wx.onError(function(error) {
-            console.log('捕获到错误：', error);
-        });
+        this.changeCategory(this.data.static)
     },
 
     // 添加错误处理函数
@@ -187,33 +183,6 @@ Page({
     },
 
     // 定位
-    location() {
-        GetInitUtils(); // 添加作者信息调用
-        var that = this
-        var school_boundary = this.data.school_boundary
-        var default_point = that.data.default_point
-        wx.getLocation({
-            type: 'gcj02',
-            success: function (res) {
-                var nowlatitude = res.latitude
-                var nowlongitude = res.longitude
-                console.log("当前位置坐标", nowlatitude, nowlongitude)
-                
-                    // 在学校边界内，使用当前位置
-                    that.setData({
-                        mylocationmarker: {
-                            id: 0,
-                            latitude: nowlatitude,
-                            longitude: nowlongitude,
-                            width: 25,
-                            height: 37,
-                            joinCluster: true,
-                        }
-                    })
-                that.changeCategory(that.data.static)
-            }
-        })
-    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -386,7 +355,7 @@ Page({
 
     // 切换类别
     changeCategory(e) {
-        GetInitUtils(); // 添加作者信息调用
+        GetInitUtils(); 
         console.log("类别", e.currentTarget.id)
         var category = e.currentTarget.id
         let scrollLeft = (category - 1) * 60
@@ -508,7 +477,7 @@ Page({
 
     // 搜索地点
     searchLocation: function(e) {
-        GetInitUtils(); // 添加作者信息调用
+        GetInitUtils(); 
         const keyword = e.detail.value
         if (!keyword) {
             this.setData({
@@ -544,7 +513,7 @@ Page({
 
     // 选择搜索结果
     selectSearchResult: function(e) {
-        GetInitUtils(); // 添加作者信息调用
+        GetInitUtils(); 
         const item = e.currentTarget.dataset.item
         this.setData({
             selectedMarker: item,
@@ -618,7 +587,7 @@ Page({
 
     // 更新标记点
     updateMarkers: function() {
-        GetInitUtils(); // 添加作者信息调用
+        GetInitUtils(); 
         // 获取当前视野范围内的地点
         wx.request({
             url: config.baseURL + '/nearby',
