@@ -186,8 +186,6 @@ Page({
     // 定位
     location() {
         var that = this
-        var school_boundary = this.data.school_boundary
-        var default_point = that.data.default_point
         wx.getLocation({
             type: 'gcj02',
             success: function (res) {
@@ -197,14 +195,7 @@ Page({
                 
                     // 在学校边界内，使用当前位置
                     that.setData({
-                        mylocationmarker: {
-                            id: 0,
-                            latitude: nowlatitude,
-                            longitude: nowlongitude,
-                            width: 25,
-                            height: 37,
-                            joinCluster: true,
-                        }
+            
                     })
                 that.changeCategory(that.data.static)
             }
@@ -415,7 +406,6 @@ Page({
             }
             markers.push(m)
         }
-        markers.push(this.data.mylocationmarker)
         console.log("当前marker点", markers)
         this.setData({
             markers: markers

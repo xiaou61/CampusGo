@@ -1,5 +1,5 @@
 <!--pages/school/school.wxml-->
-<view class="school-container">
+<view class="school-page school-container">
   <view class="header">
     <view class="title-wrapper">
       <text class="title">校园指南</text>
@@ -10,20 +10,44 @@
     </view>
   </view>
   
-  <scroll-view scroll-y class="guide-list">
-    <view class="guide-item" wx:for="{{allWords}}" wx:key="index" bindtap="jump" data-id="{{index}}">
-      <view class="guide-content">
-        <view class="guide-icon">
-          <text class="icon">📖</text>
-        </view>
-        <view class="guide-info">
-          <text class="guide-title">{{item.title}}</text>
-          <text class="guide-desc">{{item.desc || '点击查看详情'}}</text>
-        </view>
-        <view class="guide-arrow">
-          <image src="{{green_arrow}}" mode="aspectFit"></image>
+  <scroll-view 
+    scroll-y 
+    class="guide-list" 
+    enable-back-to-top 
+    enable-flex
+    bindscrolltolower="onScrollToLower"
+  >
+    <block wx:if="{{allWords.length > 0}}">
+      <view class="guide-item" wx:for="{{allWords}}" wx:key="index" bindtap="jump" data-id="{{index}}">
+        <view class="guide-content">
+          <view class="guide-icon">
+            <text class="icon">📖</text>
+          </view>
+          <view class="guide-info">
+            <text class="guide-title">{{item.title}}</text>
+            <text class="guide-desc">{{item.desc || '点击查看详情'}}</text>
+          </view>
+          <view class="guide-arrow">
+            <image class="guide-arrow-icon" src="{{green_arrow}}" mode="aspectFit"></image>
+          </view>
         </view>
       </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && allWords.length === 0}}">
+      <text>暂无校园指南数据</text>
+    </view>
+    
+    <!-- 加载状态 -->
+    <view class="loading-state" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text>加载中...</text>
+    </view>
+    
+    <!-- 加载完成提示 -->
+    <view class="load-more" wx:if="{{!loading && !hasMore && allWords.length > 0}}">
+      <text>没有更多数据了</text>
     </view>
   </scroll-view>
 </view>

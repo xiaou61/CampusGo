@@ -10,22 +10,27 @@
 // pages/school/school.js
 var school = require('../../data/school')
 var media = require('../../data/media')
+import { getSchoolGuide } from '../../data/schoolGuide'
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        allWords: school.school_guide,
-
-        green_arrow: media.green_arrow
+        allWords: [],
+        green_arrow: media.green_arrow,
+        pageNum: 1,
+        pageSize: 10,
+        hasMore: true,
+        loading: false
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        this.loadGuideData()
     },
 
     /**
@@ -60,14 +65,18 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh() {
-
+        this.setData({ pageNum: 1, hasMore: true })
+        this.loadGuideData()
+        wx.stopPullDownRefresh()
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom() {
-
+    onScrollToLower() {
+        if (this.data.hasMore) {
+            this.loadGuideData(true)
+        }
     },
 
     /**
@@ -75,6 +84,31 @@ Page({
      */
     onShareAppMessage() {
 
+    },
+
+    // 加载指南数据
+    loadGuideData(isLoadMore = false) {
+        if (this.data.loading || (!isLoadMore && !this.data.hasMore)) return
+        
+        this.setData({ loading: true })
+        
+        getSchoolGuide(this.data.pageNum, this.data.pageSize)
+            .then(res => {
+                const newList = isLoadMore ? [...this.data.allWords, ...res.list] : res.list
+                this.setData({
+                    allWords: newList,
+                    hasMore: res.list.length === this.data.pageSize,
+                    pageNum: isLoadMore ? this.data.pageNum + 1 : 1,
+                    loading: false
+                })
+            })
+            .catch(err => {
+                wx.showToast({
+                    title: err,
+                    icon: 'none'
+                })
+                this.setData({ loading: false })
+            })
     },
 
     /* 关于侧边栏，点击跳转 */

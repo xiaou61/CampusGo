@@ -1,5 +1,5 @@
 /* pages/school/school.wxss */
-page {
+.school-page {
   background-color: #f8f9fa;
 }
 
@@ -63,7 +63,6 @@ page {
 }
 
 .school-container {
-  min-height: 100vh;
   padding: 30rpx;
   position: relative;
   overflow: hidden;
@@ -121,8 +120,8 @@ page {
 }
 
 .guide-list {
-  margin-top: 20rpx;
-  height: calc(100vh - 200rpx);
+  margin-top: 10rpx;
+  height: calc(100vh - 180rpx);
 }
 
 .guide-item {
@@ -199,7 +198,7 @@ page {
   transform: translateX(10rpx);
 }
 
-.guide-arrow image {
+.guide-arrow-icon {
   width: 100%;
   height: 100%;
 }
@@ -245,4 +244,47 @@ page {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* 加载状态样式 */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx;
+  color: #999;
+}
+
+.loading-spinner {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #4facfe;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 空状态样式 */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 加载更多提示样式 */
+.load-more {
+  text-align: center;
+  padding: 30rpx;
+  color: #999;
+  font-size: 24rpx;
 }

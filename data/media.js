@@ -41,6 +41,7 @@ module.exports = {
   // 校徽
   //logo.png
   school_logo: "https://gampusgo-1321866016.cos.ap-beijing.myqcloud.com/school/school_logo.png",
+  school_logo1:"https://www.hevttc.edu.cn/images/logo.png",
   // label: "../../images/label.png",  // 学校简介图标 暂时不用
   laba: "../../images/laba.png",
   school_icon: "../../images/school_icon.png",

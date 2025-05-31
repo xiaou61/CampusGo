@@ -9,7 +9,9 @@
         "pages/site/site",
         "pages/school/school",
         "pages/school/guidance/guidance",
-        "pages/ai/ai"
+        "pages/ai/ai",
+        "pages/login/login",
+        "pages/recommend/recommend"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -20,18 +22,6 @@
     "tabBar": {
         "list": [
             {
-                "selectedIconPath": "/images/tabbar/icon_map_HL.png",
-                "iconPath": "/images/tabbar/icon_map.png",
-                "pagePath": "pages/map/map",
-                "text": "地图"
-            },
-            {
-                "selectedIconPath": "/images/tabbar/icon_collection_HL.png",
-                "iconPath": "/images/tabbar/icon_collection.png",
-                "pagePath": "pages/site/site",
-                "text": "地点汇总"
-            },
-            {
                 "selectedIconPath": "/images/tabbar/icon_home_HL.png",
                 "iconPath": "/images/tabbar/icon_home.png",
                 "pagePath": "pages/home/home",
@@ -40,14 +30,8 @@
             {
                 "selectedIconPath": "/images/tabbar/icon_school_HL.png",
                 "iconPath": "/images/tabbar/icon_school.png",
-                "pagePath": "pages/school/school",
-                "text": "校园指南"
-            },
-            {
-                "selectedIconPath": "/images/tabbar/icon_ai_HL.png",
-                "iconPath": "/images/tabbar/icon_ai.png",
-                "pagePath": "pages/ai/ai",
-                "text": "AI助手"
+                "pagePath": "pages/recommend/recommend",
+                "text": "推荐"
             }
         ]
     },

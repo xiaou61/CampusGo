@@ -4,12 +4,17 @@ var map = require('../../data/map')
 var school = require('../../data/school')
 var data = require('../../data/data')
 const app = getApp()
+const { request } = require('../../utils/request')
+
+
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        userInfo: {},
         miniprogram_name: data.miniprogram_name, // 校园导航小程序名称
         school_information: school.school_information, // 学校信息
         AppID: school.AppID,  // 学校招生小程序AppID
@@ -69,6 +74,14 @@ Page({
     onLoad(options) {
         //this.getWeather()
         this.startTypingLoop()
+        // 如果全局数据中已有用户信息，直接使用
+        if (app.globalData.userInfo) {
+            this.setData({
+                userInfo: app.globalData.userInfo
+            })
+        } else {
+            this.getuserInfo()
+        }
     },
 
     /**
@@ -82,7 +95,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
+        // 获取用户信息
     },
 
     /**
@@ -107,6 +120,34 @@ Page({
         var swiperH = winWid * imgh / imgw + "px" //等比设置swiper的高度。 即 屏幕宽度 / swiper高度 = 图片宽度 / 图片高度  ==》swiper高度 = 屏幕宽度 * 图片高度 / 图片宽度
         this.setData({
             Height: swiperH //设置高度
+        })
+    },
+
+    // 获取用户数据
+    getuserInfo(){
+        request({
+            url: 'student/user/info',
+            method: 'GET'
+        }).then(res => {
+            if (res.code === 200) {
+                app.globalData.userInfo = res.data
+                this.setData({
+                    userInfo: app.globalData.userInfo
+                })
+            } else if (res.code === 401 || res.code === 500) {
+                // 未登录或token失效，跳转到登录页
+                wx.removeStorageSync('token')
+                wx.redirectTo({
+                    url: '/pages/login/login'
+                })
+            }
+        }).catch(err => {
+            console.log('获取用户信息失败')
+            // 发生错误时，清除token并跳转到登录页
+            wx.removeStorageSync('token')
+            wx.redirectTo({
+                url: '/pages/login/login'
+            })
         })
     },
 
@@ -148,6 +189,20 @@ Page({
             appId: this.data.MiXueAppID,
         })
     },
+
+    onInfoCardTap(){
+
+    },
+    
+    // 打开编辑个人信息模态框
+    openEditModal() {
+        wx.showModal({
+            title: '编辑个人信息',
+            content: '该功能正在开发中',
+            showCancel: false,
+            confirmText: '确定'
+        })
+    },
     
     //瑞幸咖啡
     toLuckin() {
@@ -183,24 +238,21 @@ Page({
 
     // 跳转到地图页
     map() {
-        wx.switchTab({
-            url: '../map/map',
-        })
+      wx.navigateTo({
+        url: '../map/map',
+      })
     },
 
     // 跳转到校园页
     ai() {
-        wx.switchTab({
+        wx.navigateTo({
             url: '../ai/ai',
         })
     },
 
     // 跳转到地点汇总页
     guide() {
-        // wx.switchTab({
-        //   url: '../site/site',
-        // })
-        wx.switchTab({
+        wx.navigateTo({
           url: '../school/school',
         })
     },
@@ -251,4 +303,5 @@ Page({
     onUnload() {
         if (this.typingTimer) clearInterval(this.typingTimer)
     },
+
 })

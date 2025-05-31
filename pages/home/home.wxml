@@ -29,13 +29,25 @@
     </view>
   </view>
 
+  <!-- 个人信息卡片 -->
+  <view class="profile-card">
+    <view class="profile-header">
+      <view class="profile-avatar">{{userInfo.name[0]}}</view>
+      <view class="profile-basic">
+        <view class="profile-name">{{userInfo.name}}</view>
+        <view class="profile-id">学号: {{userInfo.studentNumber}}</view>
+      </view>
+      <view class="edit-btn" bindtap="openEditModal">✏️</view>
+    </view>
+  </view>
+
   <!-- 学校信息卡片 -->
   <view class="info-section animate-fade-in">
     <view class="info-card"  bindtap="onInfoCardTap">
       <view class="info-row">
         <view class="info-item" hover-class="info-card-hover">
           <text class="info-label">建校时间</text>
-          <text class="info-value">{{school_information.build_time}}年</text>
+          <text class="info-value">{{school_information.build_time}}</text>
         </view>
         <view class="info-item" hover-class="info-card-hover">
           <text class="info-label">院校类型</text>

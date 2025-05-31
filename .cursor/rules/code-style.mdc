@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# CampusGo 代码风格指南
+
+## JavaScript 规范
+
+### 1. 命名规范
+- 变量名使用驼峰命名法（camelCase）
+- 常量使用全大写，下划线分隔（UPPER_SNAKE_CASE）
+- 类名使用大驼峰命名法（PascalCase）
+- 私有变量以下划线开头（_privateVar）
+
+### 2. 代码格式
+- 使用 2 个空格缩进
+- 语句末尾使用分号
+- 运算符前后加空格
+- 逗号后加空格
+- 大括号使用 K&R 风格
+
+### 3. 注释规范
+- 使用 JSDoc 风格的注释
+- 关键代码添加必要的注释
+- 复杂逻辑需要详细注释
+- 避免无意义的注释
+
+### 4. 函数规范
+- 函数名应该是动词或动词短语
+- 参数不超过 3 个
+- 函数职责单一
+- 避免副作用
+
+## WXML 规范
+
+### 1. 标签规范
+- 标签名使用小写
+- 自闭合标签使用 `/>`
+- 属性使用双引号
+- 属性名使用驼峰命名
+
+### 2. 结构规范
+- 合理使用语义化标签
+- 避免过深的嵌套
+- 使用 block 标签减少节点
+- 合理使用条件渲染
+
+### 3. 数据绑定
+- 使用 `{{}}` 进行数据绑定
+- 复杂表达式使用计算属性
+- 避免在模板中进行复杂运算
+- 合理使用过滤器
+
+## WXSS 规范
+
+### 1. 命名规范
+- 使用 BEM 命名方法
+- 类名使用小写字母
+- 使用连字符分隔单词
+- 避免使用 ID 选择器
+
+### 2. 样式组织
+- 按功能模块组织样式
+- 使用注释分隔不同部分
+- 相关样式放在一起
+- 避免样式重复
+
+### 3. 响应式设计
+- 使用 rpx 作为主要单位
+- 使用媒体查询适配不同设备
+- 弹性布局优先
+- 考虑不同屏幕尺寸
+
+### 4. 性能优化
+- 避免过度嵌套选择器
+- 减少选择器复杂度
+- 合理使用继承
+- 避免使用通配符
+
+## 示例代码
+
+### JavaScript
+```javascript
+// 常量定义
+const API_BASE_URL = 'https://api.example.com';
+
+// 类定义
+class UserService {
+  constructor() {
+    this._token = null;
+  }
+
+  // 方法定义
+  async login(username, password) {
+    try {
+      const response = await request({
+        url: `${API_BASE_URL}/login`,
+        method: 'POST',
+        data: { username, password }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
+    }
+  }
+}
+```
+
+### WXML
+```html
+<view class="user-card">
+  <view class="user-card__header">
+    <image class="user-card__avatar" src="{{userInfo.avatarUrl}}" />
+    <text class="user-card__name">{{userInfo.nickName}}</text>
+  </view>
+  <view class="user-card__content">
+    <block wx:if="{{userInfo.isVip}}">
+      <view class="user-card__vip-badge">VIP</view>
+    </block>
+  </view>
+</view>
+```
+
+### WXSS
+```css
+/* 组件样式 */
+.user-card {
+  padding: 20rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.user-card__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.user-card__avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.user-card__name {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 375px) {
+  .user-card {
+    padding: 16rpx;
+  }
+  
+  .user-card__avatar {
+    width: 60rpx;
+    height: 60rpx;
+  }
+}
+

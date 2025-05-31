@@ -64,15 +64,6 @@ module.exports = {
     // 闭合多边形
     points: [{"latitude":"39.908180","longitude":"119.548027"},{"latitude":"39.912063","longitude":"119.544078"},{"latitude":"39.914723","longitude":"119.546760"},{"latitude":"39.914650","longitude":"119.547789"},{"latitude":"39.915003","longitude":"119.548815"},{"latitude":"39.914896","longitude":"119.549628"},{"latitude":"39.914180","longitude":"119.550873"},{"latitude":"39.912940","longitude":"119.549368"},{"latitude":"39.912176","longitude":"119.549442"},{"latitude":"39.912468","longitude":"119.550601"},{"latitude":"39.911645","longitude":"119.551320"},{"latitude":"39.911135","longitude":"119.551070"},{"latitude":"39.910516","longitude":"119.551623"}],
   
-    // 默认地点
-    default_point: {
-      name: "东南一门",
-      aliases: "学校正大门",
-      img: "https://gampusgo-1321866016.cos.ap-beijing.myqcloud.com/school/background.jpg",
-      desc: "学校正大门\n可以通行行人和车辆",
-      latitude: 39.908927,
-      longitude: 119.54864
-    },
   
     // 地点数据（如需修改请修改./siteDate.js）
     site_data

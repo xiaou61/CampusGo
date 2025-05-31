@@ -25,6 +25,17 @@
     scroll-into-view="{{ detail }}" 
     scroll-with-animation="true"
   >
+    <!-- 加载状态 -->
+    <view class="loading-state" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text>加载中...</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && curWords.length === 0}}">
+      <text>暂无校园指南数据</text>
+    </view>
+
     <view 
       class="card-item" 
       wx:for="{{curWords}}" 

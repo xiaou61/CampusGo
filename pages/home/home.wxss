@@ -929,3 +929,54 @@
   border-radius: 15rpx;
   box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }
+
+/* 个人信息卡片样式 */
+.profile-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #91b4ff 0%, #2eb4fc 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-right: 30rpx;
+}
+
+.profile-basic {
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10rpx;
+}
+
+.profile-id {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.edit-btn {
+  font-size: 40rpx;
+  color: #4a90e2;
+  padding: 10rpx;
+}

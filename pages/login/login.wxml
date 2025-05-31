@@ -1,0 +1,67 @@
+<view class="login-page-wrapper">
+  <view class="login-page">
+    <view>
+      <image class = "logo" src="{{school_logo}}" mode="aspectFit"/>
+    </view>
+    <view class="login-container">
+      <view class="login-header">
+        <text class="title">欢迎回来</text>
+        <text class="subtitle">请登录您的账户</text>
+      </view>
+
+      <form class="login-form" bindsubmit="handleLogin">
+        <view class="form-group">
+          <text class="label">学号</text>
+          <input 
+            class="input {{studentNumberError ? 'error' : ''}}" 
+            type="text" 
+            value="{{studentNumber}}"
+            bindinput="onStudentNumberInput"
+            bindblur="validateStudentNumber"
+            maxlength="20"
+          />
+          <text class="error-message" wx:if="{{studentNumberError}}">{{studentNumberError}}</text>
+        </view>
+
+        <view class="form-group">
+          <text class="label">密码</text>
+          <view class="password-wrapper">
+            <input 
+              class="input {{passwordError ? 'error' : ''}}" 
+              type="{{showPassword ? 'text' : 'password'}}" 
+              value="{{password}}"
+              bindinput="onPasswordInput"
+              bindblur="validatePassword"
+              password="{{!showPassword}}"
+              maxlength="20"
+            />
+            <text class="password-toggle" bindtap="togglePassword" hover-class="button-hover">
+              {{showPassword ? '🙈' : '👁️'}}
+            </text>
+          </view>
+          <text class="error-message" wx:if="{{passwordError}}">{{passwordError}}</text>
+        </view>
+
+        <view class="form-options">
+          <view class="remember-me">
+            <checkbox class="remember-me-checkbox" checked="{{rememberMe}}" bindtap="toggleRememberMe" />
+            <text>记住我</text>
+          </view>
+          <text class="forgot-password" bindtap="onForgotPassword" hover-class="link-hover">忘记密码？</text>
+        </view>
+
+        <button 
+          class="login-btn {{loading ? 'loading' : ''}} {{(!studentNumber || !password) ? 'disabled' : ''}}" 
+          form-type="submit"
+          disabled="{{loading || !studentNumber || !password}}"
+          hover-class="button-hover"
+        >
+          <view class="btn-content">
+            <view class="spinner" wx:if="{{loading}}"></view>
+            <text>{{loading ? '登录中...' : '登录'}}</text>
+          </view>
+        </button>
+      </form>
+    </view>
+  </view>
+</view>
