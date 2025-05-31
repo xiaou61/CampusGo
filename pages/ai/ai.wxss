@@ -1,10 +1,17 @@
 /* pages/ai.wxss */
 .ai-container {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100vh;
   background: linear-gradient(to bottom, #f0f7ff, #ffffff);
   box-sizing: border-box;
+}
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
 
 .chat-history {
