@@ -1,5 +1,4 @@
 //核心包依赖
-const jjsk = require('./libs/jjsk');
 const { request } = require('./utils/request')
 const app = getApp()
 // app.js

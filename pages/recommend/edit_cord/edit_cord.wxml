@@ -1,0 +1,80 @@
+<!--pages/recommend/edit_cord/edit_cord.wxml-->
+<view class="page">
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <view class="cancel-btn" bindtap="goBack">取消</view>
+    <view class="title">发布帖子</view>
+    <view class="publish-btn {{canPublish ? '' : 'disabled'}}" bindtap="publishPost">发布</view>
+  </view>
+
+  <!-- 编辑区域 -->
+  <view class="edit-area">
+    <!-- 标题输入 -->
+    <input 
+      class="title-input" 
+      type="text" 
+      placeholder="请输入标题（选填）" 
+      placeholder-class="placeholder"
+      value="{{title}}"
+      bindinput="onTitleInput"
+      maxlength="50"
+    />
+
+    <!-- 内容输入 -->
+    <textarea 
+      class="content-input" 
+      placeholder="分享新鲜事..." 
+      placeholder-class="placeholder"
+      value="{{content}}"
+      bindinput="onContentInput"
+      maxlength="2000"
+      auto-height
+    />
+
+    <!-- 图片上传区域 -->
+    <view class="image-upload">
+      <view class="image-list">
+        <view 
+          class="image-item" 
+          wx:for="{{images}}" 
+          wx:key="*this"
+        >
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">
+            <image src="/assets/icons/close.png" mode="aspectFit"></image>
+          </view>
+        </view>
+        <view class="upload-btn" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+          <image src="/assets/icons/camera.png" mode="aspectFit"></image>
+          <text>{{images.length}}/9</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 分类输入 -->
+    <view class="category-input">
+        <input 
+            class="input" 
+            placeholder="请输入关键字" 
+            value="{{category}}"
+            bindinput="onCategoryInput"
+        />
+    </view>
+  </view>
+
+  <!-- 底部工具栏 -->
+  <view class="toolbar">
+    <view class="tool-item" bindtap="chooseImage">
+      <image src="/assets/icons/image.png" mode="aspectFit"></image>
+      <text>图片</text>
+    </view>
+    <view class="tool-item" bindtap="chooseLocation">
+      <image src="/assets/icons/location.png" mode="aspectFit"></image>
+      <text>位置</text>
+    </view>
+    <view class="tool-item" bindtap="chooseTopic">
+      <image src="/assets/icons/topic.png" mode="aspectFit"></image>
+      <text>话题</text>
+    </view>
+  </view>
+</view>

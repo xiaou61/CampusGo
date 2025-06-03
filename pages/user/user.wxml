@@ -1,0 +1,101 @@
+<!--pages/user/user.wxml-->
+<view class="page-container">
+
+  <!-- 顶部背景区域 -->
+  <view class="header-section">
+    <image class="header-bg" src="https://gampusgo-1321866016.cos.ap-beijing.myqcloud.com/school/school_background.png" mode="aspectFill" />
+    <view class="header-content">
+      <view class="user-info">
+        <view class="avatar-wrapper" bindtap="handleAvatarUpload">
+          <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+          <view class="avatar-mask">
+            <text class="avatar-tip">点击更换头像</text>
+          </view>
+        </view>
+        <view class="user-meta">
+          <text class="username">{{userInfo.name || '未登录'}}</text>
+          <text class="user-id">学号：{{userInfo.studentNumber || '未获取到'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据统计区域 -->
+  <view class="stats-section animate-fade-in">
+    <view class="stats-card">
+      <view class="stats-row">
+        <view class="stats-item" hover-class="stats-card-hover">
+          <text class="stats-value">{{userInfo.posts || 0}}</text>
+          <text class="stats-label">发帖数</text>
+        </view>
+        <view class="stats-item" hover-class="stats-card-hover">
+          <text class="stats-value">{{userInfo.followers || 0}}</text>
+          <text class="stats-label">粉丝数</text>
+        </view>
+        <view class="stats-item" hover-class="stats-card-hover">
+          <text class="stats-value">{{userInfo.following || 0}}</text>
+          <text class="stats-label">关注数</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <!-- <view class="menu-section animate-slide-up">
+    <view class="menu-grid">
+      <view class="menu-item" bindtap="navigateToMyPosts" hover-class="menu-item-hover">
+        <image class="menu-icon" src="/assets/icons/posts.png" mode="aspectFit" />
+        <text class="menu-text">我的帖子</text>
+      </view>
+      <view class="menu-item" bindtap="navigateToFavorites" hover-class="menu-item-hover">
+        <image class="menu-icon" src="/assets/icons/favorite.png" mode="aspectFit" />
+        <text class="menu-text">我的收藏</text>
+      </view>
+      <view class="menu-item" bindtap="navigateToLikes" hover-class="menu-item-hover">
+        <image class="menu-icon" src="/assets/icons/like.png" mode="aspectFit" />
+        <text class="menu-text">我的点赞</text>
+      </view>
+      <view class="menu-item" bindtap="navigateToComments" hover-class="menu-item-hover">
+        <image class="menu-icon" src="/assets/icons/comment.png" mode="aspectFit" />
+        <text class="menu-text">我的评论</text>
+      </view>
+    </view>
+  </view> -->
+
+    <view class="settings-section animate-fade-in">
+    <view class="settings-list">
+      <view class="settings-item" bindtap="navigateToCard">
+        <image class="settings-icon" src="/images/tabler--bell.png" mode="aspectFit" />
+        <text class="settings-text">通知</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 设置列表 -->
+  <view class="settings-section animate-fade-in">
+    <view class="settings-list">
+      <view class="settings-item" bindtap="navigateToCard">
+        <image class="settings-icon" src="/images/tabler--credit-card.png" mode="aspectFit" />
+        <text class="settings-text">钱包</text>
+      </view>
+      <view class="settings-item" bindtap="navigateToSettings">
+        <image class="settings-icon" src="/images/tabler--adjustments.png" mode="aspectFit" />
+        <text class="settings-text">设置</text>
+      </view>
+      <view class="settings-item" bindtap="navigateToAbout">
+        <image class="settings-icon" src="/images/tabler--exclamation-circle.png" mode="aspectFit" />
+        <text class="settings-text">关于我们</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出登录按钮 -->
+  <view class="logout-section">
+    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+  </view>
+
+  <!-- 底部版权信息 -->
+  <view class="footer animate-fade-in">
+    <text>{{miniprogram_name}}小程序</text>
+  </view>
+</view>

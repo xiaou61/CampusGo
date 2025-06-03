@@ -1,0 +1,333 @@
+/* pages/user/user.wxss */
+.page-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* 顶部背景区域 */
+.header-section {
+  position: relative;
+  height: 500rpx;
+  overflow: hidden;
+}
+
+.header-bg {
+  width: 100%;
+  height: 100%;
+  filter: blur(1px);
+}
+
+.header-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  padding: 0 40rpx;
+}
+
+.user-info {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4rpx solid #fff;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.avatar-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s linear;
+}
+
+.avatar-wrapper:active .avatar-mask {
+  opacity: 1;
+}
+
+.avatar-tip {
+  color: #fff;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.user-meta {
+  flex: 1;
+  margin-left: 30rpx;
+  color: rgb(0, 0, 0);
+}
+
+.username {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.user-id {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.edit-btn {
+  font-size: 40rpx;
+  color: #fff;
+  padding: 20rpx;
+}
+
+/* 数据统计区域 */
+.stats-section {
+  margin: -60rpx 30rpx 30rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.stats-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stats-item {
+  text-align: center;
+  padding: 20rpx;
+  transition: all 0.3s linear;
+}
+
+.stats-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+  transition: all 0.3s linear;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #666;
+  transition: all 0.3s linear;
+}
+
+/* 功能菜单 */
+.menu-section {
+  margin: 30rpx;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  background: #f8f9fa;
+}
+
+.menu-item .menu-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.menu-item .menu-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 设置列表 */
+.settings-section {
+  margin: 30rpx;
+}
+
+.settings-list {
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.settings-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.settings-item .settings-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+
+.settings-item .settings-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.settings-item .arrow {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 0;
+}
+
+/* 底部版权信息 */
+.footer {
+  text-align: center;
+  padding: 40rpx;
+  color: #666;
+  font-size: 24rpx;
+}
+
+/* 编辑表单 */
+.edit-form {
+  padding: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+.form-textarea {
+  width: 100%;
+  height: 200rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+
+/* 动画效果 */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 点击效果 */
+.stats-card-hover {
+  background-color: #f0f0f0;
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.stats-card-hover .stats-value {
+  transform: scale(0.95);
+  color: #737cff;
+}
+
+.stats-card-hover .stats-label {
+  color: #999;
+}
+
+.menu-item-hover {
+  background-color: #e8e8e8;
+}
+
+/* 退出登录按钮样式 */
+.logout-section {
+  padding: 40rpx 30rpx;
+  margin-bottom: 40rpx;
+}
+
+.logout-btn {
+  width: 200rpx;
+  height: 88rpx;
+  line-height: 66rpx;
+  text-align: center;
+  background-color: #fff;
+  color: #ff4d4f;
+  font-size: 32rpx;
+  border-radius: 20rpx;
+  border: none;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+}
+
+.logout-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}

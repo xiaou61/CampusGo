@@ -11,7 +11,16 @@
         "pages/school/guidance/guidance",
         "pages/ai/ai",
         "pages/login/login",
-        "pages/recommend/recommend"
+        "pages/recommend/recommend",
+        "pages/recommend/search/search",
+        "pages/recommend/edit_cord/edit_cord",
+        "pages/recommend/detail/detail",
+        "pages/schedule/schedule",
+        "pages/user/user",
+        "pages/user/card/card",
+        "pages/user/about/about",
+        "pages/user/setting/setting",
+        "pages/OA/OA"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -21,6 +30,18 @@
     },
     "tabBar": {
         "list": [
+            {
+              "selectedIconPath": "/images/tabbar/icon_schedule_HL.png",
+              "iconPath": "/images/tabbar/icon_schedule.png",
+              "pagePath": "pages/OA/OA",
+              "text": "OA"
+            },
+            {
+                "selectedIconPath": "/images/tabbar/icon_schedule_HL.png",
+                "iconPath": "/images/tabbar/icon_schedule.png",
+                "pagePath": "pages/schedule/schedule",
+                "text": "课程表"
+            },
             {
                 "selectedIconPath": "/images/tabbar/icon_home_HL.png",
                 "iconPath": "/images/tabbar/icon_home.png",
@@ -32,6 +53,12 @@
                 "iconPath": "/images/tabbar/icon_school.png",
                 "pagePath": "pages/recommend/recommend",
                 "text": "推荐"
+            },
+            {
+                "selectedIconPath": "/images/tabbar/icon_user_HL.png",
+                "iconPath": "/images/tabbar/icon_user.png",
+                "pagePath": "pages/user/user",
+                "text": "我的"
             }
         ]
     },
@@ -40,8 +67,5 @@
     "lazyCodeLoading": "requiredComponents",
     "useExtendedLib": {
         "weui": true
-    },
-    "usingComponents": {
-        "towxml": "/towxml/towxml"
     }
 }

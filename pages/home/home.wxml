@@ -32,7 +32,12 @@
   <!-- 个人信息卡片 -->
   <view class="profile-card">
     <view class="profile-header">
-      <view class="profile-avatar">{{userInfo.name[0]}}</view>
+      <view class="profile-avatar">
+        <view class="avatar-wrapper">
+          <image class="avatar-image" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+          <view class="avatar-border"></view>
+        </view>
+      </view>
       <view class="profile-basic">
         <view class="profile-name">{{userInfo.name}}</view>
         <view class="profile-id">学号: {{userInfo.studentNumber}}</view>

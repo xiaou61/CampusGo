@@ -1,58 +1,53 @@
 <!--pages/ai/ai.wxml-->
-<view class="ai-container">
-  <!-- 对话历史区域 -->
-  <scroll-view class="chat-history" scroll-y="true" scroll-into-view="{{scrollToView}}" scroll-with-animation="true">
-    <view class="daily-limit">
-      <text>今日剩余提问次数：{{remainingQuestions}}/50</text>
-    </view>
-    <block wx:for="{{messages}}" wx:key="id">
-      <view class="message-item {{item.role === 'user' ? 'user-message' : ''}}" id="msg-{{item.id}}">
-        <view class="message-avatar">
-          <image src="{{item.role === 'user' ? userAvatar : aiAvatar}}" mode="aspectFill"></image>
-        </view>
-        <view class="message-content">
-          <view class="message-bubble {{item.role === 'user' ? 'user-bubble' : 'ai-bubble'}}">
-            <block wx:if="{{item.content === 'loading'}}">
-              <view class="loading-container">
-                <view class="loading-dot"></view>
-                <view class="loading-dot"></view>
-                <view class="loading-dot"></view>
-              </view>
-            </block>
-            <block wx:else>
-              <view bindlongpress="onLongPress" data-content="{{item.content}}">
-                <towxml content="{{item.content}}" bind:error="onTowxmlError"/>
-              </view>
-            </block>
+<view class="chat-container">
+  <!-- 聊天记录区域 -->
+  <scroll-view 
+    class="chat-messages" 
+    scroll-y="true" 
+    scroll-into-view="{{scrollToMessage}}"
+    scroll-with-animation="true"
+    bindscrolltoupper="loadMoreMessages"
+  >
+    <view class="message-list">
+      <block wx:for="{{messages}}" wx:key="id">
+        <!-- AI消息 -->
+        <view class="message-item {{item.type === 'ai' ? 'ai-message' : 'user-message'}}" id="msg-{{item.id}}">
+          <view class="message-avatar">
+            <image src="{{item.type === 'ai' ? aiAvatar : userAvatar}}" mode="aspectFill" />
           </view>
-          <view class="message-time">{{item.time}}</view>
+          <view class="message-content">
+            <view class="message-bubble">
+              <text user-select="true">{{item.content}}</text>
+            </view>
+            <view class="message-time">{{item.time}}</view>
+          </view>
         </view>
-      </view>
-    </block>
+      </block>
+    </view>
   </scroll-view>
 
   <!-- 输入区域 -->
-  <view class="input-container">
-    <!-- 建议问题区域 -->
-    <view class="suggested-questions" wx:if="{{suggestedQuestions.length > 0}}">
-      <text class="suggested-title">猜你想问：</text>
-      <view class="suggested-list">
-        <text wx:for="{{suggestedQuestions}}" wx:key="index" class="suggested-item" bindtap="onSuggestedQuestionTap" data-question="{{item}}">{{item}}</text>
-      </view>
-    </view>
-
-    <!-- 输入框区域 -->
-    <view class="input-area">
+  <view class="input-area">
+    <view class="input-box">
       <textarea 
-        class="input-text" 
-        value="{{inputValue}}" 
-        bindinput="onInput" 
+        class="message-input" 
+        value="{{inputMessage}}" 
+        bindinput="onInputChange"
+        bindconfirm="sendMessage"
         placeholder="请输入您的问题..."
-        auto-height="true"
+        auto-height
         maxlength="500"
+        show-confirm-bar="{{false}}"
         cursor-spacing="20"
-      ></textarea>
-      <view class="send-btn {{inputValue ? 'active' : ''}}" bindtap="sendMessage">发送</view>
+      />
+      <view class="input-actions">
+        <view class="action-btn" bindtap="clearInput">
+          <text class="iconfont icon-clear">✕</text>
+        </view>
+        <view class="action-btn" bindtap="sendMessage">
+          <text class="iconfont icon-send">发送</text>
+        </view>
+      </view>
     </view>
   </view>
 </view>

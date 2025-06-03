@@ -144,7 +144,7 @@ Page({
     }).catch(err => {
       this.setData({ loading: false })
       wx.showToast({
-        title: '登录失败，请重试',
+        title: err,
         icon: 'none'
       })
     })

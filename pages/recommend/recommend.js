@@ -1,4 +1,6 @@
 // pages/recommend/recommend.js
+const { request } = require('../../utils/request.js')
+
 Page({
 
     /**
@@ -6,19 +8,28 @@ Page({
      */
     data: {
         currentCategory: 'all',
-        currentTab: 'home',
+        currentTab: 'all',
         loading: false,
         hasMore: true,
         pageNum: 1,
         pageSize: 10,
         posts: [],
-        searchValue: ''
+        searchValue: '',
+        refreshing: false,
+        noMore: false,
+        page: 1,
+        newPostsCount: 0,  // 新增：新帖子数量
+        lastRefreshTime: '' // 新增：上次刷新时间
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
+        // 初始化上次刷新时间
+        this.setData({
+            lastRefreshTime: new Date().toISOString().replace('T', ' ').substring(0, 19)
+        })
         this.loadPosts()
     },
 
@@ -80,24 +91,133 @@ Page({
         }
     },
 
-    // 加载帖子数据
-    loadPosts(isLoadMore = false) {
-        if (this.data.loading || (!isLoadMore && !this.data.hasMore)) return
+    // 下拉刷新
+    async onRefresh() {
+        this.setData({
+            refreshing: true,
+            page: 1,
+            noMore: false
+        })
         
-        this.setData({ loading: true })
-        
-        // 这里替换为实际的API调用
-        setTimeout(() => {
-            const mockPosts = this.getMockPosts()
-            const newPosts = isLoadMore ? [...this.data.posts, ...mockPosts] : mockPosts
-            
-            this.setData({
-                posts: newPosts,
-                hasMore: this.data.pageNum < 3, // 模拟只有3页数据
-                pageNum: isLoadMore ? this.data.pageNum + 1 : 1,
-                loading: false
+        try {
+            // 获取新帖子数量
+            const countRes = await request({
+                url: 'user/post/countNewPosts',
+                method: 'post',
+                data: {
+                    lastRefreshTime: this.data.lastRefreshTime
+                }
             })
-        }, 1000)
+
+            if (countRes.code === 200) {
+                const newCount = parseInt(countRes.data) || 0
+                // 使用本地时间
+                const now = new Date()
+                const currentTime = now.getFullYear() + '-' + 
+                    String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                    String(now.getDate()).padStart(2, '0') + ' ' + 
+                    String(now.getHours()).padStart(2, '0') + ':' + 
+                    String(now.getMinutes()).padStart(2, '0') + ':' + 
+                    String(now.getSeconds()).padStart(2, '0')
+                
+                this.setData({
+                    newPostsCount: newCount,
+                    lastRefreshTime: currentTime
+                })
+                
+                // 显示刷新时间和新帖子数量
+                let message = ``
+                if (newCount > 0) {
+                    message += `\n为你推荐${newCount}条新帖子`
+                    wx.showToast({
+                      title: message,
+                      icon: 'none',
+                      duration: 2000
+                  })
+                }
+            }
+
+            await this.loadPosts(true)
+        } catch (error) {
+            console.error('刷新失败:', error)
+            wx.showToast({
+                title: '刷新失败',
+                icon: 'none'
+            })
+        } finally {
+            this.setData({
+                refreshing: false
+            })
+        }
+    },
+
+    // 加载帖子数据
+    async loadPosts(isRefresh = false) {
+        if (this.data.loading || this.data.noMore) return
+
+        this.setData({ loading: true })
+
+        try {
+            // 根据分类选择不同的接口和参数
+            const url = this.data.currentTab === 'all' ? 'user/post/list' : 'user/post/listByCategory'
+            const requestData = {
+                pageNum: this.data.page,
+                pageSize: this.data.pageSize,
+                sortField: 'create_time',
+                desc: true
+            }
+
+            // 只在非全部分类时添加category字段
+            if (this.data.currentTab !== 'all') {
+                requestData.category = this.data.currentTab
+            }
+
+            const res = await request({
+                url: url,
+                method: 'post',
+                data: requestData
+            })
+
+            if (res.code === 200) {
+                const newPosts = res.data.list || []
+                
+                // 处理帖子数据，添加必要的字段
+                const processedPosts = newPosts.map(post => ({
+                    id: post.id,
+                    userId: post.userId,
+                    title: post.title,
+                    content: post.content,
+                    images: post.imageUrls || [],
+                    likes: post.likeCount,
+                    comments: post.commentCount,
+                    views: post.viewCount,
+                    createTime: post.createTime,
+                    updateTime: post.updateTime,
+                    category: post.category,
+                    username: post.nickname,
+                    avatar: post.avatarUrl
+                }))
+                
+                this.setData({
+                    posts: isRefresh ? processedPosts : [...this.data.posts, ...processedPosts],
+                    page: this.data.page + 1,
+                    noMore: newPosts.length < this.data.pageSize
+                })
+            } else {
+                wx.showToast({
+                    title: res.msg || '加载失败',
+                    icon: 'none'
+                })
+            }
+        } catch (error) {
+            console.error('加载帖子失败:', error)
+            wx.showToast({
+                title: '加载失败',
+                icon: 'none'
+            })
+        } finally {
+            this.setData({ loading: false })
+        }
     },
 
     // 模拟数据
@@ -202,13 +322,15 @@ Page({
     // 底部导航切换
     switchTab(e) {
         const tab = e.currentTarget.dataset.tab
-        this.setData({ currentTab: tab })
-        
-        // 这里可以添加实际的页面跳转逻辑
-        wx.showToast({
-            title: `${tab}页面开发中`,
-            icon: 'none'
+        if (tab === this.data.currentTab) return
+
+        this.setData({
+            currentTab: tab,
+            posts: [],
+            page: 1,
+            noMore: false
         })
+        this.loadPosts()
     },
 
     // 分享到朋友圈
@@ -216,5 +338,31 @@ Page({
         return {
             title: '推荐帖子'
         }
+    },
+
+    showSearch(){
+      wx.navigateTo({
+        url: '../recommend/search/search',
+      })
+    },
+
+    // 获取内容
+    get_cord(){
+
+    },
+    
+    // 创建帖子
+    createPost(){
+      wx.navigateTo({
+        url: '../recommend/edit_cord/edit_cord',
+      })
+    },
+
+    // 跳转到帖子详情页
+    goToDetail(e) {
+        const postId = e.currentTarget.dataset.id
+        wx.navigateTo({
+            url: `/pages/recommend/detail/detail?id=${postId}`
+        })
     }
 })

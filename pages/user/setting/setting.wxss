@@ -1,0 +1,382 @@
+/* pages/user/setting/setting.wxss */
+.page-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 30rpx;
+}
+
+/* 设置组 */
+.settings-group {
+  margin-bottom: 30rpx;
+}
+
+.group-title {
+  font-size: 28rpx;
+  color: #666;
+  padding: 20rpx 0;
+}
+
+/* 设置列表 */
+.settings-list {
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+  transition: all 0.3s linear;
+}
+
+.settings-item:active {
+  background-color: #f8f9fa;
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+}
+
+.item-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.item-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.item-right {
+  display: flex;
+  align-items: center;
+}
+
+.item-value {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.arrow-icon {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.5;
+}
+
+/* 开关样式 */
+switch {
+  transform: scale(0.8);
+  margin-right: -10rpx;
+}
+
+/* 退出登录按钮 */
+.logout-section {
+  padding: 40rpx 30rpx;
+  margin-top: 60rpx;
+}
+
+.logout-btn {
+  width: 200rpx;
+  height: 88rpx;
+  line-height: 66rpx;
+  text-align: center;
+  background-color: #fff;
+  color: #ff4d4f;
+  font-size: 32rpx;
+  border-radius: 20rpx;
+  border: none;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+}
+
+.logout-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 邮箱绑定弹窗样式 */
+.email-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.email-dialog__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.email-dialog__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.email-dialog__header {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+}
+
+.email-dialog__title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.email-dialog__close {
+  width: 40rpx;
+  height: 40rpx;
+  padding: 10rpx;
+}
+
+.email-dialog__body {
+  padding: 30rpx;
+}
+
+.email-input-group {
+  position: relative;
+  margin-bottom: 20rpx;
+}
+
+.email-input {
+  width: 90%;
+  height: 88rpx;
+  background: #f5f7f8;
+  border-radius: 12rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #333;
+  border: 2rpx solid #eee;
+  transition: all 0.3s ease;
+}
+
+.email-input:focus {
+  border-color: #737cff;
+  background: #fff;
+}
+
+.email-input__clear {
+  position: absolute;
+  right: 20rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-input__clear image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 验证码输入框组样式 */
+.verification-input-group {
+  position: relative;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.verification-input {
+  flex: 1;
+  height: 88rpx;
+  background: #f5f7f8;
+  border-radius: 12rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #333;
+  border: 2rpx solid #eee;
+  transition: all 0.3s ease;
+}
+
+.verification-input:focus {
+  border-color: #737cff;
+  background: #fff;
+}
+
+.send-code-btn {
+  flex-shrink: 0;
+  height: 88rpx;
+  width: 200rpx !important;
+  line-height: 88rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #737cff;
+  background: none;
+  border: 2rpx solid #737cff;
+  border-radius: 12rpx;
+  transition: all 0.3s ease;
+}
+
+.send-code-btn:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+.send-code-btn.disabled {
+  color: #999;
+  border-color: #999;
+  background: #f5f7f8;
+}
+
+.email-dialog__footer {
+  padding: 20rpx 30rpx;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.email-dialog__btn {
+  min-width: 160rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  padding: 0 30rpx;
+}
+
+.email-dialog__btn.cancel {
+  background: #f5f7f8;
+  color: #666;
+}
+
+.email-dialog__btn.confirm {
+  background: #737cff;
+  color: #fff;
+}
+
+/* 修改密码弹窗样式 */
+.password-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.password-dialog__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.password-dialog__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.password-dialog__header {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1rpx solid #eee;
+}
+
+.password-dialog__title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.password-dialog__close {
+  width: 40rpx;
+  height: 40rpx;
+  padding: 10rpx;
+}
+
+.password-dialog__body {
+  padding: 30rpx;
+}
+
+.password-input-group {
+  margin-bottom: 20rpx;
+}
+
+.password-input {
+  width: 90%;
+  height: 88rpx;
+  background: #f5f7f8;
+  border-radius: 12rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #333;
+  border: 2rpx solid #eee;
+  transition: all 0.3s ease;
+}
+
+.password-input:focus {
+  border-color: #737cff;
+  background: #fff;
+}
+
+.password-dialog__footer {
+  padding: 20rpx 30rpx;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.password-dialog__btn {
+  min-width: 160rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  padding: 0 30rpx;
+}
+
+.password-dialog__btn.cancel {
+  background: #f5f7f8;
+  color: #666;
+}
+
+.password-dialog__btn.confirm {
+  background: #737cff;
+  color: #fff;
+}

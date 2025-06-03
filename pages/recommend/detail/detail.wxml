@@ -1,0 +1,111 @@
+<!--pages/recommend/detail/detail.wxml-->
+<view class="page">
+  <!-- 帖子内容 -->
+  <view class="post-content">
+    <!-- 用户信息 -->
+    <view class="post-header">
+      <view class="user-info">
+        <image class="avatar" src="{{post.avatar}}" mode="aspectFill"></image>
+        <view class="user-meta">
+          <text class="username">{{post.username}}</text>
+          <text class="time">{{post.time}}</text>
+        </view>
+      </view>
+      <view class="follow-btn" wx:if="{{!post.isFollowing}}" catchtap="followUser" data-id="{{post.userId}}">关注</view>
+    </view>
+
+    <!-- 帖子内容 -->
+    <view class="content">
+      <text class="title" wx:if="{{post.title}}">{{post.title}}</text>
+      <text class="text">{{post.content}}</text>
+      <view class="image-grid" wx:if="{{post.images.length > 0}}">
+        <image 
+          wx:for="{{post.images}}" 
+          wx:key="*this" 
+          src="{{item}}" 
+          mode="aspectFill"
+          class="grid-image {{post.images.length === 1 ? 'single' : ''}}"
+          bindtap="previewImage"
+          data-urls="{{post.images}}"
+          data-current="{{item}}"
+        ></image>
+      </view>
+      <view class="category" wx:if="{{post.category}}">
+        <text class="category-text">{{post.category}}</text>
+      </view>
+    </view>
+
+    <!-- 帖子底部 -->
+    <view class="post-footer">
+      <view class="action-btn" catchtap="toggleLike" data-id="{{post.id}}">
+        <image src="{{post.isLiked ? 'https://img.dexbug.com/i/2025/06/01/m4xath.png' : 'https://img.dexbug.com/i/2025/06/01/m4xhfk.png'}}" mode="aspectFit"></image>
+        <text class="{{post.isLiked ? 'active' : ''}}">{{post.likes || '点赞'}}</text>
+      </view>
+      <view class="action-btn" catchtap="showComments" data-id="{{post.id}}">
+        <image src="/assets/icons/comment.png" mode="aspectFit"></image>
+        <text>{{post.comments || '评论'}}</text>
+      </view>
+      <view class="action-btn" catchtap="sharePost" data-id="{{post.id}}">
+        <image src="/assets/icons/share.png" mode="aspectFit"></image>
+        <text>分享</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评论列表 -->
+  <view class="comment-section">
+    <view class="section-header">
+      <text class="title">评论 {{commentCount}}</text>
+    </view>
+    <view class="comment-list">
+      <view class="comment-item" wx:for="{{comments}}" wx:key="id" bindlongpress="onCommentLongPress" data-id="{{item.id}}" data-is-reply="false" data-user-id="{{item.userId}}">
+        <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+        <view class="comment-content">
+          <view class="comment-header">
+            <text class="username">{{item.username}}</text>
+            <text class="time">{{item.time}}</text>
+          </view>
+          <text class="text">{{item.content}}</text>
+          <view class="comment-actions">
+            <view class="action-btn" catchtap="likeComment" data-id="{{item.id}}">
+              <image src="{{item.isLiked ? 'https://img.dexbug.com/i/2025/06/01/m4xath.png' : 'https://img.dexbug.com/i/2025/06/01/m4xhfk.png'}}" mode="aspectFit"></image>
+              <text class="{{item.isLiked ? 'active' : ''}}">{{item.likes || '点赞'}}</text>
+            </view>
+            <view class="action-btn" catchtap="replyComment" data-id="{{item.id}}">
+              <image src="/assets/icons/reply.png" mode="aspectFit"></image>
+              <text>回复</text>
+            </view>
+          </view>
+          <!-- 回复列表 -->
+          <view class="reply-list" wx:if="{{item.replies.length > 0}}">
+            <view class="reply-item" wx:for="{{item.replies}}" wx:for-item="reply" wx:key="id" bindlongpress="onCommentLongPress" data-id="{{reply.id}}" data-is-reply="true" data-parent-id="{{item.id}}" data-user-id="{{reply.userId}}">
+              <text class="username">{{reply.username}}</text>
+              <text class="text">{{reply.content}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{loading}}">
+      <view class="loading-icon"></view>
+      <text>加载中...</text>
+    </view>
+    <view class="no-more" wx:if="{{noMore}}">- 已经到底啦 -</view>
+  </view>
+
+  <!-- 评论输入框 -->
+  <view class="comment-input-wrap">
+    <input 
+      class="comment-input" 
+      type="text" 
+      placeholder="{{replyTo ? '回复 ' + replyTo.username : '说点什么...'}}" 
+      placeholder-class="placeholder"
+      value="{{commentValue}}"
+      bindinput="onCommentInput"
+      bindconfirm="submitComment"
+      focus="{{showKeyboard}}"
+    />
+    <view class="send-btn {{commentValue ? 'active' : ''}}" bindtap="submitComment">发送</view>
+  </view>
+</view>

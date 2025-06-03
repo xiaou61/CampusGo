@@ -1,0 +1,142 @@
+<!--pages/recommend/search/search.wxml-->
+<!-- 顶部搜索栏 -->
+<view class="search-header">
+  <view class="search-input-wrap">
+    <image class="search-icon" src="https://img.dexbug.com/i/2025/05/31/m0hqt1.png" mode="aspectFit"></image>
+    <input 
+      class="search-input" 
+      type="text" 
+      placeholder="搜索帖子" 
+      placeholder-class="placeholder"
+      value="{{searchValue}}"
+      bindinput="onSearchInput"
+      bindconfirm="onSearch"
+      focus="{{true}}"
+    />
+    <image 
+      wx:if="{{searchValue}}" 
+      class="clear-icon" 
+      src="https://img.dexbug.com/i/2025/05/31/m2wtpe.png" 
+      mode="aspectFit"
+      bindtap="clearSearch"
+    ></image>
+  </view>
+  <view class="cancel-btn" bindtap="goBack">取消</view>
+</view>
+
+<!-- 搜索历史 -->
+<view class="search-history" wx:if="{{!searchValue && historyList.length > 0}}">
+  <view class="section-header">
+    <text class="title">搜索历史</text>
+    <image 
+      class="clear-icon" 
+      src="/assets/icons/delete.png" 
+      mode="aspectFit"
+      bindtap="clearHistory"
+    ></image>
+  </view>
+  <view class="history-list">
+    <view 
+      class="history-item" 
+      wx:for="{{historyList}}" 
+      wx:key="*this"
+      bindtap="onHistoryTap"
+      data-keyword="{{item}}"
+    >
+      <image class="history-icon" src="/assets/icons/history.png" mode="aspectFit"></image>
+      <text>{{item}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 热门搜索 -->
+<view class="hot-search" wx:if="{{!searchValue}}">
+  <view class="section-header">
+    <text class="title">热门搜索</text>
+  </view>
+  <view class="hot-list">
+    <view 
+      class="hot-item" 
+      wx:for="{{hotList}}" 
+      wx:key="keyword"
+      bindtap="onHotTap"
+      data-keyword="{{item.keyword}}"
+    >
+      <text class="rank {{item.rank <= 3 ? 'top' : ''}}">{{item.rank}}</text>
+      <text class="keyword">{{item.keyword}}</text>
+      <text class="count">{{item.count}}次搜索</text>
+    </view>
+  </view>
+</view>
+
+<!-- 搜索结果 -->
+<scroll-view 
+  class="search-results" 
+  scroll-y 
+  wx:if="{{searchValue}}"
+  refresher-enabled="{{true}}"
+  refresher-threshold="{{45}}"
+  refresher-default-style="black"
+  refresher-background="#f8f9fa"
+  bindrefresherrefresh="onRefresh"
+  refresher-triggered="{{refreshing}}"
+>
+  <view class="post-item" wx:for="{{searchResults}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+    <!-- 用户信息 -->
+    <view class="post-header">
+      <view class="user-info">
+        <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+        <view class="user-meta">
+          <text class="username">{{item.username}}</text>
+          <text class="time">{{item.time}}</text>
+        </view>
+      </view>
+      <view class="follow-btn" wx:if="{{!item.isFollowing}}" catchtap="followUser" data-id="{{item.userId}}">关注</view>
+    </view>
+
+    <!-- 帖子内容 -->
+    <view class="post-content">
+      <text class="text">{{item.content}}</text>
+      <view class="image-grid" wx:if="{{item.images.length > 0}}">
+        <image 
+          wx:for="{{item.images}}" 
+          wx:for-item="image" 
+          wx:key="*this" 
+          src="{{image}}" 
+          mode="aspectFill"
+          class="grid-image {{item.images.length === 1 ? 'single' : ''}}"
+          catchtap="previewImage"
+          data-urls="{{item.images}}"
+          data-current="{{image}}"
+        ></image>
+      </view>
+    </view>
+
+    <!-- 帖子底部 -->
+    <view class="post-footer">
+      <view class="action-btn" catchtap="toggleLike" data-id="{{item.id}}">
+        <image src="{{item.isLiked ? '/assets/icons/like-filled.png' : '/assets/icons/like.png'}}" mode="aspectFit"></image>
+        <text class="{{item.isLiked ? 'active' : ''}}">{{item.likes || '点赞'}}</text>
+      </view>
+      <view class="action-btn" catchtap="showComments" data-id="{{item.id}}">
+        <image src="/assets/icons/comment.png" mode="aspectFit"></image>
+        <text>{{item.comments || '评论'}}</text>
+      </view>
+      <view class="action-btn" catchtap="sharePost" data-id="{{item.id}}">
+        <image src="/assets/icons/share.png" mode="aspectFit"></image>
+        <text>分享</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-icon"></view>
+    <text>加载中...</text>
+  </view>
+  <view class="no-more" wx:if="{{noMore}}">- 已经到底啦 -</view>
+  <view class="no-result" wx:if="{{!loading && searchResults.length === 0}}">
+    <image src="/assets/icons/no-result.png" mode="aspectFit"></image>
+    <text>暂无搜索结果</text>
+  </view>
+</scroll-view>

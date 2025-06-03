@@ -1,0 +1,227 @@
+page {
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+}
+
+.refresh-btn {
+  width: 52rpx;
+  height: 52rpx;
+  position: absolute;
+  left: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.content {
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  overflow: visible;
+  text-align: center;
+  z-index: 110;
+  background: #fff;
+}
+
+.cu-custom .content view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cu-custom .content text {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cu-custom .content .cuIcon-unfold {
+  font-size: 32rpx;
+  margin-left: 8rpx;
+}
+
+.container {
+  top:40rpx;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 90rpx);
+  margin: 0;
+  padding: 0;
+}
+
+.week-list {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 92rpx;
+  display: flex;
+  align-items: center;
+  background: #f5f7f8;
+  z-index: 112;
+  margin: 0;
+  padding: 0;
+}
+
+.now-month {
+  width: 50rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.week-item {
+  width: calc((100% - 50rpx) / 7);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.week-item.active {
+  background-color: var(--theme);
+  border-radius: 20rpx;
+}
+
+.week-name {
+  font-size: 24rpx;
+  color: #444;
+}
+
+.week-date {
+  font-size: 20rpx;
+  color: #a1a1a1;
+}
+
+.active .week-name,
+.active .week-date {
+  color: rgb(67, 64, 255);
+}
+
+.course-content {
+  width: 100%;
+  padding-top: 95rpx;
+  display: flex;
+}
+
+.course-nums {
+  width: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f6f7;
+}
+
+.course-num {
+  height: 240rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.course-list {
+  width: 100%;
+  height: 100%;
+}
+
+.course-item {
+  position: absolute;
+  width: calc((100% - 40rpx) / 7);
+  display: block;
+}
+
+.course-item__content {
+  text-align: center;
+  width: 100%;
+  border-radius: 8rpx;
+  color: #fff;
+  height: 240rpx;
+}
+
+.switch-week__popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  will-change: transform;
+}
+
+.switch-week__mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  will-change: opacity;
+  transition: opacity 0.3s ease-out;
+}
+
+.switch-week__content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 30rpx;
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switch-week__title {
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 500;
+  margin-bottom: 30rpx;
+}
+
+.switch-week__list {
+  margin: 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.switch-week__item {
+  flex: 0 0 auto;
+  width: 20%;
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+}
+
+.switch-week__item-box {
+  margin: 10rpx;
+  height: 100rpx;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12rpx;
+  will-change: transform;
+  transition: all 0.2s ease-out;
+}
+
+.switch-week__item-box.active {
+  background-color: #edaafd;
+  color: rgb(255, 255, 255);
+  font-size: 32rpx;
+  font-weight: bold;
+  transform: scale(1.05);
+}
+
+.switch-week__item-box:active {
+  transform: scale(0.95);
+}
+
+.course-swpier {
+  width: calc(100% - 50rpx);
+  height: 1200rpx;
+}
