@@ -93,10 +93,8 @@ Page({
   },
 
   onForgotPassword() {
-    wx.showModal({
-      title: '忘记密码',
-      content: '请联系管理员重置密码',
-      showCancel: false
+    wx.navigateTo({
+      url: '../login/forget/fotget',
     })
   },
 

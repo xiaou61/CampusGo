@@ -20,7 +20,13 @@
         "pages/user/card/card",
         "pages/user/about/about",
         "pages/user/setting/setting",
-        "pages/OA/OA"
+        "pages/OA/OA",
+        "pages/hot/hot",
+        "pages/tools/tools",
+        "pages/tools/ai-chat/ai-chat",
+        "pages/tools/ai-memory/ai-memory",
+        "pages/login/forget/fotget",
+        "pages/OA/exam/exam"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -31,10 +37,10 @@
     "tabBar": {
         "list": [
             {
-              "selectedIconPath": "/images/tabbar/icon_schedule_HL.png",
-              "iconPath": "/images/tabbar/icon_schedule.png",
-              "pagePath": "pages/OA/OA",
-              "text": "OA"
+                "selectedIconPath": "/images/tabbar/icon_schedule_HL.png",
+                "iconPath": "/images/tabbar/icon_schedule.png",
+                "pagePath": "pages/OA/OA",
+                "text": "OA"
             },
             {
                 "selectedIconPath": "/images/tabbar/icon_schedule_HL.png",

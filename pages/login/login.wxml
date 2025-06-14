@@ -35,9 +35,7 @@
               password="{{!showPassword}}"
               maxlength="20"
             />
-            <text class="password-toggle" bindtap="togglePassword" hover-class="button-hover">
-              {{showPassword ? '🙈' : '👁️'}}
-            </text>
+            <image class="password-toggle" src="{{showPassword ? '/images/tabler--eye.png' : '/images/tabler--eye-closed.png'}}" bindtap="togglePassword" hover-class="button-hover"></image>
           </view>
           <text class="error-message" wx:if="{{passwordError}}">{{passwordError}}</text>
         </view>

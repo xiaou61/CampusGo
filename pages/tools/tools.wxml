@@ -1,0 +1,22 @@
+<!--pages/tools/tools.wxml-->
+<view class="page">
+    <view class="category-section">
+        <view class="category-title">AI助手</view>
+        <view class="tools-grid">
+            <view class="tool-item" bindtap="onToolTap" data-tool="ai-chat">
+                <view class="tool-icon">
+                    <image src="/assets/icons/ai-chat.png" mode="aspectFit"></image>
+                </view>
+                <text class="tool-name">AI对话</text>
+                <text class="tool-desc">智能对话助手</text>
+            </view>
+            <view class="tool-item" bindtap="onToolTap" data-tool="ai-memory">
+                <view class="tool-icon">
+                    <image src="/assets/icons/ai-memory.png" mode="aspectFit"></image>
+                </view>
+                <text class="tool-name">AI记忆对话</text>
+                <text class="tool-desc">记住对话历史的AI助手</text>
+            </view>
+        </view>
+    </view>
+</view> 

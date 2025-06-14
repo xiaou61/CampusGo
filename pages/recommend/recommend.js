@@ -15,22 +15,35 @@ Page({
         pageSize: 10,
         posts: [],
         searchValue: '',
-        refreshing: false,
         noMore: false,
         page: 1,
         newPostsCount: 0,  // 新增：新帖子数量
-        lastRefreshTime: '' // 新增：上次刷新时间
+        lastRefreshTime: '', // 新增：上次刷新时间
+        triggered: false, // 下拉刷新状态
+        refreshTranslateY: -100, // 刷新容器的初始位置
+        isRefreshing: false,     // 是否正在刷新
+        refreshText: '下拉刷新',  // 刷新提示文本
+        startY: 0,              // 触摸开始位置
+        moveY: 0                // 触摸移动位置
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        // 初始化上次刷新时间
+        // 初始化上次刷新时间，使用本地时间
+        const now = new Date()
+        const currentTime = now.getFullYear() + '-' + 
+            String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+            String(now.getDate()).padStart(2, '0') + ' ' + 
+            String(now.getHours()).padStart(2, '0') + ':' + 
+            String(now.getMinutes()).padStart(2, '0') + ':' + 
+            String(now.getSeconds()).padStart(2, '0')
+        
         this.setData({
-            lastRefreshTime: new Date().toISOString().replace('T', ' ').substring(0, 19)
+            lastRefreshTime: currentTime,
+            triggered: true  // 设置触发下拉刷新状态
         })
-        this.loadPosts()
     },
 
     /**
@@ -44,7 +57,18 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
+        const now = new Date()
+        const currentTime = now.getFullYear() + '-' + 
+            String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+            String(now.getDate()).padStart(2, '0') + ' ' + 
+            String(now.getHours()).padStart(2, '0') + ':' + 
+            String(now.getMinutes()).padStart(2, '0') + ':' + 
+            String(now.getSeconds()).padStart(2, '0')
+        
+        this.setData({
+            lastRefreshTime: currentTime,
+            triggered: true  // 设置触发下拉刷新状态
+        })
     },
 
     /**
@@ -64,41 +88,7 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh() {
-        this.setData({
-            posts: [],
-            pageNum: 1,
-            hasMore: true
-        })
-        this.loadPosts()
-        wx.stopPullDownRefresh()
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage() {
-        return {
-            title: '推荐帖子',
-            path: '/pages/recommend/recommend'
-        }
-    },
-
-    // 下拉刷新
     async onRefresh() {
-        this.setData({
-            refreshing: true,
-            page: 1,
-            noMore: false
-        })
-        
         try {
             // 获取新帖子数量
             const countRes = await request({
@@ -122,18 +112,18 @@ Page({
                 
                 this.setData({
                     newPostsCount: newCount,
-                    lastRefreshTime: currentTime
+                    lastRefreshTime: currentTime,
+                    page: 1,
+                    noMore: false
                 })
                 
-                // 显示刷新时间和新帖子数量
-                let message = ``
-                if (newCount > 0) {
-                    message += `\n为你推荐${newCount}条新帖子`
+                // 只在有新帖子且不是首次加载时显示提示
+                if (newCount > 0 && this.data.posts.length > 0) {
                     wx.showToast({
-                      title: message,
-                      icon: 'none',
-                      duration: 2000
-                  })
+                        title: `为你推荐${newCount}条新帖子`,
+                        icon: 'none',
+                        duration: 2000
+                    })
                 }
             }
 
@@ -146,9 +136,54 @@ Page({
             })
         } finally {
             this.setData({
-                refreshing: false
+                triggered: false
             })
         }
+    },
+
+    /**
+     * 下拉刷新复位
+     */
+    onRestore() {
+        this.setData({
+            triggered: false
+        })
+    },
+
+    /**
+     * 下拉刷新中止
+     */
+    onAbort() {
+        this.setData({
+            triggered: false
+        })
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    scrollBottem() {
+        if (!this.data.noMore && !this.data.loading) {
+            this.loadPosts()
+        }
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage() {
+        return {
+            title: '推荐帖子',
+            path: '/pages/recommend/recommend'
+        }
+    },
+
+    // 监听滚动事件
+    onScroll(e) {
+        const scrollTop = e.detail.scrollTop
+        this.setData({
+            scrollTop
+        })
     },
 
     // 加载帖子数据
@@ -364,5 +399,114 @@ Page({
         wx.navigateTo({
             url: `/pages/recommend/detail/detail?id=${postId}`
         })
+    },
+
+    // 触摸开始
+    touchStart(e) {
+        // 只有在顶部时才允许下拉刷新
+        if (this.data.scrollTop <= 0) {
+            this.setData({
+                startY: e.touches[0].clientY
+            })
+        }
+    },
+
+    // 触摸移动
+    touchMove(e) {
+        if (this.data.startY === 0) return
+
+        const moveY = e.touches[0].clientY
+        const distance = moveY - this.data.startY
+
+        // 只处理下拉动作
+        if (distance > 0) {
+            // 计算下拉距离，添加阻尼效果
+            const translateY = Math.min(distance * 0.3, 100)
+            
+            this.setData({
+                moveY: translateY,
+                refreshTranslateY: translateY - 100,
+                refreshText: translateY >= 80 ? '释放刷新' : '下拉刷新'
+            })
+        }
+    },
+
+    // 触摸结束
+    async touchEnd() {
+        if (this.data.startY === 0) return
+
+        // 如果下拉距离超过阈值，触发刷新
+        if (this.data.moveY >= 80) {
+            this.setData({
+                isRefreshing: true,
+                refreshText: '刷新中...',
+                refreshTranslateY: 0
+            })
+
+            try {
+                // 获取新帖子数量
+                const countRes = await request({
+                    url: 'user/post/countNewPosts',
+                    method: 'post',
+                    data: {
+                        lastRefreshTime: this.data.lastRefreshTime
+                    }
+                })
+
+                if (countRes.code === 200) {
+                    const newCount = parseInt(countRes.data) || 0
+                    // 使用本地时间
+                    const now = new Date()
+                    const currentTime = now.getFullYear() + '-' + 
+                        String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                        String(now.getDate()).padStart(2, '0') + ' ' + 
+                        String(now.getHours()).padStart(2, '0') + ':' + 
+                        String(now.getMinutes()).padStart(2, '0') + ':' + 
+                        String(now.getSeconds()).padStart(2, '0')
+                    
+                    this.setData({
+                        newPostsCount: newCount,
+                        lastRefreshTime: currentTime,
+                        page: 1,
+                        noMore: false
+                    })
+                    
+                    // 只在有新帖子且不是首次加载时显示提示
+                    if (newCount > 0 && this.data.posts.length > 0) {
+                        wx.showToast({
+                            title: `为你推荐${newCount}条新帖子`,
+                            icon: 'none',
+                            duration: 2000
+                        })
+                    }
+                }
+
+                await this.loadPosts(true)
+            } catch (error) {
+                console.error('刷新失败:', error)
+                wx.showToast({
+                    title: '刷新失败',
+                    icon: 'none'
+                })
+            } finally {
+                // 延迟关闭刷新状态，让用户看到刷新完成
+                setTimeout(() => {
+                    this.setData({
+                        isRefreshing: false,
+                        refreshText: '下拉刷新',
+                        refreshTranslateY: -100,
+                        startY: 0,
+                        moveY: 0
+                    })
+                }, 500)
+            }
+        } else {
+            // 如果下拉距离不够，回弹
+            this.setData({
+                refreshTranslateY: -100,
+                startY: 0,
+                moveY: 0
+            })
+        }
     }
 })

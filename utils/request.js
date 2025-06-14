@@ -1,4 +1,6 @@
-const baseUrl = 'http://4170f302.r9.cpolar.cn/uapi/' // 这里需要替换成你的实际后端地址
+// 这里需要替换成你的实际后端地址
+const baseUrl = 'http://localhost:8080/uapi/'  //本地测试
+// const baseUrl = 'http://51acf174.r39.cpolar.top/uapi/'   //内网测试
 
 function request(options) {
   const token = wx.getStorageSync('token')
@@ -81,7 +83,65 @@ function upload(options) {
   })
 }
 
+function streamRequest({ url, method, data, onMessage, onDone, onError }) {
+  const token = wx.getStorageSync('token')
+  const fullUrl = baseUrl + url + '?message=' + encodeURIComponent(data.message)
+
+  let buffer = ''
+
+  const task = wx.request({
+    url: fullUrl,
+    method: method || 'GET',
+    header: {
+      'satoken': token || '',
+      'Accept': 'text/event-stream',
+      'Connection': 'keep-alive'
+    },
+    enableChunked: true,  // 保证支持分块响应
+    success(res) {
+      if (res.statusCode !== 200) {
+        onError?.('[ERROR]请求失败')
+      }
+    },
+    fail(err) {
+      console.error('流式请求失败：', err)
+      onError?.('[ERROR]网络错误')
+    }
+  })
+
+  task.onChunkedData((res) => {
+    try {
+      // 注意：这里用 TextDecoder 解码 Uint8Array（二进制）数据
+      const chunk = new TextDecoder().decode(res.data)
+      buffer += chunk
+      // 按换行符分割
+      const lines = buffer.split('\n')
+      buffer = lines.pop()  // 最后一行不完整，暂存缓存
+
+      for (const line of lines) {
+        if (line.startsWith('data:')) {
+          const content = line.slice(5).trim()
+
+          if (content === '[DONE]') {
+            onDone?.()
+          } else if (content.startsWith('[ERROR]')) {
+            onError?.(content)
+          } else {
+            onMessage?.(content)
+          }
+        }
+      }
+    } catch (e) {
+      console.error('解析流错误', e)
+      onError?.('[ERROR]解析失败')
+    }
+  })
+
+  return task
+}
+
 module.exports = {
   request,
-  upload
+  upload,
+  streamRequest
 } 

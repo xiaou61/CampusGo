@@ -1,2 +1,169 @@
 <!--pages/OA/OA.wxml-->
-<text>pages/OA/OA.wxml</text>
+<view class="header">
+    <view class="header-title">移动 OA 系统</view>
+    <view class="notification-btn" bindtap="showNotificationPanel">🔔</view>
+    <view class="header-user">
+        <text>{{userInfo.name}}</text>
+        <image src="{{userInfo.avatar}}" mode="aspectFill"></image>
+    </view>
+</view>
+
+<view class="container-OA">
+    <view class="card">
+        <view class="card-body">
+            <view class="quick-actions">
+                <view class="quick-action-item" bindtap="navigateToApproval">
+                    <view class="quick-action-icon">📝</view>
+                    <view class="quick-action-text">审批</view>
+                </view>
+                <view class="quick-action-item" bindtap="navigateToSchedule">
+                    <view class="quick-action-icon">📅</view>
+                    <view class="quick-action-text">日程</view>
+                </view>
+                <view class="quick-action-item" bindtap="navigateToReport">
+                    <view class="quick-action-icon">📊</view>
+                    <view class="quick-action-text">报表</view>
+                </view>
+                <view class="quick-action-item" bindtap="navigateToDocument">
+                    <view class="quick-action-icon">📁</view>
+                    <view class="quick-action-text">文档</view>
+                </view>
+                <view class="quick-action-item" bindtap="navigateToContacts">
+                    <view class="quick-action-icon">👥</view>
+                    <view class="quick-action-text">通讯录</view>
+                </view>
+                <view class="quick-action-item" bindtap="navigateToAnnouncement">
+                    <view class="quick-action-icon">🔔</view>
+                    <view class="quick-action-text">公告</view>
+                </view>
+                <view class="quick-action-item" bindtap="navigateToExam">
+                    <view class="quick-action-icon">k</view>
+                    <view class="quick-action-text">考试</view>
+                </view>
+                <view class="quick-action-item" bindtap="navigateToMore">
+                    <view class="quick-action-icon">⚙️</view>
+                    <view class="quick-action-text">更多</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="card">
+        <view class="card-header">
+            <text>待办任务</text>
+            <text class="more-link" bindtap="navigateToMoreTasks">更多</text>
+        </view>
+        <view class="card-body">
+            <view class="task-list">
+                <view class="task-item" wx:for="{{tasks}}" wx:key="id" bindtap="viewTaskDetail" data-id="{{item.id}}">
+                    <view class="task-status status-{{item.priority}}"></view>
+                    <view class="task-content">
+                        <view class="task-title">{{item.title}}</view>
+                        <view class="task-info">
+                            <text>截止日期: {{item.deadline}}</text>
+                            <text>{{item.department}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="card">
+        <view class="card-header">
+            <text>日程安排</text>
+            <text class="more-link" bindtap="navigateToMoreSchedule">更多</text>
+        </view>
+        <view class="card-body">
+            <view class="calendar-header">
+                <text wx:for="{{weekDays}}" wx:key="*this">{{item}}</text>
+            </view>
+            <view class="calendar">
+                <view class="calendar-day {{item.isToday ? 'today' : ''}} {{item.hasEvent ? 'has-event' : ''}}" 
+                      wx:for="{{calendarDays}}" 
+                      wx:key="date"
+                      bindtap="viewDaySchedule"
+                      data-date="{{item.date}}">
+                    {{item.day}}
+                </view>
+            </view>
+            <view class="today-schedule" wx:if="{{todaySchedule.length > 0}}">
+                <view class="task-item" wx:for="{{todaySchedule}}" wx:key="id" bindtap="viewScheduleDetail" data-id="{{item.id}}">
+                    <view class="task-status status-{{item.priority}}"></view>
+                    <view class="task-content">
+                        <view class="task-title">{{item.title}}</view>
+                        <view class="task-info">
+                            <text>{{item.time}}</text>
+                            <text>{{item.location}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="card">
+        <view class="card-header">
+            <text>通知消息</text>
+            <text class="more-link" bindtap="navigateToMoreMessages">更多</text>
+        </view>
+        <view class="card-body">
+            <view class="message-list">
+                <view class="message-item {{item.unread ? 'message-unread' : ''}}" 
+                      wx:for="{{messages}}" 
+                      wx:key="id"
+                      bindtap="viewMessageDetail"
+                      data-id="{{item.id}}">
+                    <view class="message-avatar">
+                        <image src="{{item.avatar}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="message-content">
+                        <view class="message-header">
+                            <text class="message-sender">{{item.sender}}</text>
+                            <text class="message-time">{{item.time}}</text>
+                        </view>
+                        <view class="message-text">{{item.content}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="load-more" bindtap="loadMoreMessages" wx:if="{{hasMoreMessages}}">加载更多</view>
+        </view>
+    </view>
+</view>
+
+<view class="notification-panel {{showNotificationPanel ? 'active' : ''}}">
+    <view class="notification-header">
+        <view class="notification-title">通知中心</view>
+        <view class="notification-close" bindtap="hideNotificationPanel">✕</view>
+    </view>
+    <view class="notification-content">
+        <view class="message-list">
+            <view class="message-item {{item.unread ? 'message-unread' : ''}}" 
+                  wx:for="{{notifications}}" 
+                  wx:key="id"
+                  bindtap="viewNotificationDetail"
+                  data-id="{{item.id}}">
+                <view class="message-avatar">
+                    <image src="{{item.avatar}}" mode="aspectFill"></image>
+                </view>
+                <view class="message-content">
+                    <view class="message-header">
+                        <text class="message-sender">{{item.sender}}</text>
+                        <text class="message-time">{{item.time}}</text>
+                    </view>
+                    <view class="message-text">{{item.content}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="notification-footer">
+        <button class="notification-clear" bindtap="clearAllNotifications">清除所有通知</button>
+    </view>
+</view>
+
+<view class="overlay {{showNotificationPanel ? 'active' : ''}}" bindtap="hideNotificationPanel"></view>
+
+<view class="toast {{showToast ? 'show' : ''}}">
+    <view class="toast-icon">🔔</view>
+    <view class="toast-message">{{toastMessage}}</view>
+</view>

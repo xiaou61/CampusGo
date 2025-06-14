@@ -246,7 +246,7 @@ Page({
     // 跳转到校园页
     ai() {
         wx.navigateTo({
-            url: '../ai/ai',
+            url: '../tools/tools',
         })
     },
 
@@ -303,5 +303,14 @@ Page({
     onUnload() {
         if (this.typingTimer) clearInterval(this.typingTimer)
     },
-
+    hot(){
+        wx.navigateTo({
+            url: '../hot/hot',
+        })
+    },
+    tmp(){
+        wx.navigateTo({
+            url: '../tmp/tmp',
+        })
+    }
 })

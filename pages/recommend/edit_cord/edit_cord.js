@@ -1,5 +1,5 @@
 // pages/recommend/edit_cord/edit_cord.js
-const { request } = require('../../../utils/request.js')
+const { request, upload } = require('../../../utils/request.js')
 
 Page({
 
@@ -11,6 +11,15 @@ Page({
         content: '',
         images: [],
         category: '',
+        categoryIndex: 0,
+        categories: [
+            { value: 'SECOND_HAND', label: '二手闲置' },
+            { value: 'HELP', label: '打听求助' },
+            { value: 'DATING', label: '恋爱交友' },
+            { value: 'CAMPUS', label: '校园趣事' },
+            { value: 'JOB', label: '兼职招聘' },
+            { value: 'OTHER', label: '其他' }
+        ],
         canPublish: false
     },
 
@@ -86,18 +95,19 @@ Page({
         this.checkCanPublish()
     },
 
-    // 分类输入
-    onCategoryInput(e) {
+    // 分类选择
+    onCategorySelect(e) {
+        const value = e.currentTarget.dataset.value
         this.setData({
-            category: e.detail.value
+            category: value
         })
         this.checkCanPublish()
     },
 
     // 检查是否可以发布
     checkCanPublish() {
-        const { title } = this.data
-        const canPublish = title.trim().length > 0 
+        const { title, category } = this.data
+        const canPublish = title.trim().length > 0 && category
         this.setData({ canPublish })
     },
 
@@ -112,26 +122,21 @@ Page({
 
             // 使用 Promise.all 并行上传所有文件
             const uploadPromises = res.tempFilePaths.map(filePath => {
-                return new Promise((resolve, reject) => {
-                    wx.uploadFile({
-                        url: 'http://localhost:8080/uapi/file-upload/batch',
-                        filePath: filePath,
-                        name: 'files',
-                        header: {
-                            'content-type': 'multipart/form-data'
-                        },
-                        success: (uploadRes) => {
-                            const data = JSON.parse(uploadRes.data)
-                            if (data.code === 200) {
-                                resolve(data.data[0])  // 获取数组中的第一个URL
-                            } else {
-                                reject(new Error(data.msg || '上传失败'))
-                            }
-                        },
-                        fail: (error) => {
-                            reject(error)
-                        }
-                    })
+                return upload({
+                    url: 'file-upload/batch',
+                    filePath: filePath,
+                    name: 'files',
+                    header: {
+                        'content-type': 'multipart/form-data'
+                    },
+                    formData: {
+                        type: 'post' // 可以添加其他表单数据
+                    }
+                }).then(res => {
+                    if (res.code === 200) {
+                        return res.data[0] // 获取数组中的第一个URL
+                    }
+                    throw new Error(res.msg || '上传失败')
                 })
             })
 

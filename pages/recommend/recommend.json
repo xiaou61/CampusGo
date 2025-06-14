@@ -1,4 +1,7 @@
 {
     "usingComponents": {},
-    "navigationBarTitleText": "推荐"
+    "navigationBarTitleText": "推荐",
+    "disableScroll": true,
+    "backgroundColor": "#f8f9fa",
+    "backgroundTextStyle": "dark"
 }

@@ -2,79 +2,84 @@
 <view class="page">
   <!-- 顶部导航 -->
   <view class="nav-bar">
-    <view class="cancel-btn" bindtap="goBack">取消</view>
+    <view class="left">
+      <view class="back-btn" bindtap="goBack">
+        <image src="https://img.dexbug.com/i/2025/05/31/m0hqt1.png" mode="aspectFit"></image>
+      </view>
+    </view>
     <view class="title">发布帖子</view>
-    <view class="publish-btn {{canPublish ? '' : 'disabled'}}" bindtap="publishPost">发布</view>
+    <view class="right">
+      <view class="publish-btn {{canPublish ? '' : 'disabled'}}" bindtap="publishPost">发布</view>
+    </view>
   </view>
 
   <!-- 编辑区域 -->
   <view class="edit-area">
     <!-- 标题输入 -->
-    <input 
-      class="title-input" 
-      type="text" 
-      placeholder="请输入标题（选填）" 
-      placeholder-class="placeholder"
-      value="{{title}}"
-      bindinput="onTitleInput"
-      maxlength="50"
-    />
+    <view class="input-group">
+      <view class="input-label">标题</view>
+      <input 
+        class="title-input" 
+        type="text" 
+        placeholder="请输入标题" 
+        placeholder-class="placeholder"
+        value="{{title}}"
+        bindinput="onTitleInput"
+        maxlength="50"
+      />
+    </view>
 
     <!-- 内容输入 -->
-    <textarea 
-      class="content-input" 
-      placeholder="分享新鲜事..." 
-      placeholder-class="placeholder"
-      value="{{content}}"
-      bindinput="onContentInput"
-      maxlength="2000"
-      auto-height
-    />
+    <view class="input-group">
+      <view class="input-label">内容</view>
+      <textarea 
+        class="content-input" 
+        placeholder="分享新鲜事..." 
+        placeholder-class="placeholder"
+        value="{{content}}"
+        bindinput="onContentInput"
+        maxlength="2000"
+        auto-height
+      />
+    </view>
 
-    <!-- 图片上传区域 -->
-    <view class="image-upload">
-      <view class="image-list">
+    <!-- 分类选择 -->
+    <view class="input-group">
+      <view class="input-label">分类</view>
+      <view class="category-list">
         <view 
-          class="image-item" 
-          wx:for="{{images}}" 
-          wx:key="*this"
+          class="category-item {{category === item.value ? 'active' : ''}}" 
+          wx:for="{{categories}}" 
+          wx:key="value"
+          bindtap="onCategorySelect"
+          data-value="{{item.value}}"
         >
-          <image src="{{item}}" mode="aspectFill"></image>
-          <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">
-            <image src="/assets/icons/close.png" mode="aspectFit"></image>
-          </view>
-        </view>
-        <view class="upload-btn" bindtap="chooseImage" wx:if="{{images.length < 9}}">
-          <image src="/assets/icons/camera.png" mode="aspectFit"></image>
-          <text>{{images.length}}/9</text>
+          {{item.label}}
         </view>
       </view>
     </view>
 
-    <!-- 分类输入 -->
-    <view class="category-input">
-        <input 
-            class="input" 
-            placeholder="请输入关键字" 
-            value="{{category}}"
-            bindinput="onCategoryInput"
-        />
-    </view>
-  </view>
-
-  <!-- 底部工具栏 -->
-  <view class="toolbar">
-    <view class="tool-item" bindtap="chooseImage">
-      <image src="/assets/icons/image.png" mode="aspectFit"></image>
-      <text>图片</text>
-    </view>
-    <view class="tool-item" bindtap="chooseLocation">
-      <image src="/assets/icons/location.png" mode="aspectFit"></image>
-      <text>位置</text>
-    </view>
-    <view class="tool-item" bindtap="chooseTopic">
-      <image src="/assets/icons/topic.png" mode="aspectFit"></image>
-      <text>话题</text>
+    <!-- 图片上传区域 -->
+    <view class="input-group">
+      <view class="input-label">图片</view>
+      <view class="image-upload">
+        <view class="image-list">
+          <view 
+            class="image-item" 
+            wx:for="{{images}}" 
+            wx:key="*this"
+          >
+            <image src="{{item}}" mode="aspectFill"></image>
+            <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">
+              <image src="https://img.dexbug.com/i/2025/05/31/m0hqt1.png" mode="aspectFit"></image>
+            </view>
+          </view>
+          <view class="upload-btn" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+            <image src="https://img.dexbug.com/i/2025/05/31/m0hqt1.png" mode="aspectFit"></image>
+            <text>{{images.length}}/9</text>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

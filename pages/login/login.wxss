@@ -105,16 +105,41 @@
 /* 密码输入框容器 */
 .password-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-wrapper input {
+  flex: 1;
+  font-size: 32rpx;
+  color: #333;
+  padding: 24rpx 32rpx;
 }
 
 .password-toggle {
   position: absolute;
   right: 24rpx;
-  top: 30%;
+  top: 50%;
+  height: 50rpx;
+  width: 50rpx;
   transform: translateY(-50%);
   font-size: 32rpx;
   color: #666;
   z-index: 10;
+}
+
+/* 密码显示按钮 */
+.eye-btn {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-btn image {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.6;
 }
 
 /* 错误信息 */

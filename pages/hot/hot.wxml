@@ -1,0 +1,71 @@
+<!--pages/hot/hot.wxml-->
+<view class="page">
+    <!-- 分类导航 -->
+    <scroll-view class="category-nav" scroll-x enable-flex>
+        <view 
+            class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="id"
+            bindtap="onCategoryTap"
+            data-category="{{item.id}}"
+        >
+            {{item.name}}
+        </view>
+    </scroll-view>
+
+    <!-- 热榜列表 -->
+    <scroll-view 
+        class="hot-list" 
+        scroll-y 
+        enable-back-to-top 
+        refresher-enabled="{{true}}"
+        refresher-threshold="{{45}}"
+        refresher-default-style="black"
+        refresher-background="#f8f9fa"
+        bindrefresherrefresh="onRefresh"
+        refresher-triggered="{{refreshing}}"
+    >
+        <block wx:for="{{hotList}}" wx:key="id">
+            <view class="hot-section" wx:if="{{currentCategory === 'all' || currentCategory === item.type}}">
+                <!-- 热榜标题 -->
+                <view class="section-header">
+                    <image class="icon" src="{{item.iconUrl}}" mode="aspectFit"></image>
+                    <text class="name">{{item.name}}</text>
+                    <text class="update-time">更新时间：{{item.updateTime}}</text>
+                </view>
+
+                <!-- 热榜内容 -->
+                <view class="section-content">
+                    <view 
+                        class="hot-item" 
+                        wx:for="{{item.data}}" 
+                        wx:key="title"
+                        wx:for-item="hotItem"
+                        bindtap="onHotItemTap"
+                        data-url="{{hotItem.url}}"
+                    >
+                        <text class="rank {{index < 3 ? 'top' : ''}}">{{index + 1}}</text>
+                        <text class="title">{{hotItem.title}}</text>
+                        <text class="count" wx:if="{{hotItem.followerCount === 0}}">置顶</text>
+                        <text class="count" wx:elif="{{hotItem.followerCount}}">{{hotItem.followerCount}}热度</text>
+                    </view>
+                </view>
+                
+            </view>
+        </block>
+    </scroll-view>
+
+    <!-- 二维码弹窗 -->
+    <view class="qrcode-modal" wx:if="{{showQRCode}}">
+        <view class="qrcode-content">
+            <view class="qrcode-header">
+                <text class="qrcode-title">扫码访问</text>
+                <text class="qrcode-close" bindtap="closeQRCode">×</text>
+            </view>
+            <view class="qrcode-body">
+                <image class="qrcode-image" src="{{qrcodeUrl}}" mode="aspectFit" show-menu-by-longpress="{{true}}"></image>
+                <text class="qrcode-tip">请使用微信扫一扫访问</text>
+            </view>
+        </view>
+    </view>
+</view>

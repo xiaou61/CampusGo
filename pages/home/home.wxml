@@ -87,6 +87,12 @@
       <view class="grid-item" bindtap="link" hover-class="grid-card-hover">
         <image src="{{function_buttons[3]}}" mode="aspectFit" />
       </view>
+           <view class="grid-item" bindtap="hot" hover-class="grid-card-hover">
+        <image src="{{function_buttons[3]}}" mode="aspectFit" />
+      </view>
+           <view class="grid-item" bindtap="tmp" hover-class="grid-card-hover">
+        <image src="{{function_buttons[3]}}" mode="aspectFit" />
+      </view>
     </view>
   </view>
 

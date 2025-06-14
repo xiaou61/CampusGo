@@ -1,0 +1,77 @@
+<!--pages/login/forget/fotget.wxml-->
+<view class="page">
+  <!-- 表单区域 -->
+  <view class="form-container">
+    <!-- 邮箱输入 -->
+    <view class="input-group">
+      <view class="input-label">邮箱</view>
+      <view class="input-wrapper">
+        <input 
+          type="text" 
+          placeholder="请输入邮箱" 
+          value="{{email}}"
+          bindinput="onEmailInput"
+        />
+      </view>
+    </view>
+
+    <!-- 验证码输入 -->
+    <view class="input-group">
+      <view class="input-label">验证码</view>
+      <view class="input-wrapper code-wrapper">
+        <input 
+          type="number" 
+          placeholder="请输入验证码" 
+          value="{{code}}"
+          bindinput="onCodeInput"
+          maxlength="6"
+        />
+        <view class="code-btn {{canSendCode ? '' : 'disabled'}}" bindtap="sendCode">
+          {{codeText}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 新密码输入 -->
+    <view class="input-group">
+      <view class="input-label">新密码</view>
+      <view class="input-wrapper">
+        <input 
+          password="{{!showPassword}}"
+          placeholder="请输入新密码" 
+          value="{{password}}"
+          bindinput="onPasswordInput"
+        />
+        <view class="eye-btn" bindtap="togglePassword">
+          <image src="{{showPassword ? '/images/tabler--eye.png' : '/images/tabler--eye-closed.png'}}" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 确认密码输入 -->
+    <view class="input-group">
+      <view class="input-label">确认密码</view>
+      <view class="input-wrapper">
+        <input 
+          password="{{!showConfirmPassword}}"
+          placeholder="请再次输入新密码" 
+          value="{{confirmPassword}}"
+          bindinput="onConfirmPasswordInput"
+        />
+        <view class="eye-btn" bindtap="toggleConfirmPassword">
+          <image src="{{showConfirmPassword ? '/images/tabler--eye.png' : '/images/tabler--eye-closed.png'}}" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="submit-btn {{canSubmit ? '' : 'disabled'}}" bindtap="submit">
+      确认修改
+    </view>
+
+    <!-- 提示文本 -->
+    <view class="tips">
+      <text>密码长度为8-20位</text>
+    </view>
+  </view>
+</view>
